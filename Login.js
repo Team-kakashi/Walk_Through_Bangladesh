@@ -3,11 +3,11 @@ import { SafeAreaView, StyleSheet, TextInput, Text, Button } from "react-native"
 
 const UselessTextInput = () => {
   const [text, onChangeEmail] = React.useState(null);
-  //const [text, onChangePassword] = React.useState(null);
+  const [password, onChangePassword] = React.useState(null);
 
   return (
 
-    <Text style={styles.baseText}>
+    <View style={styles.baseText}>
    
     <SafeAreaView>
 
@@ -26,8 +26,8 @@ const UselessTextInput = () => {
       />
       <TextInput
         style={styles.input}
-        onChangeText={onChangeEmail}
-        value={text}
+        onChangeText={onChangePassword}
+        value={password}
         placeholder="Enter Password"
       />
       <Button
@@ -36,7 +36,7 @@ const UselessTextInput = () => {
             />
       
     </SafeAreaView>
-    </Text>
+    </View>
   );
 };
 
