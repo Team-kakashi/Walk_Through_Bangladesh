@@ -1,7 +1,7 @@
 import * as React from 'react';
 //import { TextInput } from 'react-native-paper';
 import {Picker} from '@react-native-picker/picker' ;
-import { TouchableOpacity, SafeAreaView, StyleSheet, TextInput, Text, Button, View } from "react-native";
+import { TouchableOpacity, SafeAreaView, StyleSheet, TextInput, Text, Button, View, Alert } from "react-native";
 
 const Register = () => {
     const [name, setName] = React.useState('');
@@ -14,10 +14,38 @@ const Register = () => {
                           console.log(contactno)
                           console.log(email)
                           console.log(password)
-                        console.log(pickerValue)};
+                        console.log(pickerValue)
+                        submitData()};
 
-    const onPressChange = () => {console.log("login presssed")}
+    const onPressChange = () => {console.log("login pressed")}
 
+
+    const submitData = ()=>{
+      Alert.alert("submit hosse");
+      fetch("http://10.0.2.2:3000/send-data",{
+          method:"post",
+          headers:{
+            'Content-Type': 'application/json'
+          },
+          body:JSON.stringify({
+            
+              name: name,
+              email: email,
+              password: password,
+              contactno: contactno,
+              pickerValue: pickerValue,
+              
+          })
+      })
+      .then(res=>res.json())
+      .then(data=>{
+          Alert.alert(`${data.name} is saved successfuly`)
+          //navigation.navigate("Home")
+      })
+      .catch(err=>{
+        Alert.alert("someting went wrong")
+    })
+}
 
     return (
     <View style={styles.baseText}>
