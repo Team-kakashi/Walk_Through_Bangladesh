@@ -1,9 +1,13 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, TextInput, Text, Button } from "react-native";
+import { SafeAreaView, StyleSheet, TextInput, Text, Button,View, TouchableOpacity } from "react-native";
 
-const UselessTextInput = () => {
-  const [text, onChangeEmail] = React.useState(null);
+const UselessTextInput = ({ navigation }) => {
+  const [email, onChangeEmail] = React.useState(null);
   const [password, onChangePassword] = React.useState(null);
+
+  
+  const onPressLogin = () => {console.log("login pressed")
+                                navigation.navigate("Login")}
 
   return (
 
@@ -21,7 +25,7 @@ const UselessTextInput = () => {
       <TextInput
         style={styles.input}
         onChangeText={onChangeEmail}
-        value={text}
+        value={email}
         placeholder="Enter Your Email"
       />
       <TextInput
@@ -31,10 +35,22 @@ const UselessTextInput = () => {
         placeholder="Enter Password"
       />
       <Button
+            style={styles.button}
               title="LogIn"
-              // buttons
+              onPress={onPressLogin}
             />
-      
+
+      <View style={styles.footer}>
+              <Text>Not Registerd?</Text>
+              <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('SignUp')}
+              >
+              <Text>Sign Up</Text>
+              </TouchableOpacity>
+      </View>
+
+
     </SafeAreaView>
     </View>
   );
@@ -61,6 +77,19 @@ const styles = StyleSheet.create({
     margin: 22,
     borderWidth: 1,
     padding: 10,
+  },
+
+  button: {
+    alignItems: "center",
+    backgroundColor: "#00FFDD",
+    padding: 10
+  },
+
+  footer: {
+    marginTop: 40,
+   alignItems: 'flex-end',
+    padding: 10,
+    
   },
 });
 

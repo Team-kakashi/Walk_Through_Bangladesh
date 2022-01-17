@@ -1,18 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 //import { NavigationContainer, StackActions } from "@react-navigation/native";
 import UselessTextInput from "./Login";
 import Register from "./Signup";
 
+const Stack = createNativeStackNavigator();
+
 export default function App() {
   return (
-    //<NavigationContainer>
-         /* { <stack.Navigator>
-            <stack.Screen name="Login" component={UselessTextInput} />
-          </stack.Navigator> }*/
-         // <UselessTextInput />
-         <Register />
-    //</NavigationContainer>
+    <NavigationContainer>
+         <Stack.Navigator>
+         <Stack.Screen name="SignUp" component={Register} />
+            <Stack.Screen name="Login" component={UselessTextInput} />
+            
+         </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
