@@ -1,14 +1,17 @@
 import * as React from 'react';
 //import { TextInput } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {Picker} from '@react-native-picker/picker' ;
 import { TouchableOpacity, SafeAreaView, StyleSheet, TextInput, Text, Button, View, Alert } from "react-native";
+import { clickProps } from 'react-native-web/dist/cjs/modules/forwardedProps';
 
-const Register = () => {
+const Register = ({ navigation }) => {
     const [name, setName] = React.useState('');
     const [contactno, setContactno] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const [pickerValue, setPickerValue] = React.useState('Select User Type');
+    const [pickerValue, setPickerValue] = React.useState('Traveller');
   
     const onPress = () => {console.log(name)
                           console.log(contactno)
@@ -17,7 +20,8 @@ const Register = () => {
                         console.log(pickerValue)
                         submitData()};
 
-    const onPressChange = () => {console.log("login pressed")}
+    const onPressChange = () => {console.log("login pressed")
+                              navigation.navigate("Login")}
 
 
     const submitData = ()=>{
@@ -39,9 +43,14 @@ const Register = () => {
       })
       .then(res=>res.json())
       .then(data=>{
+<<<<<<< HEAD
         console.log(data);
           //Alert.alert(`${data.name} is saved successfuly`)
           //navigation.navigate("Home")
+=======
+          Alert.alert(`${data.name} is saved successfuly`)
+          navigation.navigate("Login")
+>>>>>>> 6571762f0f44e04f7f4d6600c3f09f0be7423676
       })
       .catch(err=>{
         console.log(err);
