@@ -72,87 +72,69 @@ console.log(verificationCode);
 //   }
 // }
 
-// const postRegister = (req, res) => {
-//   let {
-//     nid,
-//     name,
-//     email,
-//     password,
-//     location,
-//     contact_info,
-//     financial_condition,
-//   } = req.body;
-//   let hash = bcrypt.hashSync(password);
+const postRegister = (req, res) => {
+  let {
+    name,
+    email,
+    password,
+    contactNo,
+    userType,
+  } = req.body;
+  //console.log(name,email,password,contactNo,userType)
+  let hash = bcrypt.hashSync(password);
+  //  res.status(200).send("Success");
+  // console.log(nid, name, hash, verificationCode);
 
-//   console.log(nid, name, hash, verificationCode);
+  postgres
+    .select("*")
+    .from("users")
+    .where("email", "=", email)
+    .then((data) => {
+      
+      if (data[0] == undefined) {
+        postgres
+        .insert({
+             name: name,
+             email: email,
+             contact_info: contactNo,
+             user_type:userType
+                })
+        .into("users")
+        .returning("id")
+        .then((userid)=>{
+         console.log(userid[0]);
+            postgres
+            .insert({
+              user_id:userid[0],
+              email:email,
+              password:hash,
+              verified:0,
+              verificationcode: verificationCode,
+                 })
+         .into("login")
+         .then(()=>{
+           res.status(200).send("Successful")
+         })
+         .catch((err)=>{
+           console.log(err)
+           res.status(400).send("Unable to register")
+         })
+        })
+        .catch((err)=>{
+          console.log(err)
+          res.status(400).send("Unable to register")
 
-//   postgres
-//     .select("*")
-//     .from("users")
-//     .where("nid", "=", req.body.nid)
-//     .then((data) => {
-//       if (data[0] == undefined) {
-//         postgres
-//           .transaction((trx) => {
-//             trx
-//               .insert({
-//                 nid: nid,
-//                 email: email,
-//                 hash: hash,
-//                 verificationcode: verificationCode,
-//               })
-//               .into("login")
-//               .returning("email")
-//               .then((loginEmail) => {
-//                 console.log(loginEmail[0], verificationCode);
-//                 sendMail(loginEmail[0], verificationCode)
-//                   .then((result) => {
-//                     console.log("EMAIL SENT ...", result);
-//                   })
-//                   .catch((error) => {
-//                     console.log(error);
-//                   });
-//                 console.log(
-//                   nid,
-//                   name,
-//                   email,
-//                   password,
-//                   location,
-//                   contact_info,
-//                   financial_condition
-//                 );
-//                 userCreation(
-//                   nid,
-//                   name,
-//                   email,
-//                   password,
-//                   location,
-//                   contact_info,
-//                   financial_condition
-//                 );
-//                 setVerificationCode(verificationCode);
-//                 console.log(user);
-//                 console.log("asd" + getVerificationCode());
-//                 return trx("users").insert({
-//                   nid: nid,
-//                   name: name,
-//                   email: loginEmail[0],
-//                   location: location,
-//                   contact_info: contact_info,
-//                   financial_condition: financial_condition,
-//                 });
-//               })
-//               .then(trx.commit)
-//               .catch(trx.rollback);
-//           })
-//           .catch((err) => res.status(400).json("unable to register"));
-//         res.send("sign in ");
-//       } else {
-//         res.status(400).send("muri kha");
-//       }
-//     })
-//     .catch((err) => res.status(400).json("database error"));
-// };
+        })
+      } else {
+        res.status(400).send("muri kha");
+      }
+    })
+    .catch((err) =>{
+      console.log(err)
+      res.status(400).json("database error")
+      
+      });
+};
 
 const postLogin = (req, res) => {
   postgres
@@ -222,5 +204,5 @@ const postLogin = (req, res) => {
     });
 };
 module.exports = {
-  postLogin,
+  postLogin,postRegister
 };

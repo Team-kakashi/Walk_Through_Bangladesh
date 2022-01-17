@@ -22,7 +22,7 @@ const Register = () => {
 
     const submitData = ()=>{
       Alert.alert("submit hosse");
-      fetch("http://10.0.2.2:3000/send-data",{
+      fetch("http://127.0.0.1:3000/signup",{
           method:"post",
           headers:{
             'Content-Type': 'application/json'
@@ -32,18 +32,20 @@ const Register = () => {
               name: name,
               email: email,
               password: password,
-              contactno: contactno,
-              pickerValue: pickerValue,
+              contactNo: contactno,
+              userType: pickerValue,
               
           })
       })
       .then(res=>res.json())
       .then(data=>{
-          Alert.alert(`${data.name} is saved successfuly`)
+        console.log(data);
+          //Alert.alert(`${data.name} is saved successfuly`)
           //navigation.navigate("Home")
       })
       .catch(err=>{
-        Alert.alert("someting went wrong")
+        console.log(err);
+        //Alert.alert(err)
     })
 }
 
