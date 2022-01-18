@@ -11,7 +11,7 @@ const UselessTextInput = ({ navigation }) => {
                               submitData();}
 
                                 const submitData = ()=>{
-                                  Alert.alert("submit hosse");
+                                 
                                   fetch("http://192.168.0.181:3000/login",{
                                       method:"post",
                                       headers:{
@@ -30,7 +30,10 @@ const UselessTextInput = ({ navigation }) => {
                                     if(data==200){
                                       console.log(data);
                                       navigation.navigate("Login")
+                                      Alert.alert("successfully logged in !");
                                     }
+                                    else 
+                                    Alert.alert("wrong credential !");
                                   })
                                   .catch(err=>{
                                     console.log(err);

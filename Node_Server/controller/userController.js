@@ -25,7 +25,7 @@ const postgres = knex({
     database: "Walk_Through_Bd",
   },
 });
-const verificationCode = random.int((min = 1111111), (max = 9999999));
+let verificationCode = random.int((min = 1111111), (max = 9999999));
 console.log(verificationCode);
 
 // const oAuth2Client = new google.auth.OAuth2(
@@ -140,71 +140,75 @@ const postRegister = (req, res) => {
 const postLogin = (req, res) => {
   console.log(req.body.email);
   console.log(req.body.password);
-  // postgres
-  //   .select("email", "password")
-  //   .from("login")
-  //   .where("email", "=", req.body.email)
-  //   .then((data) => {
-  //     let isValid;
-  //     if (req.body.password == data[0].password) isValid = true;
-  //     else isValid = false;
-  //     //  const isValid = bcrypt.compareSync(req.body.password, data[0].hash);
-  //     console.log(req.body.password);
-  //     console.log(isValid);
-  //     if (isValid) {
-  //       postgres
-  //         .select("*")
-  //         .from("login")
-  //         .where("email", "=", req.body.email)
-  //         .then((user1) => {
-  //           console.log(user1, user1[0].verified);
-  //           postgres
-  //             .select("*")
-  //             .from("users")
-  //             .where("email", "=", req.body.email)
-  //             .then((user2) => {
-  //               console.log(user2);
-  //               // userCreation(
-  //               //   user2[0].nid,
-  //               //   user2[0].name,
-  //               //   user2[0].email,
-  //               //   user2[0].password,
-  //               //   user2[0].location,
-  //               //   user2[0].contact_info,
-  //               //   user2[0].financial_condition
-  //               // );
-  //               //  console.log(user.email);
-  //               console.log(user1[0].verified);
-  //               if (user1[0].verified) {
-  //                 // return 1;
-  //                 res.status(200).json(user2[0]);
-  //               } else {
-  //                 // return 0;
-  //                 res.status(405).json("email not verified");
-  //               }
-  //             })
-  //             .catch((err) => {
-  //               console.log(err);
-  //               // return 0;
-  //               res.status(400).json("cant find user");
-  //             });
-  //         })
-  //         .catch((err) => {
-  //           console.log(err);
-  //           //return 0;
-  //           res.status(400).json("cant find user");
-  //         });
-  //     } else {
-  //       console.log(err);
-  //       //  return 0;
-  //       res.status(400).json("wrong credential");
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //     return 0;
-  //     res.status(400).json("wrong credential");
-  //   });
+  postgres
+    .select("email", "password")
+    .from("login")
+    .where("email", "=", req.body.email)
+    .then((data) => {
+    //  let isValid;
+      // if (req.body.password == data[0].password) isValid = true;
+      // else isValid = false;
+      let isValid=false;
+      if(data[0]!=undefined){
+      console.log(data)
+      isValid = bcrypt.compareSync(req.body.password, data[0].password);
+      console.log(req.body.password);
+      console.log(isValid);
+      }
+      if (isValid) {
+        postgres
+          .select("*")
+          .from("login")
+          .where("email", "=", req.body.email)
+          .then((user1) => {
+            console.log(user1, user1[0].verified);
+            postgres
+              .select("*")
+              .from("users")
+              .where("email", "=", req.body.email)
+              .then((user2) => {
+                console.log(user2);
+                // userCreation(
+                //   user2[0].nid,
+                //   user2[0].name,
+                //   user2[0].email,
+                //   user2[0].password,
+                //   user2[0].location,
+                //   user2[0].contact_info,
+                //   user2[0].financial_condition
+                // );
+                //  console.log(user.email);
+                console.log(user1[0].verified);
+             //   if (user1[0].verified) {
+                  // return 1;
+                  res.status(200).json(user2[0]);
+             //   } else {
+                  // return 0;
+              //    res.status(405).json("email not verified");
+            //    }
+              })
+              .catch((err) => {
+                console.log(err);
+                // return 0;
+                res.status(400).json("cant find user");
+              });
+          })
+          .catch((err) => {
+            console.log(err);
+            //return 0;
+            res.status(400).json("cant find user");
+          });
+      } else {
+        console.log("wrong credential");
+        //  return 0;
+        res.status(400).json("wrong credential");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+     // return 0;
+      res.status(400).json("wrong credential");
+    });
 };
 module.exports = {
   postLogin,postRegister
