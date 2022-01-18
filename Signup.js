@@ -26,7 +26,7 @@ const Register = ({ navigation }) => {
 
     const submitData = ()=>{
       Alert.alert("submit hosse");
-      fetch("http://127.0.0.1:3000/signup",{
+      fetch("http://192.168.0.181:3000/signup",{
           method:"post",
           headers:{
             'Content-Type': 'application/json'
@@ -41,10 +41,13 @@ const Register = ({ navigation }) => {
               
           })
       })
-      .then(res=>res.json())
+      .then(res=> res.status)
       .then(data=>{
-          Alert.alert(`${data.name} is saved successfuly`)
+        //console.log(res.status())
+        if(data==200){
+          console.log(data);
           navigation.navigate("Login")
+        }
       })
       .catch(err=>{
         console.log(err);
