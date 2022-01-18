@@ -43,14 +43,8 @@ const Register = ({ navigation }) => {
       })
       .then(res=>res.json())
       .then(data=>{
-<<<<<<< HEAD
-        console.log(data);
-          //Alert.alert(`${data.name} is saved successfuly`)
-          //navigation.navigate("Home")
-=======
           Alert.alert(`${data.name} is saved successfuly`)
           navigation.navigate("Login")
->>>>>>> 6571762f0f44e04f7f4d6600c3f09f0be7423676
       })
       .catch(err=>{
         console.log(err);
