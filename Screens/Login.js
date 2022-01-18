@@ -11,8 +11,7 @@ const UselessTextInput = ({ navigation }) => {
                               submitData();}
 
                                 const submitData = ()=>{
-                                  Alert.alert("submit hosse");
-                                  fetch("http://192.168.0.181:3000/login",{
+                                  fetch("http://192.168.0.193:3000/login",{
                                       method:"post",
                                       headers:{
                                         'Content-Type': 'application/json'
@@ -24,12 +23,16 @@ const UselessTextInput = ({ navigation }) => {
                                           
                                       })
                                   })
-                                  .then(res=> res.status)
+                                  .then(res =>res.json())
                                   .then(data=>{
                                     //console.log(res.status())
-                                    if(data==200){
+                                    if(data=="wrong credential"){
+                                      Alert.alert(data);
+                                    }
+                                    else{
                                       console.log(data);
-                                      navigation.navigate("Login")
+                                      // console.log(JSON.stringify(data.json()));
+                                       navigation.navigate("Login")
                                     }
                                   })
                                   .catch(err=>{

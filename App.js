@@ -4,8 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 //import { NavigationContainer, StackActions } from "@react-navigation/native";
-import UselessTextInput from "./Login";
-import Register from "./Signup";
+import UselessTextInput from "./Screens/Login";
+import Register from "./Screens/Signup";
 
 const Stack = createNativeStackNavigator();
 

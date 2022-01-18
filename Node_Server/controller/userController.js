@@ -190,13 +190,13 @@ const postLogin = (req, res) => {
               .catch((err) => {
                 console.log(err);
                 // return 0;
-                res.status(400).json("cant find user");
+                res.status(400).json("wrong credential");
               });
           })
           .catch((err) => {
             console.log(err);
             //return 0;
-            res.status(400).json("cant find user");
+            res.status(400).json("wrong credential");
           });
       } else {
         console.log("wrong credential");

@@ -18,7 +18,13 @@ const Register = ({ navigation }) => {
                           console.log(email)
                           console.log(password)
                         console.log(pickerValue)
-                        submitData()};
+                        if(name==""||contactno==""||email==""||password==""||pickerValue==""){
+                          Alert.alert("Fill all fields");
+                        }
+                        else{
+                        submitData()
+                      }
+    };
 
     const onPressChange = () => {console.log("login pressed")
                               navigation.navigate("Login")}
@@ -26,7 +32,7 @@ const Register = ({ navigation }) => {
 
     const submitData = ()=>{
       
-      fetch("http://192.168.0.181:3000/signup",{
+      fetch("http://192.168.0.193:3000/signup",{
           method:"post",
           headers:{
             'Content-Type': 'application/json'
