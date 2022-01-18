@@ -26,7 +26,7 @@ const Register = ({ navigation }) => {
 
     const submitData = ()=>{
       Alert.alert("submit hosse");
-      fetch("http://192.168.0.181:3000/signup",{
+      fetch("http://192.168.0.193:3000/signup",{
           method:"post",
           headers:{
             'Content-Type': 'application/json'
