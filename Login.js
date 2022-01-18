@@ -12,7 +12,7 @@ const UselessTextInput = ({ navigation }) => {
 
                                 const submitData = ()=>{
                                   Alert.alert("submit hosse");
-                                  fetch("http://192.168.0.193:3000/login",{
+                                  fetch("http://192.168.0.181:3000/login",{
                                       method:"post",
                                       headers:{
                                         'Content-Type': 'application/json'

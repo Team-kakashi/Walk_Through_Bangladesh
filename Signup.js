@@ -3,7 +3,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {Picker} from '@react-native-picker/picker' ;
-import { TouchableOpacity, SafeAreaView, StyleSheet, TextInput, Text, Button, View, Alert } from "react-native";
+import { TouchableOpacity, SafeAreaView, StyleSheet, TextInput, Text, Button, View, Alert, ScrollView } from "react-native";
 import { clickProps } from 'react-native-web/dist/cjs/modules/forwardedProps';
 
 const Register = ({ navigation }) => {
@@ -25,8 +25,8 @@ const Register = ({ navigation }) => {
 
 
     const submitData = ()=>{
-      Alert.alert("submit hosse");
-      fetch("http://192.168.0.193:3000/signup",{
+      
+      fetch("http://192.168.0.181:3000/signup",{
           method:"post",
           headers:{
             'Content-Type': 'application/json'
@@ -47,7 +47,10 @@ const Register = ({ navigation }) => {
         if(data==200){
           console.log(data);
           navigation.navigate("Login")
+          Alert.alert("successfully signed in !");
         }
+        else 
+        Alert.alert("Email already exists !");
       })
       .catch(err=>{
         console.log(err);
@@ -58,6 +61,7 @@ const Register = ({ navigation }) => {
     return (
     <View style={styles.baseText}>
     <SafeAreaView>
+      <ScrollView>
         <Text style={styles.title}>
            Sign UP
         </Text>
@@ -122,6 +126,7 @@ const Register = ({ navigation }) => {
               <Text>Login</Text>
               </TouchableOpacity>
           </View>
+          </ScrollView>
       </SafeAreaView>
       </View>
 
