@@ -32,7 +32,10 @@ const UselessTextInput = ({ navigation }) => {
                                     else{
                                       console.log(data);
                                       // console.log(JSON.stringify(data.json()));
-                                       navigation.navigate("Login")
+                                      if(data.user_type=="HotelManager"){
+                                        navigation.navigate("HotelManager")
+                                      }
+                                       
                                     }
                                   })
                                   .catch(err=>{

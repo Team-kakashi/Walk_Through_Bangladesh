@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 //import { NavigationContainer, StackActions } from "@react-navigation/native";
 import UselessTextInput from "./Screens/Login";
 import Register from "./Screens/Signup";
+import HotelInfo from "./Screens/HotelManager";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,9 +14,9 @@ export default function App() {
   return (
     <NavigationContainer>
          <Stack.Navigator>
-         <Stack.Screen name="SignUp" component={Register} />
-            <Stack.Screen name="Login" component={UselessTextInput} />
-            
+              <Stack.Screen name="HotelManager" component={HotelInfo} />
+              <Stack.Screen name="SignUp" component={Register} />
+              <Stack.Screen name="Login" component={UselessTextInput} />
          </Stack.Navigator>
     </NavigationContainer>
   );
