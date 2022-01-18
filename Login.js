@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, TextInput, Text, Button,View, TouchableOpacity } from "react-native";
+import { SafeAreaView, StyleSheet, TextInput, Text, Button,View, TouchableOpacity,Alert } from "react-native";
 
 const UselessTextInput = ({ navigation }) => {
   const [email, onChangeEmail] = React.useState(null);
@@ -7,7 +7,36 @@ const UselessTextInput = ({ navigation }) => {
 
   
   const onPressLogin = () => {console.log("login pressed")
-                                navigation.navigate("Login")}
+                                navigation.navigate("Login")
+                              submitData();}
+
+                                const submitData = ()=>{
+                                  Alert.alert("submit hosse");
+                                  fetch("http://192.168.0.181:3000/login",{
+                                      method:"post",
+                                      headers:{
+                                        'Content-Type': 'application/json'
+                                      },
+                                      body:JSON.stringify({
+                                      
+                                          email: email,
+                                          password: password,
+                                          
+                                      })
+                                  })
+                                  .then(res=> res.status)
+                                  .then(data=>{
+                                    //console.log(res.status())
+                                    if(data==200){
+                                      console.log(data);
+                                      navigation.navigate("Login")
+                                    }
+                                  })
+                                  .catch(err=>{
+                                    console.log(err);
+                                    //Alert.alert(err)
+                                })
+                            }
 
   return (
 
