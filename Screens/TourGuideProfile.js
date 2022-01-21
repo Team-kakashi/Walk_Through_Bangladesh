@@ -6,18 +6,17 @@ import {Picker} from '@react-native-picker/picker' ;
 import { TouchableOpacity, SafeAreaView, StyleSheet, TextInput, Text, Button, View, Alert, ScrollView } from "react-native";
 import { clickProps } from 'react-native-web/dist/cjs/modules/forwardedProps';
 
-const HotelInfo = ({ navigation }) => {
-    const [hotelName, setHotelName] = React.useState('');
-    const [address, setAddress] = React.useState('');
-    const [roomType, setRoomType] = React.useState('');
-    const [capacity, setCapacity] = React.useState('');
-    const [acOption, setAcOption] = React.useState('');
-    const [roomdetails, setRoomDetails] = React.useState('');
-    const [discountOffer, setDiscountOffer] = React.useState('');
+const GuideInfo = ({ navigation }) => {
+    const [addService, setAddSrevice] = React.useState('');
+    const [route, setRoute] = React.useState('');
+    const [price, setPrice] = React.useState('');
     const [photo, setPhoto] = React.useState('');
-    const [rent, setRent] = React.useState('');
   
     const onPress = () => {
+        console.log(addService)
+        console.log(route)
+        console.log(price)
+        console.log(photo)
                         submitData()
                       
     };
@@ -34,16 +33,10 @@ const HotelInfo = ({ navigation }) => {
             'Content-Type': 'application/json'
           },
           body:JSON.stringify({
-            
-            hotelName: hotelName,
-            address : address,
-            roomType: roomType,
-            capacity: capacity,
-            rent: rent,
-            acOption: acOption,
-            roomdetails: roomdetails,
-            discountOffer: discountOffer,
-            
+            addService: addService,
+            route: route,
+            price: price,
+            photo: photo,
               
           })
       })
@@ -69,81 +62,30 @@ const HotelInfo = ({ navigation }) => {
     <SafeAreaView>
       <ScrollView>
         <Text style={styles.title}>
-           Add Hotel & Room Information
+           Add Tour Guide's Information
         </Text>
       <TextInput
       style={styles.input}
-        label="HotelName"
-        value={hotelName}
-        placeholder="Hotel Name"
-        onChangeText={hotelName => setHotelName(hotelName)}
+        label="AddService"
+        value={addService}
+        placeholder="Add Service"
+        onChangeText={addService => setAddSrevice(addService)}
       />
       <TextInput
       style={styles.input}
-        label="Address"
-       value={address}
-       placeholder="Address"
-        onChangeText={address => setAddress(address)}
+        label="Route"
+       value={route}
+       placeholder="Select Route"
+        onChangeText={route => setRoute(route)}
       />
-
-        <Text >
-           Select A Room Type :
-        </Text>
-
-      <Picker
-        style= {styles.dropdown}
-        selectedValue={roomType}
-        onValueChange ={(itemValue) => setRoomType(itemValue)}
-      >
-        <Picker.Item label="Delux" value="Delux" />
-        <Picker.Item label="Normal" value="Normal" />
-
-      </Picker>
       <TextInput
       style={styles.input}
-        label="Capacity"
-        value={capacity}
-       placeholder="Capacity"
-        onChangeText={capacity => setCapacity(capacity)}
+        label="Price"
+       value={price}
+       placeholder="Price"
+        onChangeText={price => setPrice(price)}
       />
 
-<TextInput
-      style={styles.input}
-        label="Rent"
-        value={rent}
-       placeholder="Rent"
-        onChangeText={rent => setRent(rent)}
-      />
-
-        <Text >
-           Select AC Option :
-        </Text>
-
-      <Picker
-        style= {styles.dropdown}
-        selectedValue={acOption}
-        onValueChange ={(itemValue) => setAcOption(itemValue)}
-      >
-        <Picker.Item label="AC" value="AC" />
-        <Picker.Item label="Non_AC" value="Non_AC" />
-
-      </Picker>
-
-      <TextInput
-      style={styles.input}
-        label="RoomDetails"
-        placeholder="Room Details"
-        value={roomdetails}
-        onChangeText={roomdetails => setRoomDetails(roomdetails)}
-      />
-
-      <TextInput
-      style={styles.input}
-        label="DiscountOffer"
-        placeholder="Discount Offers"
-        value={discountOffer}
-        onChangeText={discountOffer => setDiscountOffer(discountOffer)}
-      />
 
        <TouchableOpacity
         style={styles.button}
@@ -209,4 +151,4 @@ const HotelInfo = ({ navigation }) => {
 
   });
   
-  export default HotelInfo;
+  export default GuideInfo;

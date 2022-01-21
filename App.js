@@ -9,6 +9,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import UselessTextInput from "./Screens/Login";
 import Register from "./Screens/Signup";
 import HotelInfo from "./Screens/HotelManager";
+import VehicleInfo from "./Screens/VehicleInfo";
+import GuideInfo from "./Screens/TourGuideProfile";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +18,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen name="VehicleInfo" component={VehicleInfo} />
+      <Stack.Screen name="GuideInfo" component={GuideInfo} />
         <Stack.Screen name="HotelManager" component={HotelInfo} />
         <Stack.Screen name="SignUp" component={Register} />
         <Stack.Screen name="Login" component={UselessTextInput} />
