@@ -11,7 +11,7 @@ const UselessTextInput = ({ navigation }) => {
                               submitData();}
 
                                 const submitData = ()=>{
-                                  fetch("http://192.168.0.193:3000/login",{
+                                  fetch("http://192.168.1.104:3000/login",{
                                       method:"post",
                                       headers:{
                                         'Content-Type': 'application/json'
@@ -35,7 +35,12 @@ const UselessTextInput = ({ navigation }) => {
                                       if(data.user_type=="HotelManager"){
                                         navigation.navigate("HotelManager")
                                       }
-                                       
+                                      else if(data.user_type=="TourGuide"){
+                                        navigation.navigate("GuideInfo")
+                                      }
+                                      else if(data.user_type=="VehicleOwner"){
+                                        navigation.navigate("VehicleInfo")
+                                      }
                                     }
                                   })
                                   .catch(err=>{

@@ -7,6 +7,8 @@ import { TouchableOpacity, SafeAreaView, StyleSheet, TextInput, Text, Button, Vi
 import { clickProps } from 'react-native-web/dist/cjs/modules/forwardedProps';
 import * as ImagePicker from 'expo-image-picker';
 
+import {openImagePickerAsync, openCameraPickerAsync, Returnurl} from "./ImagePicker";
+
 const GuideInfo = ({ navigation }) => {
     const [addService, setAddSrevice] = React.useState('');
     const [route, setRoute] = React.useState('');
@@ -22,13 +24,18 @@ const GuideInfo = ({ navigation }) => {
                       
     };
 
-    const onPressChange = () => {console.log("login pressed")
-                              navigation.navigate("Login")}
-
+    const onImagePick = async() => {await openImagePickerAsync();
+                                   console.log(Returnurl);
+                                   newrender();
+                                }
+    const onCameraPick = async() => {await openCameraPickerAsync();
+                                    console.log(Returnurl);
+                                    newrender();
+                                 }
 
     const submitData = ()=>{
     
-      fetch("http://192.168.0.193:3000/hotelmanager",{
+      fetch("http://192.168.1.104:3000/hotelmanager",{
           method:"post",
           headers:{
             'Content-Type': 'application/json'
@@ -59,7 +66,7 @@ const GuideInfo = ({ navigation }) => {
 }
 
 let defaultimg="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTw8BbwCUZs0OY8-mL_AUlUIRSWZWGMrwt8sT39lCI7CbqPIdGC-PmOSKg4wOOj-9xR5o&usqp=CAU";
-let openImagePickerAsync = async () => {
+/*let openImagePickerAsync = async () => {
     let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (permissionResult.granted === false) {
@@ -83,6 +90,10 @@ let openImagePickerAsync = async () => {
     let pickerResult = await ImagePicker.launchCameraAsync();
     console.log(pickerResult);
     setPhoto(pickerResult.uri);
+  }*/
+
+  const newrender =() =>{
+    setPhoto(Returnurl)
   }
 
     return (
@@ -116,14 +127,14 @@ let openImagePickerAsync = async () => {
 
     <TouchableOpacity
         style={styles.button}
-        onPress={() => openCameraPickerAsync()}
+        onPress={onCameraPick}
       >
         <Text>Take A Photo </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={()=>openImagePickerAsync()}
+        onPress={onImagePick}
       >
         <Text>Upload A Photo</Text>
       </TouchableOpacity>

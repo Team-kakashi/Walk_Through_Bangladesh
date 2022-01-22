@@ -3,8 +3,9 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {Picker} from '@react-native-picker/picker' ;
-import { TouchableOpacity, SafeAreaView, StyleSheet, TextInput, Text, Button, View, Alert, ScrollView } from "react-native";
+import { TouchableOpacity, SafeAreaView, StyleSheet, TextInput, Text, Button, View, Alert, ScrollView, Image } from "react-native";
 import { clickProps } from 'react-native-web/dist/cjs/modules/forwardedProps';
+import {openImagePickerAsync, openCameraPickerAsync, Returnurl} from "./ImagePicker";
 
 const HotelInfo = ({ navigation }) => {
     const [hotelName, setHotelName] = React.useState('');
@@ -22,13 +23,19 @@ const HotelInfo = ({ navigation }) => {
                       
     };
 
-    const onPressChange = () => {console.log("login pressed")
-                              navigation.navigate("Login")}
-
+    const onImagePick = async() => {await openImagePickerAsync();
+      console.log(Returnurl);
+      newrender();
+   }
+const onCameraPick = async() => {await openCameraPickerAsync();
+       console.log(Returnurl);
+       newrender();
+    }
+    let defaultimg="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTw8BbwCUZs0OY8-mL_AUlUIRSWZWGMrwt8sT39lCI7CbqPIdGC-PmOSKg4wOOj-9xR5o&usqp=CAU";
 
     const submitData = ()=>{
       
-      fetch("http://192.168.0.193:3000/hotelmanager",{
+      fetch("http://192.168.1.104:3000/hotelmanager",{
           method:"post",
           headers:{
             'Content-Type': 'application/json'
@@ -64,10 +71,16 @@ const HotelInfo = ({ navigation }) => {
     })
 }
 
+const newrender =() =>{
+  setPhoto(Returnurl)
+}
+
     return (
+      
     <View style={styles.baseText}>
-    <SafeAreaView>
       <ScrollView>
+    <SafeAreaView>
+      
         <Text style={styles.title}>
            Add Hotel & Room Information
         </Text>
@@ -145,16 +158,40 @@ const HotelInfo = ({ navigation }) => {
         onChangeText={discountOffer => setDiscountOffer(discountOffer)}
       />
 
+<TouchableOpacity
+        style={styles.button}
+        onPress={onCameraPick}
+      >
+        <Text>Take A Photo </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={onImagePick}
+      >
+        <Text>Upload A Photo</Text>
+      </TouchableOpacity>
+
+      
+
+        <Image 
+        style={styles.imageArea}
+        source={{uri: photo==''?defaultimg:photo}}
+         >
+        </Image>
+
        <TouchableOpacity
         style={styles.button}
         onPress={onPress}
       >
-        <Text>Add {"\n"} {"\n"} </Text>
+        <Text>Add {"\n"} {"\n"} {"\n"}</Text>
       </TouchableOpacity>
           
-          </ScrollView>
+          
       </SafeAreaView>
+      </ScrollView>
       </View>
+      
 
     );
   };
@@ -163,7 +200,6 @@ const HotelInfo = ({ navigation }) => {
   
     baseText: {
       flex: 1,
-      marginTop: 40,
      //marginLeft: 80,
      padding: 20,
      alignItems: 'center',
@@ -172,33 +208,36 @@ const HotelInfo = ({ navigation }) => {
     button: {
       alignItems: "center",
       backgroundColor: "#00FFDD",
-      padding: 10
+      padding: 10,
+      marginBottom: 5,
     },
     
     title: {
       alignItems: "center",
-      marginBottom: 20,
-      padding: 10,
+      marginBottom: 15,
+      padding: 5,
       textAlign: 'center',
     },
 
     input: {
-      height: 40,
-      width : 125,
-      margin: 22,
+      marginBottom: 5,
       borderWidth: 1,
       padding: 10,
       
     },
 
     dropdown: {
-      height: 40,
-      width : 125,
-      margin: 22,
+      marginBottom: 5,
       borderWidth: 2,
       padding: 10,
       
     },
+
+    imageArea: {
+      height: "7%",
+      width: "40%",
+      
+  },
 
     footer: {
       marginTop: 40,

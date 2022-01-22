@@ -19,12 +19,14 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+
+      <Stack.Screen name="SignUp" component={Register} />
+      <Stack.Screen name="Login" component={UselessTextInput} />
+      <Stack.Screen name="HotelManager" component={HotelInfo} />
       <Stack.Screen name="GuideInfo" component={GuideInfo} />
       <Stack.Screen name="Camera" component={CameraView} />
       <Stack.Screen name="VehicleInfo" component={VehicleInfo} />
-        <Stack.Screen name="HotelManager" component={HotelInfo} />
-        <Stack.Screen name="SignUp" component={Register} />
-        <Stack.Screen name="Login" component={UselessTextInput} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );
