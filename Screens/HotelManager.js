@@ -52,7 +52,7 @@ const HotelInfo = ({ navigation }) => {
         //console.log(res.status())
         if(data==200){
           console.log(data);
-          navigation.navigate("Login")
+         // navigation.navigate("Login")
           Alert.alert("successfully submitted !");
         }
         else 

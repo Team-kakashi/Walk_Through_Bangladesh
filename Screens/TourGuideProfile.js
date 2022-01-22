@@ -3,8 +3,9 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {Picker} from '@react-native-picker/picker' ;
-import { TouchableOpacity, SafeAreaView, StyleSheet, TextInput, Text, Button, View, Alert, ScrollView } from "react-native";
+import { TouchableOpacity, SafeAreaView, StyleSheet, TextInput, Text, Button, View, Alert, ScrollView, Image } from "react-native";
 import { clickProps } from 'react-native-web/dist/cjs/modules/forwardedProps';
+import * as ImagePicker from 'expo-image-picker';
 
 const GuideInfo = ({ navigation }) => {
     const [addService, setAddSrevice] = React.useState('');
@@ -26,7 +27,7 @@ const GuideInfo = ({ navigation }) => {
 
 
     const submitData = ()=>{
-      
+    
       fetch("http://192.168.0.193:3000/hotelmanager",{
           method:"post",
           headers:{
@@ -45,7 +46,7 @@ const GuideInfo = ({ navigation }) => {
         //console.log(res.status())
         if(data==200){
           console.log(data);
-          navigation.navigate("Login")
+          //navigation.navigate("Login")
           Alert.alert("successfully submitted !");
         }
         else 
@@ -56,6 +57,33 @@ const GuideInfo = ({ navigation }) => {
         Alert.alert("route can't be found");
     })
 }
+
+let defaultimg="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTw8BbwCUZs0OY8-mL_AUlUIRSWZWGMrwt8sT39lCI7CbqPIdGC-PmOSKg4wOOj-9xR5o&usqp=CAU";
+let openImagePickerAsync = async () => {
+    let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert("Permission to access camera roll is required!");
+      return;
+    }
+
+    let pickerResult = await ImagePicker.launchImageLibraryAsync();
+    console.log(pickerResult);
+    setPhoto(pickerResult.uri);
+  }
+
+  let openCameraPickerAsync = async () => {
+    let permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      alert("Permission to access camera roll is required!");
+      return;
+    }
+
+    let pickerResult = await ImagePicker.launchCameraAsync();
+    console.log(pickerResult);
+    setPhoto(pickerResult.uri);
+  }
 
     return (
     <View style={styles.baseText}>
@@ -86,15 +114,39 @@ const GuideInfo = ({ navigation }) => {
         onChangeText={price => setPrice(price)}
       />
 
+    <TouchableOpacity
+        style={styles.button}
+        onPress={() => openCameraPickerAsync()}
+      >
+        <Text>Take A Photo </Text>
+      </TouchableOpacity>
 
-       <TouchableOpacity
+      <TouchableOpacity
+        style={styles.button}
+        onPress={()=>openImagePickerAsync()}
+      >
+        <Text>Upload A Photo</Text>
+      </TouchableOpacity>
+
+      
+
+        <Image 
+        style={styles.imageArea}
+        source={{uri: photo==''?defaultimg:photo}}
+         >
+        </Image>
+
+        <TouchableOpacity
         style={styles.button}
         onPress={onPress}
       >
-        <Text>Add {"\n"} {"\n"} </Text>
+        <Text>Add {"\n"} {"\n"}</Text>
       </TouchableOpacity>
+
+        </ScrollView>
+
+      
           
-          </ScrollView>
       </SafeAreaView>
       </View>
 
@@ -114,7 +166,8 @@ const GuideInfo = ({ navigation }) => {
     button: {
       alignItems: "center",
       backgroundColor: "#00FFDD",
-      padding: 10
+      padding: 10,
+      marginBottom: 10,
     },
     
     title: {
@@ -140,6 +193,12 @@ const GuideInfo = ({ navigation }) => {
       borderWidth: 2,
       padding: 10,
       
+    },
+
+    imageArea: {
+        height: "10%",
+        width: "30%",
+        marginBottom: 10,
     },
 
     footer: {
