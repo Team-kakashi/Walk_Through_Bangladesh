@@ -1,6 +1,7 @@
 /** @format */
 
 import { StatusBar } from "expo-status-bar";
+import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -10,27 +11,51 @@ import UselessTextInput from "./Screens/Login";
 import Register from "./Screens/Signup";
 import HotelInfo from "./Screens/HotelManager";
 
+import { HotelManagerLandingScreen } from "./src/features/hotelManager/screens/hotelManagerLanding.screen";
+import { ThemeProvider } from "styled-components/native";
+import { theme } from "./src/infrastructure/theme";
+
+import {
+  useFonts as useFontsInter,
+  Inter_400Regular,
+} from "@expo-google-fonts/inter";
+
+// import {
+//   useFonts as useFontsRobotoSlab,
+//   RobotoSlab_700Bold,
+// } from "@expo-google-fonts/inter";
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  let [interLoaded] = useFontsInter({
+    Inter_400Regular,
+  });
+
+  // let [robotoSlabLoaded] = useFontsRobotoSlab({
+  //   RobotoSlab_700Bold,
+  // });
+
+  if (!interLoaded) {
+    return null;
+  }
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="HotelManager" component={HotelInfo} />
-        <Stack.Screen name="SignUp" component={Register} />
-        <Stack.Screen name="Login" component={UselessTextInput} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ThemeProvider theme={theme}>
+      <HotelManagerLandingScreen />
+    </ThemeProvider>
+
+    // <NavigationContainer>
+    //   <Stack.Navigator>
+    //       <Stack.Screen
+    //         name="hotelManagerLanding"
+    //         component={hotelManagerLandingScreen}
+    //       />
+
+    //     <Stack.Screen name="HotelManager" component={HotelInfo} />
+    //     <Stack.Screen name="SignUp" component={Register} />
+    //     <Stack.Screen name="Login" component={UselessTextInput} />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
-
-//hello
