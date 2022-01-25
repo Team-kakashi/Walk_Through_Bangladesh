@@ -50,7 +50,7 @@ const Register = ({ navigation }) => {
   };
 
   const submitData = () => {
-    fetch("http://192.168.0.108:3000/signup", {
+    fetch("http://192.168.1.104:3000/signup", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

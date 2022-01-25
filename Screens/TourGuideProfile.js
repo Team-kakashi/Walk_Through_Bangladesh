@@ -20,6 +20,12 @@ import {
 import { clickProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 import * as ImagePicker from "expo-image-picker";
 
+import {
+  openImagePickerAsync,
+  openCameraPickerAsync,
+  Returnurl,
+} from "./ImagePicker";
+
 const GuideInfo = ({ navigation }) => {
   const [addService, setAddSrevice] = React.useState("");
   const [route, setRoute] = React.useState("");
@@ -34,13 +40,19 @@ const GuideInfo = ({ navigation }) => {
     submitData();
   };
 
-  const onPressChange = () => {
-    console.log("login pressed");
-    navigation.navigate("Login");
+  const onImagePick = async () => {
+    await openImagePickerAsync();
+    console.log(Returnurl);
+    newrender();
+  };
+  const onCameraPick = async () => {
+    await openCameraPickerAsync();
+    console.log(Returnurl);
+    newrender();
   };
 
   const submitData = () => {
-    fetch("http://192.168.0.108:3000/hotelmanager", {
+    fetch("http://192.168.1.104:3000/hotelmanager", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -69,9 +81,8 @@ const GuideInfo = ({ navigation }) => {
 
   let defaultimg =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTw8BbwCUZs0OY8-mL_AUlUIRSWZWGMrwt8sT39lCI7CbqPIdGC-PmOSKg4wOOj-9xR5o&usqp=CAU";
-  let openImagePickerAsync = async () => {
-    let permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
+  /*let openImagePickerAsync = async () => {
+    let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (permissionResult.granted === false) {
       alert("Permission to access camera roll is required!");
@@ -81,7 +92,7 @@ const GuideInfo = ({ navigation }) => {
     let pickerResult = await ImagePicker.launchImageLibraryAsync();
     console.log(pickerResult);
     setPhoto(pickerResult.uri);
-  };
+  }
 
   let openCameraPickerAsync = async () => {
     let permissionResult = await ImagePicker.requestCameraPermissionsAsync();
@@ -94,6 +105,10 @@ const GuideInfo = ({ navigation }) => {
     let pickerResult = await ImagePicker.launchCameraAsync();
     console.log(pickerResult);
     setPhoto(pickerResult.uri);
+  }*/
+
+  const newrender = () => {
+    setPhoto(Returnurl);
   };
 
   return (
@@ -123,17 +138,11 @@ const GuideInfo = ({ navigation }) => {
             onChangeText={(price) => setPrice(price)}
           />
 
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => openCameraPickerAsync()}
-          >
+          <TouchableOpacity style={styles.button} onPress={onCameraPick}>
             <Text>Take A Photo </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => openImagePickerAsync()}
-          >
+          <TouchableOpacity style={styles.button} onPress={onImagePick}>
             <Text>Upload A Photo</Text>
           </TouchableOpacity>
 
