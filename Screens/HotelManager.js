@@ -27,6 +27,7 @@ const HotelInfo = ({ navigation }) => {
   const [roomdetails, setRoomDetails] = React.useState("");
   const [discountOffer, setDiscountOffer] = React.useState("");
   const [photo, setPhoto] = React.useState("");
+  const [rent, setRent] = React.useState("");
 
   const onPress = () => {
     submitData();
@@ -48,6 +49,7 @@ const HotelInfo = ({ navigation }) => {
         address: address,
         roomType: roomType,
         capacity: capacity,
+        rent: rent,
         acOption: acOption,
         roomdetails: roomdetails,
         discountOffer: discountOffer,
@@ -58,7 +60,7 @@ const HotelInfo = ({ navigation }) => {
         //console.log(res.status())
         if (data == 200) {
           console.log(data);
-          navigation.navigate("Login");
+          // navigation.navigate("Login")
           Alert.alert("successfully submitted !");
         } else Alert.alert("Something Went Wrong, Try again !");
       })
@@ -73,7 +75,6 @@ const HotelInfo = ({ navigation }) => {
       <SafeAreaView>
         <ScrollView>
           <Text style={styles.title}>Add Hotel & Room Information</Text>
-
           <TextInput
             style={styles.input}
             label="HotelName"
@@ -81,7 +82,6 @@ const HotelInfo = ({ navigation }) => {
             placeholder="Hotel Name"
             onChangeText={(hotelName) => setHotelName(hotelName)}
           />
-
           <TextInput
             style={styles.input}
             label="Address"
@@ -100,13 +100,20 @@ const HotelInfo = ({ navigation }) => {
             <Picker.Item label="Delux" value="Delux" />
             <Picker.Item label="Normal" value="Normal" />
           </Picker>
-
           <TextInput
             style={styles.input}
             label="Capacity"
             value={capacity}
             placeholder="Capacity"
             onChangeText={(capacity) => setCapacity(capacity)}
+          />
+
+          <TextInput
+            style={styles.input}
+            label="Rent"
+            value={rent}
+            placeholder="Rent"
+            onChangeText={(rent) => setRent(rent)}
           />
 
           <Text>Select AC Option :</Text>
@@ -116,7 +123,7 @@ const HotelInfo = ({ navigation }) => {
             selectedValue={acOption}
             onValueChange={(itemValue) => setAcOption(itemValue)}
           >
-            <Picker.Item label="AC" value="Delux" />
+            <Picker.Item label="AC" value="AC" />
             <Picker.Item label="Non_AC" value="Non_AC" />
           </Picker>
 
@@ -137,7 +144,9 @@ const HotelInfo = ({ navigation }) => {
           />
 
           <TouchableOpacity style={styles.button} onPress={onPress}>
-            <Text>Add</Text>
+            <Text>
+              Add {"\n"} {"\n"}{" "}
+            </Text>
           </TouchableOpacity>
         </ScrollView>
       </SafeAreaView>

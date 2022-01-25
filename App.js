@@ -10,6 +10,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import UselessTextInput from "./Screens/Login";
 import Register from "./Screens/Signup";
 import HotelInfo from "./Screens/HotelManager";
+import VehicleInfo from "./Screens/VehicleInfo";
+import GuideInfo from "./Screens/TourGuideProfile";
+import CameraView from "./Screens/Camera";
 
 import { HotelManagerLandingScreen } from "./src/features/hotelManager/screens/hotelManagerLanding.screen";
 import { ThemeProvider } from "styled-components/native";
@@ -47,11 +50,6 @@ export default function App() {
 
     // <NavigationContainer>
     //   <Stack.Navigator>
-    //       <Stack.Screen
-    //         name="hotelManagerLanding"
-    //         component={hotelManagerLandingScreen}
-    //       />
-
     //     <Stack.Screen name="HotelManager" component={HotelInfo} />
     //     <Stack.Screen name="SignUp" component={Register} />
     //     <Stack.Screen name="Login" component={UselessTextInput} />
