@@ -39,7 +39,7 @@ const HotelInfo = ({ navigation }) => {
   };
 
   const submitData = () => {
-    fetch("http://192.168.0.193:3000/hotelmanager", {
+    fetch("http://192.168.0.108:3000/hotelmanager", {
       method: "post",
       headers: {
         "Content-Type": "application/json",

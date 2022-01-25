@@ -15,12 +15,18 @@ import GuideInfo from "./Screens/TourGuideProfile";
 import CameraView from "./Screens/Camera";
 
 import { HotelManagerLandingScreen } from "./src/features/hotelManager/screens/hotelManagerLanding.screen";
+import { LogInScreen } from "./src/features/authentication/screens/logIn.screen";
+import { AccountSelectScreen } from "./src/features/authentication/screens/accountselect.screen";
+import { SignupTravellerScreen } from "./src/features/authentication/screens/signup.traveller.screen";
+import { SignupHotelManagerScreen } from "./src/features/authentication/screens/signup.hotelmanager.screen";
+
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme";
 
 import {
   useFonts as useFontsInter,
   Inter_400Regular,
+  Inter_900Black,
 } from "@expo-google-fonts/inter";
 
 // import {
@@ -31,8 +37,9 @@ import {
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  let [interLoaded] = useFontsInter({
+  const [interLoaded] = useFontsInter({
     Inter_400Regular,
+    Inter_900Black,
   });
 
   // let [robotoSlabLoaded] = useFontsRobotoSlab({
@@ -47,11 +54,13 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <HotelManagerLandingScreen />
     </ThemeProvider>
-
     // <NavigationContainer>
     //   <Stack.Navigator>
-    //     <Stack.Screen name="HotelManager" component={HotelInfo} />
     //     <Stack.Screen name="SignUp" component={Register} />
+    //     <Stack.Screen name="GuideInfo" component={GuideInfo} />
+    //     <Stack.Screen name="Camera" component={CameraView} />
+    //     <Stack.Screen name="VehicleInfo" component={VehicleInfo} />
+    //     <Stack.Screen name="HotelManager" component={HotelInfo} />
     //     <Stack.Screen name="Login" component={UselessTextInput} />
     //   </Stack.Navigator>
     // </NavigationContainer>
