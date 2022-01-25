@@ -2,15 +2,7 @@
 
 import React, { useState } from "react";
 import { Searchbar, Title } from "react-native-paper";
-import {
-  ScrollView,
-  Text,
-  View,
-  StatusBar,
-  Picker,
-  TouchableOpacity,
-  Modal,
-} from "react-native";
+import { ScrollView, Text, View, TouchableOpacity, Modal } from "react-native";
 import { RoomCard } from "../componenets/roomCard.component";
 import styled from "styled-components/native";
 import {
@@ -28,15 +20,15 @@ const RoomCardContainer = styled(View)`
 `;
 
 export const HotelManagerLandingScreen = () => {
-  const [chooseData, setChooseData] = useState("Select Item...");
-  const [isModeVisible, setisModeVisible] = useState(false);
-  const changeModalVisibility = (bool) => {
-    setisModeVisible(bool);
-  };
+  // const [chooseData, setChooseData] = useState("Select Item...");
+  // const [isModeVisible, setisModeVisible] = useState(false);
+  // const changeModalVisibility = (bool) => {
+  //   setisModeVisible(bool);
+  // };
 
-  const setData = (option) => {
-    setChooseData(option);
-  };
+  // const setData = (option) => {
+  //   setChooseData(option);
+  // };
 
   return (
     <SafeAreaViewContainer>
@@ -50,13 +42,14 @@ export const HotelManagerLandingScreen = () => {
             Add Room
           </TertiaryButton>
         </RightGravity>
+
         <SpacingSmall></SpacingSmall>
         <RoomCardContainer>
           <Subtitle>Hotel Rooms</Subtitle>
           <RoomCard />
         </RoomCardContainer>
 
-        <TouchableOpacity onPress={() => changeModalVisibility(true)}>
+        {/* <TouchableOpacity onPress={() => changeModalVisibility(true)}>
           <Text>{chooseData}</Text>
         </TouchableOpacity>
         <Modal
@@ -69,7 +62,7 @@ export const HotelManagerLandingScreen = () => {
             changeModalVisibility={changeModalVisibility}
             setData={setData}
           />
-        </Modal>
+        </Modal> */}
       </ScrollView>
     </SafeAreaViewContainer>
   );

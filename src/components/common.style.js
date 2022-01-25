@@ -142,7 +142,7 @@ export const SafeAreaViewContainer = styled(SafeAreaView)`
   ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 `;
 
-const SearchView = styled(Searchbar)`
+export const SearchView = styled(Searchbar)`
   shadow-color: ${(props) => props.theme.colors.ui.quaternary};
   box-shadow: 0px 3px;
   shadow-opacity: 0.1;
