@@ -11,6 +11,7 @@ import { LogInScreen } from "./src/features/authentication/screens/logIn.screen"
 import { AccountSelectScreen } from "./src/features/authentication/screens/accountselect.screen";
 import { SignupTravellerScreen } from "./src/features/authentication/screens/signup.traveller.screen";
 import { SignupHotelManagerScreen } from "./src/features/authentication/screens/signup.hotelmanager.screen";
+import { AddRoomScreen } from "./src/features/hotelManager/screens/addRoom.hotelManager.screen";
 
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme";
@@ -21,10 +22,10 @@ import {
   Inter_900Black,
 } from "@expo-google-fonts/inter";
 
-// import {
-//   useFonts as useFontsRobotoSlab,
-//   RobotoSlab_700Bold,
-// } from "@expo-google-fonts/inter";
+import {
+  useFonts as useFontsRobotoSlab,
+  RobotoSlab_700Bold,
+} from "@expo-google-fonts/roboto-slab";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,17 +35,17 @@ export default function App() {
     Inter_900Black,
   });
 
-  // let [robotoSlabLoaded] = useFontsRobotoSlab({
-  //   RobotoSlab_700Bold,
-  // });
+  let [robotoSlabLoaded] = useFontsRobotoSlab({
+    RobotoSlab_700Bold,
+  });
 
-  if (!interLoaded) {
+  if (!interLoaded || !robotoSlabLoaded) {
     return null;
   }
 
   return (
     <ThemeProvider theme={theme}>
-      <SignupHotelManagerScreen />
+      <AddRoomScreen />
     </ThemeProvider>
   );
 }

@@ -14,6 +14,7 @@ export const colors = {
     disabled: "#C9D9E8",
     error: "#E12D4B",
     success: "#1CCA89",
+    modal: "#E2E2E2",
   },
   bg: {
     primary: "#F5F5F5",
