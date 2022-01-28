@@ -3,7 +3,9 @@ const router = express.Router();
 const {
   postRegister,
   postLogin,
-  postRegisterWithArea,
+  RegisterTourGuide,
+  RegisterVehicleOwner,
+  RegisterHotelManager,
   //   isVerified,
   //   postHelpRequest,
   //   getHelpRequestList,
@@ -27,7 +29,8 @@ router.get("/", (req, res) => {
 });
 router.post("/login", postLogin);
 router.post("/signup", postRegister);
-router.post("/signupWithArea", postRegisterWithArea);
-
+router.post("/signupTourGuide", RegisterTourGuide);
+router.post("/signupVehicleOwner", RegisterVehicleOwner);
+router.post("/signupHotelManager", RegisterHotelManager);
 
 module.exports = router;
