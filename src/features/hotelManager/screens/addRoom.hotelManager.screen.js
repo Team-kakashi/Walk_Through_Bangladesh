@@ -21,8 +21,10 @@ export const AddRoomScreen = () => {
 
         <TextInputTheme label="Number"></TextInputTheme>
         <TextInputTheme label="Rent"></TextInputTheme>
-        <ModalView />
-        <ModalView />
+        <TextInputTheme label="Description"></TextInputTheme>
+
+        <ModalView></ModalView>
+        <ModalView></ModalView>
 
         <SpacingLarge />
 
