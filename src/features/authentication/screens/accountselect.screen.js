@@ -14,7 +14,7 @@ import {
   AccountTypeButton,
 } from "../../../components/common.style";
 
-export const AccountSelectScreen = () => (
+export const AccountSelectScreen = ({navigation}) => (
   <SafeAreaViewContainer>
     <H1>Sign up</H1>
 
@@ -25,26 +25,26 @@ export const AccountSelectScreen = () => (
     </ParentMargin>
     <SpacingSmall></SpacingSmall>
 
-    <AccountTypeButton icon="image-area" onPress={() => console.log("Pressed")}>
+    <AccountTypeButton icon="image-area" onPress={() => navigation.navigate("SignupTravellerScreen")}>
       Traveller
     </AccountTypeButton>
     <SpacingSmall></SpacingSmall>
     <AccountTypeButton
       icon="office-building"
-      onPress={() => console.log("Pressed")}
+      onPress={() => navigation.navigate("SignupHotelManagerScreen")}
     >
       Hotel Manager
     </AccountTypeButton>
     <SpacingSmall></SpacingSmall>
-    <AccountTypeButton icon="blogger" onPress={() => console.log("Pressed")}>
+    <AccountTypeButton icon="blogger" onPress={() => navigation.navigate("SignupBloggerScreen")}>
       Blogger
     </AccountTypeButton>
     <SpacingSmall></SpacingSmall>
-    <AccountTypeButton icon="infinity" onPress={() => console.log("Pressed")}>
+    <AccountTypeButton icon="infinity" onPress={() => navigation.navigate("SignupTourGuideScreen")}>
       Tour Guide
     </AccountTypeButton>
     <SpacingSmall></SpacingSmall>
-    <AccountTypeButton icon="car" onPress={() => console.log("Pressed")}>
+    <AccountTypeButton icon="car" onPress={() => navigation.navigate("SignupVehicleOwnerScreen")}>
       Vehicle Owner
     </AccountTypeButton>
   </SafeAreaViewContainer>
