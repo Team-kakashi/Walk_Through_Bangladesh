@@ -8,7 +8,6 @@ import personIcon from "../../../../assets/icons/person.png";
 import moneyIcon from "../../../../assets/icons/money.png";
 import acIcon from "../../../../assets/icons/ac.png";
 import { CardDetails } from "../../../components/roomCard.style";
-
 import {
   IconTextContainer,
   CardParent,

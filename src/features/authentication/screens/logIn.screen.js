@@ -2,7 +2,6 @@
 
 import React from "react";
 import {
-  Row,
   PrimaryButton,
   Subtitle,
   SecondaryButton,
@@ -26,6 +25,7 @@ export const LogInScreen = () => (
 
     <ParentMargin>
       <Subtitle>Don't have any account?</Subtitle>
+
       <SecondaryButton onPress={() => console.log("Pressed")}>
         SignUp
       </SecondaryButton>

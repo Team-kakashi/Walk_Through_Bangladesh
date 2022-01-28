@@ -22,44 +22,39 @@ const UselessTextInput = ({ navigation }) => {
     submitData();
   };
 
-                                const submitData = ()=>{
-                                  fetch("http://192.168.0.181:3000/login",{
-                                      method:"post",
-                                      headers:{
-                                        'Content-Type': 'application/json'
-                                      },
-                                      body:JSON.stringify({
-                                      
-                                          email: email,
-                                          password: password,
-                                          
-                                      })
-                                  })
-                                  .then(res =>res.json())
-                                  .then(data=>{
-                                    //console.log(res.status())
-                                    if(data=="wrong credential"){
-                                      Alert.alert(data);
-                                    }
-                                    else{
-                                      console.log(data);
-                                      // console.log(JSON.stringify(data.json()));
-                                      if(data.user_type=="HotelManager"){
-                                        navigation.navigate("HotelManager")
-                                      }
-                                      else if(data.user_type=="TourGuide"){
-                                        navigation.navigate("GuideInfo")
-                                      }
-                                      else if(data.user_type=="VehicleOwner"){
-                                        navigation.navigate("VehicleInfo")
-                                      }
-                                    }
-                                  })
-                                  .catch(err=>{
-                                    console.log(err);
-                                    //Alert.alert(err)
-                                })
-                            }
+  const submitData = () => {
+    fetch("http://192.168.1.104:3000/login", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log(res.status())
+        if (data == "wrong credential") {
+          Alert.alert(data);
+        } else {
+          console.log(data);
+          // console.log(JSON.stringify(data.json()));
+          if (data.user_type == "HotelManager") {
+            navigation.navigate("HotelManager");
+          } else if (data.user_type == "TourGuide") {
+            navigation.navigate("GuideInfo");
+          } else if (data.user_type == "VehicleOwner") {
+            navigation.navigate("VehicleInfo");
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        //Alert.alert(err)
+      });
+  };
 
   return (
     <View style={styles.baseText}>

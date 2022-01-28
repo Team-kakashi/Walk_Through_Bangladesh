@@ -210,6 +210,11 @@ const postLogin = (req, res) => {
       res.status(400).json("wrong credential");
     });
 };
+
+
+const postRegisterWithArea = (req,res) => {
+
+}
 module.exports = {
-  postLogin,postRegister
+  postLogin,postRegister,postRegisterWithArea 
 };

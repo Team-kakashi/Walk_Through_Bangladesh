@@ -27,6 +27,7 @@ export const SignupBloggerScreen = () => (
       <PrimaryButton icon="login" onPress={() => console.log("Pressed")}>
         Signup
       </PrimaryButton>
+      <SpacingLarge></SpacingLarge>
     </ScrollView>
   </SafeAreaViewContainer>
 );

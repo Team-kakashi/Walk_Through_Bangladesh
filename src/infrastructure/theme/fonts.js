@@ -2,7 +2,7 @@
 
 export const fonts = {
   body: "Inter_400Regular",
-  heading: "Roboto_Slab_400Regular",
+  heading: "RobotoSlab_700Bold",
 };
 
 export const fontWeights = {

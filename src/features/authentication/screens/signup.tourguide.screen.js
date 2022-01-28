@@ -21,12 +21,14 @@ export const SignupTourGuideScreen = () => (
       <TextInputTheme label="E-mail"></TextInputTheme>
       <TextInputTheme label="Phone No."></TextInputTheme>
       <TextInputTheme label="Password"></TextInputTheme>
+      <TextInputTheme label="Area"></TextInputTheme>
 
       <SpacingLarge></SpacingLarge>
 
       <PrimaryButton icon="login" onPress={() => console.log("Pressed")}>
         Signup
       </PrimaryButton>
+      <SpacingLarge></SpacingLarge>
     </ScrollView>
   </SafeAreaViewContainer>
 );

@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const {
-     postRegister,
+  postRegister,
   postLogin,
+  postRegisterWithArea,
   //   isVerified,
   //   postHelpRequest,
   //   getHelpRequestList,
@@ -25,6 +26,8 @@ router.get("/", (req, res) => {
   res.send("This is woring");
 });
 router.post("/login", postLogin);
- router.post("/signup", postRegister);
+router.post("/signup", postRegister);
+router.post("/signupWithArea", postRegisterWithArea);
+
 
 module.exports = router;
