@@ -17,21 +17,20 @@ import {
   Line,
 } from "./common.style";
 
-const OPTIONS = [
-  "Dhaka",
-  "Chattogram",
-  "Rajshahi",
-  "Barishal",
-  "Sylhet",
-];
+var OPTIONS;
 
 const WIDTH = Dimensions.get("window").width;
 const HEIGHT = Dimensions.get("window").height;
 
 export const ModalPicker = (props) => {
+  //console.log(props.setData);
+  console.log('hoise re',props.array)
+  OPTIONS=props.array
   const onPressItem = (option) => {
     props.changeModalVisibility(false);
     props.setData(option);
+   // console.log('hoise',props.array)
+   //OPTIONS= props.array
   };
   const option = OPTIONS.map((item, index) => {
     return (

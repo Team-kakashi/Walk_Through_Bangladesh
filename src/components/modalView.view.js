@@ -8,18 +8,33 @@ import {
   TouchableOpacityPicker,
 } from "./common.style";
 import { ModalPicker } from "./modalPicker";
-
-export const ModalView = () => {
+var selectingDropDown;
+var Title; 
+export const ModalView = (props) => {
+  console.log(props);
+  Title = props.Title;
+  selectingDropDown = props.Array;
+  /*if(props.AC_option!=undefined){
+    selectingDropDown = props.AC_option;
+    console.log('ac ',selectingDropDown)
+    //Title = props.Title;
+  }
+  else{
+     selectingDropDown = props.Capacity;
+    console.log('capacity ',selectingDropDown);
+    //Title = props.Title;
+  }*/
+  
   const [chooseData, setChooseData] = useState(
-    "Select Item..."
+    Title
   );
   const [isModeVisible, setisModeVisible] = useState(false);
   const changeModalVisibility = (bool) => {
     setisModeVisible(bool);
   };
 
-  const setData = (option) => {
-    setChooseData(option);
+  const setData = (selectingDropDown) => {
+    setChooseData(selectingDropDown);
   };
 
   return (
@@ -38,6 +53,7 @@ export const ModalView = () => {
         <ModalPicker
           changeModalVisibility={changeModalVisibility}
           setData={setData}
+          array={selectingDropDown}
         />
       </Modal>
     </SafeAreaViewContainer>

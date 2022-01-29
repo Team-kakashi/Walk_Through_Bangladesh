@@ -58,8 +58,9 @@ export default function App() {
          <Stack.Screen name="SignupBloggerScreen" component={SignupBloggerScreen} />
          <Stack.Screen name="SignupTourGuideScreen" component={SignupTourGuideScreen} />
          <Stack.Screen name="SignupVehicleOwnerScreen" component={SignupVehicleOwnerScreen} />
-         
+
          <Stack.Screen name="HotelManagerLandingScreen" component={HotelManagerLandingScreen} />
+         <Stack.Screen name="AddRoomScreen" component={AddRoomScreen} />
          </Stack.Navigator>
     </NavigationContainer>
     
