@@ -6,6 +6,7 @@ const {
   RegisterTourGuide,
   RegisterVehicleOwner,
   RegisterHotelManager,
+  addRoom,
   //   isVerified,
   //   postHelpRequest,
   //   getHelpRequestList,
@@ -32,5 +33,6 @@ router.post("/signup", postRegister);
 router.post("/signupTourGuide", RegisterTourGuide);
 router.post("/signupVehicleOwner", RegisterVehicleOwner);
 router.post("/signupHotelManager", RegisterHotelManager);
+router.post("/addRoom", addRoom);
 
 module.exports = router;
