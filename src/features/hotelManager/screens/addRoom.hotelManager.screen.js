@@ -10,8 +10,10 @@ import {
   PrimaryButton,
   H1,
 } from "../../../components/common.style";
-import { ModalView } from "../../../components/modalView.view";
+import { ModalView, ItemChoise } from "../../../components/modalView.view";
 
+var ac_op;
+var cap;
 export const AddRoomScreen = ({navigation}) => {
 
   const AC_option = ["AC","Non_AC"];
@@ -22,6 +24,7 @@ export const AddRoomScreen = ({navigation}) => {
   const [description,setDescription] =React.useState("");
 
   const onPressAdd = () => {
+    console.log(ItemChoise);
     setNumber('');
     setRent('');
     setDescription('');
@@ -36,16 +39,29 @@ export const AddRoomScreen = ({navigation}) => {
      }
    };
 
+   function selectPickerValue(item){
+    console.log('my slected item',item);
+    ac_op = item;
+   }
+
+   function selectCapacityValue(item){
+    console.log('my slected item',item);
+    cap = item;
+   }
+
+
    const submitData = () => {
-    fetch(IpRoute+"/", {
+    fetch(IpRoute+"/addRoom", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        number: number,
-        rent: rent,
-        description: description,
+        room_number: number,
+        room_rent: rent,
+        room_capacity: cap,
+        room_ac_option: ac_op,
+        room_description : description,
 
       }),
     })
@@ -84,8 +100,8 @@ export const AddRoomScreen = ({navigation}) => {
         
         ></TextInputTheme>
 
-        <ModalView Array={AC_option} Title="Ac_options"></ModalView>
-        <ModalView Array={Capacity} Title="Capacities"></ModalView>
+        <ModalView Array={AC_option} Title="Ac_options" PickerValue={selectPickerValue}></ModalView>
+        <ModalView Array={Capacity} Title="Capacities" PickerValue={selectCapacityValue}></ModalView>
 
         <SpacingLarge />
 

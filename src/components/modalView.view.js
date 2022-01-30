@@ -10,6 +10,7 @@ import {
 import { ModalPicker } from "./modalPicker";
 var selectingDropDown;
 var Title; 
+export var ItemChoise;
 export const ModalView = (props) => {
   console.log(props);
   Title = props.Title;
@@ -34,13 +35,16 @@ export const ModalView = (props) => {
   };
 
   const setData = (selectingDropDown) => {
+    
+    props.PickerValue(selectingDropDown)
     setChooseData(selectingDropDown);
   };
 
   return (
     <SafeAreaViewContainer>
       <TouchableOpacityPicker
-        onPress={() => changeModalVisibility(true)}
+        onPress={() =>{ changeModalVisibility(true);
+                      }}
       >
         <Subtitle>{chooseData}</Subtitle>
       </TouchableOpacityPicker>
