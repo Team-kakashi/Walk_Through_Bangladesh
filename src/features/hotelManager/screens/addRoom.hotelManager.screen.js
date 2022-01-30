@@ -1,7 +1,8 @@
 /** @format */
 
-import React from "react";
-import { ScrollView, View } from "react-native";
+import React, { useState } from "react";
+import { ScrollView, View,Alert } from "react-native";
+import {IpRoute} from "../../../components/environmentVeriables";
 import {
   SafeAreaViewContainer,
   TextInputTheme,
@@ -9,9 +10,76 @@ import {
   PrimaryButton,
   H1,
 } from "../../../components/common.style";
-import { ModalView } from "../../../components/modalView.view";
+import { ModalView, ItemChoise } from "../../../components/modalView.view";
 
-export const AddRoomScreen = () => {
+var ac_op;
+var cap;
+export const AddRoomScreen = ({navigation}) => {
+
+  const AC_option = ["AC","Non_AC"];
+  const Capacity = [1,2,3,4];
+
+  const [number,setNumber] = React.useState("");
+  const [rent,setRent] = React.useState("");
+  const [description,setDescription] =React.useState("");
+
+  const onPressAdd = () => {
+    console.log(ItemChoise);
+    setNumber('');
+    setRent('');
+    setDescription('');
+     if (
+       number == "" ||
+       rent == ""
+       
+     ) {
+       Alert.alert("Fill all fields");
+     } else {
+       submitData();
+     }
+   };
+
+   function selectPickerValue(item){
+    console.log('my slected item',item);
+    ac_op = item;
+   }
+
+   function selectCapacityValue(item){
+    console.log('my slected item',item);
+    cap = item;
+   }
+
+
+   const submitData = () => {
+    fetch(IpRoute+"/addRoom", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        room_number: number,
+        room_rent: rent,
+        room_capacity: cap,
+        room_ac_option: ac_op,
+        room_description : description,
+
+      }),
+    })
+      .then((res) => res.status)
+      .then((data) => {
+        //console.log(res.status())
+        if (data == 200) {
+          console.log(data);
+          navigation.navigate("HotelManagerLandingScreen");
+          Alert.alert("Room successfully Added !");
+        } else Alert.alert("Room already exists !");
+      })
+      .catch((err) => {
+        console.log(err);
+        //Alert.alert(err)
+      });
+  };
+
   return (
     <SafeAreaViewContainer>
       <ScrollView>
@@ -19,18 +87,27 @@ export const AddRoomScreen = () => {
 
         <SpacingLarge />
 
-        <TextInputTheme label="Number"></TextInputTheme>
-        <TextInputTheme label="Rent"></TextInputTheme>
-        <TextInputTheme label="Description"></TextInputTheme>
+        <TextInputTheme 
+        label="Number"
+        
+        ></TextInputTheme>
+        <TextInputTheme 
+        label="Rent"
+        
+        ></TextInputTheme>
+        <TextInputTheme 
+        label="Description"
+        
+        ></TextInputTheme>
 
-        <ModalView></ModalView>
-        <ModalView></ModalView>
+        <ModalView Array={AC_option} Title="Ac_options" PickerValue={selectPickerValue}></ModalView>
+        <ModalView Array={Capacity} Title="Capacities" PickerValue={selectCapacityValue}></ModalView>
 
         <SpacingLarge />
 
         <PrimaryButton
           icon="plus-circle"
-          onPress={() => console.log("Pressed")}
+          onPress={onPressAdd}
         >
           Add
         </PrimaryButton>

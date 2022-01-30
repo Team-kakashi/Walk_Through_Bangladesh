@@ -17,7 +17,7 @@ const RoomCardContainer = styled(View)`
   padding: ${(props) => props.theme.space[2]};
 `;
 
-export const HotelManagerLandingScreen = () => {
+export const HotelManagerLandingScreen = ({navigation}) => {
   return (
     <SafeAreaViewContainer>
       <ScrollView>
@@ -25,7 +25,7 @@ export const HotelManagerLandingScreen = () => {
         <RightGravity>
           <TertiaryButton
             icon="folder-plus"
-            onPress={() => console.log("Pressed")}
+            onPress={() => navigation.navigate("AddRoomScreen")}
           >
             Add Room
           </TertiaryButton>

@@ -405,7 +405,7 @@ const RegisterHotelManager = (req,res) => {
              name: name,
              email: email,
              contact_info: contactNo,
-             area:area,
+             area:null,
              user_type:userType,
             
                 })
@@ -434,7 +434,7 @@ const RegisterHotelManager = (req,res) => {
        .then(()=>{
         res.status(200).json("Successful")
        })
-       .catch(()=>{
+       .catch((err)=>{
         console.log(err)
         res.status(400).json("Unable to register")
        })
