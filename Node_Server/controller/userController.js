@@ -464,6 +464,7 @@ const RegisterHotelManager = (req,res) => {
 const addRoom  = (req,res) => {
   console.log("dhukse")
   let {
+    userId,
     room_number,
     room_rent,
     room_capacity,
@@ -471,7 +472,9 @@ const addRoom  = (req,res) => {
     room_description,
     
   } = req.body;
-  console.log(room_number,
+  console.log(
+    userId,
+    room_number,
     room_rent,
     room_capacity,
     room_ac_option,
@@ -480,6 +483,39 @@ const addRoom  = (req,res) => {
   //let hash = bcrypt.hashSync(password);
   //  res.status(200).send("Success");
   // console.log(nid, name, hash, verificationCode);
+
+  postgres
+  .select("*")
+  .from("hotel")
+  .where("ownerid","=",userId)
+  .then((data)=>{
+    postgres
+   .insert({
+    ownerid:userId ,
+    name: data[0].name,
+    address:data[0].address,
+    discount:0,
+    room_number : room_number,
+    room_rent : room_rent,
+    room_capacity : room_capacity,
+    room_ac_option : room_ac_option,
+    room_description : room_description,            
+         })
+  .into("hotel")
+  .then(()=>{
+    res.status(200).json("Successful")
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(500).json("room already exist")
+  })
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(400).json("Database error")
+  })
+
+
 
   // postgres
   //   .select("*")

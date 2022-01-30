@@ -24,10 +24,8 @@ export const AddRoomScreen = ({navigation}) => {
   const [description,setDescription] =React.useState("");
 
   const onPressAdd = () => {
-    console.log(ItemChoise);
-    setNumber('');
-    setRent('');
-    setDescription('');
+   // console.log(ItemChoise);
+
      if (
        number == "" ||
        rent == ""
@@ -35,7 +33,11 @@ export const AddRoomScreen = ({navigation}) => {
      ) {
        Alert.alert("Fill all fields");
      } else {
+  
        submitData();
+       setNumber('');
+       setRent('');
+       setDescription('');
      }
    };
 
@@ -72,7 +74,12 @@ export const AddRoomScreen = ({navigation}) => {
           console.log(data);
           navigation.navigate("HotelManagerLandingScreen");
           Alert.alert("Room successfully Added !");
-        } else Alert.alert("Room already exists !");
+        } else if(data==500) {
+          Alert.alert("Room already exists !");
+        }
+          else{
+            Alert.alert("Database error !");
+          } 
       })
       .catch((err) => {
         console.log(err);
@@ -89,14 +96,20 @@ export const AddRoomScreen = ({navigation}) => {
 
         <TextInputTheme 
         label="Number"
+        onChangeText={setNumber}
+        value={number}
         
         ></TextInputTheme>
         <TextInputTheme 
         label="Rent"
+        onChangeText={setRent}
+        value={rent}
         
         ></TextInputTheme>
         <TextInputTheme 
         label="Description"
+        onChangeText={setDescription}
+        value={description}
         
         ></TextInputTheme>
 
