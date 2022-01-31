@@ -26,12 +26,17 @@ export const LogInScreen = () => (
     <ParentMargin>
       <Subtitle>Don't have any account?</Subtitle>
 
-      <SecondaryButton onPress={() => console.log("Pressed")}>
+      <SecondaryButton
+        onPress={() => console.log("Pressed")}
+      >
         SignUp
       </SecondaryButton>
     </ParentMargin>
 
-    <PrimaryButton icon="login" onPress={() => console.log("Pressed")}>
+    <PrimaryButton
+      icon="login"
+      onPress={() => console.log("Pressed")}
+    >
       Login
     </PrimaryButton>
   </SafeAreaViewContainer>

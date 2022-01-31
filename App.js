@@ -12,6 +12,7 @@ import { AccountSelectScreen } from "./src/features/authentication/screens/accou
 import { SignupTravellerScreen } from "./src/features/authentication/screens/signup.traveller.screen";
 import { SignupHotelManagerScreen } from "./src/features/authentication/screens/signup.hotelmanager.screen";
 import { AddRoomScreen } from "./src/features/hotelManager/screens/addRoom.hotelManager.screen";
+import { TourGuideLandingScreen } from "./src/features/tourGuide/screens/tourGuideLanding.screen";
 
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme";
@@ -45,7 +46,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <AddRoomScreen />
+      <TourGuideLandingScreen />
     </ThemeProvider>
   );
 }
