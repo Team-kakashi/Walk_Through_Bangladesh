@@ -2,24 +2,23 @@
 
 import React from "react";
 import { ScrollView, View } from "react-native";
-import { RoomCard } from "../componenets/roomCard.component";
+import { BlogPreviewCard } from "../components/blogPreviewCard.component";
 import styled from "styled-components/native";
 import {
   SafeAreaViewContainer,
   TertiaryButton,
   RightGravity,
   SpacingSmall,
+  ParentMargin,
   Subtitle,
 } from "../../../components/common.style";
 
-const RoomCardContainer = styled(View)`
+const BlogCardContainer = styled(View)`
   flex: 1;
   padding: ${(props) => props.theme.space[2]};
 `;
 
-export const HotelManagerLandingScreen = ({
-  navigation,
-}) => {
+export const TravelBloggerLandingScreen = () => {
   return (
     <SafeAreaViewContainer>
       <ScrollView>
@@ -27,21 +26,19 @@ export const HotelManagerLandingScreen = ({
         <RightGravity>
           <TertiaryButton
             icon="folder-plus"
-            onPress={() =>
-              navigation.navigate("AddRoomScreen")
-            }
+            onPress={() => console.log("Pressed")}
           >
-            Add Room
+            Write Blog
           </TertiaryButton>
         </RightGravity>
 
         <SpacingSmall></SpacingSmall>
-        <RoomCardContainer>
+        <BlogCardContainer>
           <ParentMargin>
-            <Subtitle>Hotel Rooms</Subtitle>
+            <Subtitle>Blogs</Subtitle>
           </ParentMargin>
-          <RoomCard />
-        </RoomCardContainer>
+          <BlogPreviewCard />
+        </BlogCardContainer>
       </ScrollView>
     </SafeAreaViewContainer>
   );

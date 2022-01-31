@@ -98,7 +98,9 @@ const postRegister = (req, res) => {
              name: name,
              email: email,
              contact_info: contactNo,
-             user_type:userType
+             area:null,
+             user_type:userType,
+             
                 })
         .into("users")
         .returning("id")
@@ -210,6 +212,379 @@ const postLogin = (req, res) => {
       res.status(400).json("wrong credential");
     });
 };
+
+const RegisterTourGuide = (req,res) => {
+  console.log("dhukse")
+  let {
+    name,
+    email,
+    password,
+    contactNo,
+    userType,
+    area,
+  } = req.body;
+  //console.log(name,email,password,contactNo,userType)
+  let hash = bcrypt.hashSync(password);
+  //  res.status(200).send("Success");
+  // console.log(nid, name, hash, verificationCode);
+
+  postgres
+    .select("*")
+    .from("users")
+    .where("email", "=", email)
+    .then((data) => {
+      
+      if (data[0] == undefined) {
+        postgres
+        .insert({
+             name: name,
+             email: email,
+             contact_info: contactNo,
+             area:area,
+             user_type:userType,
+            
+                })
+        .into("users")
+        .returning("id")
+        .then((userid)=>{
+         console.log(userid[0]);
+            postgres
+            .insert({
+              user_id:userid[0],
+              email:email,
+              password:hash,
+              verified:0,
+              verificationcode: verificationCode,
+                 })
+         .into("login")
+         .then(()=>{
+
+          postgres
+          .insert({
+            userid:userid[0],
+            area:area
+               })
+       .into("tourguide")
+       .then(()=>{
+        res.status(200).json("Successful")
+       })
+       .catch(()=>{
+        console.log(err)
+        res.status(400).json("Unable to register")
+       })
+
+           
+         })
+         .catch((err)=>{
+           console.log(err)
+           res.status(400).json("Unable to register")
+         })
+        })
+        .catch((err)=>{
+          console.log(err)
+          res.status(400).json("Unable to register")
+
+        })
+      } else {
+        res.status(500).json("email already exist");
+      }
+    })
+    .catch((err) =>{
+      console.log(err)
+      res.status(400).json("database error")
+      
+      });
+}
+const RegisterVehicleOwner = (req,res) => {
+  console.log("dhukse")
+  let {
+    name,
+    email,
+    password,
+    contactNo,
+    userType,
+    area,
+  } = req.body;
+  //console.log(name,email,password,contactNo,userType)
+  let hash = bcrypt.hashSync(password);
+  //  res.status(200).send("Success");
+  // console.log(nid, name, hash, verificationCode);
+
+  postgres
+    .select("*")
+    .from("users")
+    .where("email", "=", email)
+    .then((data) => {
+      
+      if (data[0] == undefined) {
+        postgres
+        .insert({
+             name: name,
+             email: email,
+             contact_info: contactNo,
+             area:area,
+             user_type:userType,
+            
+                })
+        .into("users")
+        .returning("id")
+        .then((userid)=>{
+         console.log(userid[0]);
+            postgres
+            .insert({
+              user_id:userid[0],
+              email:email,
+              password:hash,
+              verified:0,
+              verificationcode: verificationCode,
+                 })
+         .into("login")
+         .then(()=>{
+
+          postgres
+          .insert({
+            ownerid:userid[0],
+            area:area
+               })
+       .into("vehicle")
+       .then(()=>{
+        res.status(200).json("Successful")
+       })
+       .catch(()=>{
+        console.log(err)
+        res.status(400).json("Unable to register")
+       })
+
+           
+         })
+         .catch((err)=>{
+           console.log(err)
+           res.status(400).json("Unable to register")
+         })
+        })
+        .catch((err)=>{
+          console.log(err)
+          res.status(400).json("Unable to register")
+
+        })
+      } else {
+        res.status(500).json("email already exist");
+      }
+    })
+    .catch((err) =>{
+      console.log(err)
+      res.status(400).json("database error")
+      
+      });
+}
+const RegisterHotelManager = (req,res) => {
+  console.log("dhukse")
+  let {
+    name,
+    email,
+    password,
+    contactNo,
+    userType,
+    hotelName,
+    hotelAddress,
+  } = req.body;
+  //console.log(name,email,password,contactNo,userType)
+  let hash = bcrypt.hashSync(password);
+  //  res.status(200).send("Success");
+  // console.log(nid, name, hash, verificationCode);
+
+  postgres
+    .select("*")
+    .from("users")
+    .where("email", "=", email)
+    .then((data) => {
+      
+      if (data[0] == undefined) {
+        postgres
+        .insert({
+             name: name,
+             email: email,
+             contact_info: contactNo,
+             area:null,
+             user_type:userType,
+            
+                })
+        .into("users")
+        .returning("id")
+        .then((userid)=>{
+         console.log(userid[0]);
+            postgres
+            .insert({
+              user_id:userid[0],
+              email:email,
+              password:hash,
+              verified:0,
+              verificationcode: verificationCode,
+                 })
+         .into("login")
+         .then(()=>{
+
+          postgres
+          .insert({
+            ownerid:userid[0],
+            name:hotelName,
+            address:hotelAddress
+               })
+       .into("hotel")
+       .then(()=>{
+        res.status(200).json("Successful")
+       })
+       .catch((err)=>{
+        console.log(err)
+        res.status(400).json("Unable to register")
+       })
+
+           
+         })
+         .catch((err)=>{
+           console.log(err)
+           res.status(400).json("Unable to register")
+         })
+        })
+        .catch((err)=>{
+          console.log(err)
+          res.status(400).json("Unable to register")
+
+        })
+      } else {
+        res.status(500).json("email already exist");
+      }
+    })
+    .catch((err) =>{
+      console.log(err)
+      res.status(400).json("database error")
+      
+      });
+}
+const addRoom  = (req,res) => {
+  console.log("dhukse")
+  let {
+    userId,
+    room_number,
+    room_rent,
+    room_capacity,
+    room_ac_option,
+    room_description,
+    
+  } = req.body;
+  console.log(
+    userId,
+    room_number,
+    room_rent,
+    room_capacity,
+    room_ac_option,
+    room_description,)
+  //console.log(name,email,password,contactNo,userType)
+  //let hash = bcrypt.hashSync(password);
+  //  res.status(200).send("Success");
+  // console.log(nid, name, hash, verificationCode);
+
+  postgres
+  .select("*")
+  .from("hotel")
+  .where("ownerid","=",userId)
+  .then((data)=>{
+    postgres
+   .insert({
+    ownerid:userId ,
+    name: data[0].name,
+    address:data[0].address,
+    discount:0,
+    room_number : room_number,
+    room_rent : room_rent,
+    room_capacity : room_capacity,
+    room_ac_option : room_ac_option,
+    room_description : room_description,            
+         })
+  .into("hotel")
+  .then(()=>{
+    res.status(200).json("Successful")
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(500).json("room already exist")
+  })
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(400).json("Database error")
+  })
+
+
+
+  // postgres
+  //   .select("*")
+  //   .from("users")
+  //   .where("email", "=", email)
+  //   .then((data) => {
+      
+  //     if (data[0] == undefined) {
+  //       postgres
+  //       .insert({
+  //            name: name,
+  //            email: email,
+  //            contact_info: contactNo,
+  //            area:area,
+  //            user_type:userType,
+            
+  //               })
+  //       .into("users")
+  //       .returning("id")
+  //       .then((userid)=>{
+  //        console.log(userid[0]);
+  //           postgres
+  //           .insert({
+  //             user_id:userid[0],
+  //             email:email,
+  //             password:hash,
+  //             verified:0,
+  //             verificationcode: verificationCode,
+  //                })
+  //        .into("login")
+  //        .then(()=>{
+
+  //         postgres
+  //         .insert({
+  //           ownerid:userid[0],
+  //           name:hotelName,
+  //           address:hotelAddress
+  //              })
+  //      .into("hotel")
+  //      .then(()=>{
+  //       res.status(200).json("Successful")
+  //      })
+  //      .catch(()=>{
+  //       console.log(err)
+  //       res.status(400).json("Unable to register")
+  //      })
+
+           
+  //        })
+  //        .catch((err)=>{
+  //          console.log(err)
+  //          res.status(400).json("Unable to register")
+  //        })
+  //       })
+  //       .catch((err)=>{
+  //         console.log(err)
+  //         res.status(400).json("Unable to register")
+
+  //       })
+  //     } else {
+  //       res.status(500).json("email already exist");
+  //     }
+  //   })
+  //   .catch((err) =>{
+  //     console.log(err)
+  //     res.status(400).json("database error")
+      
+  //     });
+}
 module.exports = {
-  postLogin,postRegister
+  postLogin,postRegister,RegisterTourGuide,RegisterVehicleOwner, RegisterHotelManager,addRoom 
 };

@@ -36,6 +36,9 @@ export const RoomCard = ({ roomCardInfo = {} }) => {
       <Row>
         <CardDetails>
           <Title>{roomNumber}</Title>
+
+          <SpacingSmall />
+
           <IconTextContainer>
             <Icon source={personIcon} />
             <Subtitle>{personNumber}</Subtitle>

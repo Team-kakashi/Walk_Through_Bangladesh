@@ -2,17 +2,18 @@
 
 import React from "react";
 import { ScrollView, View } from "react-native";
-import { RoomCard } from "../componenets/roomCard.component";
+import { ServiceCard } from "../components/serviceCard.component";
 import styled from "styled-components/native";
 import {
   SafeAreaViewContainer,
   TertiaryButton,
   RightGravity,
   SpacingSmall,
+  ParentMargin,
   Subtitle,
 } from "../../../components/common.style";
 
-const RoomCardContainer = styled(View)`
+const ServiceCardContainer = styled(View)`
   flex: 1;
   padding: ${(props) => props.theme.space[2]};
 `;
@@ -22,20 +23,23 @@ export const TourGuideLandingScreen = () => {
     <SafeAreaViewContainer>
       <ScrollView>
         <SpacingSmall></SpacingSmall>
+
         <RightGravity>
           <TertiaryButton
             icon="folder-plus"
             onPress={() => console.log("Pressed")}
           >
-            Add Room
+            Add Service
           </TertiaryButton>
         </RightGravity>
 
         <SpacingSmall></SpacingSmall>
-        <RoomCardContainer>
-          <Subtitle>Hotel Rooms</Subtitle>
-          <RoomCard />
-        </RoomCardContainer>
+        <ServiceCardContainer>
+          <ParentMargin>
+            <Subtitle>Services</Subtitle>
+          </ParentMargin>
+          <ServiceCard />
+        </ServiceCardContainer>
       </ScrollView>
     </SafeAreaViewContainer>
   );
