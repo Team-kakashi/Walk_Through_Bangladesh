@@ -1,8 +1,8 @@
 /** @format */
 
 import React, { useState } from "react";
-import { ScrollView, View,Alert } from "react-native";
-import {IpRoute} from "../../../components/environmentVeriables";
+import { ScrollView, View, Alert } from "react-native";
+import { IpRoute } from "../../../components/environmentVeriables";
 import {
   SafeAreaViewContainer,
   TextInputTheme,
@@ -15,46 +15,39 @@ import {user_id} from "../../authentication/screens/logIn.screen"
 
 var ac_op;
 var cap;
-export const AddRoomScreen = ({navigation}) => {
+export const AddRoomScreen = ({ navigation }) => {
+  const AC_option = ["AC", "Non_AC"];
+  const Capacity = [1, 2, 3, 4];
 
-  const AC_option = ["AC","Non_AC"];
-  const Capacity = [1,2,3,4];
-
-  const [number,setNumber] = React.useState("");
-  const [rent,setRent] = React.useState("");
-  const [description,setDescription] =React.useState("");
+  const [number, setNumber] = React.useState("");
+  const [rent, setRent] = React.useState("");
+  const [description, setDescription] = React.useState("");
 
   const onPressAdd = () => {
-   console.log(user_id);
+    // console.log(ItemChoise);
+    console.log(user_id);
+    if (number == "" || rent == "") {
+      Alert.alert("Fill all fields");
+    } else {
+      submitData();
+      setNumber("");
+      setRent("");
+      setDescription("");
+    }
+  };
 
-     if (
-       number == "" ||
-       rent == ""
-       
-     ) {
-       Alert.alert("Fill all fields");
-     } else {
-  
-       submitData();
-       setNumber('');
-       setRent('');
-       setDescription('');
-     }
-   };
-
-   function selectPickerValue(item){
-    console.log('my slected item',item);
+  function selectPickerValue(item) {
+    console.log("my slected item", item);
     ac_op = item;
-   }
+  }
 
-   function selectCapacityValue(item){
-    console.log('my slected item',item);
+  function selectCapacityValue(item) {
+    console.log("my slected item", item);
     cap = item;
-   }
+  }
 
-
-   const submitData = () => {
-    fetch(IpRoute+"/addRoom", {
+  const submitData = () => {
+    fetch(IpRoute + "/addRoom", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -65,8 +58,7 @@ export const AddRoomScreen = ({navigation}) => {
         room_rent: rent,
         room_capacity: cap,
         room_ac_option: ac_op,
-        room_description : description,
-
+        room_description: description,
       }),
     })
       .then((res) => res.status)
@@ -76,12 +68,11 @@ export const AddRoomScreen = ({navigation}) => {
           console.log(data);
           navigation.navigate("HotelManagerLandingScreen");
           Alert.alert("Room successfully Added !");
-        } else if(data==500) {
+        } else if (data == 500) {
           Alert.alert("Room already exists !");
+        } else {
+          Alert.alert("Database error !");
         }
-          else{
-            Alert.alert("Database error !");
-          } 
       })
       .catch((err) => {
         console.log(err);
@@ -96,27 +87,32 @@ export const AddRoomScreen = ({navigation}) => {
 
         <SpacingLarge />
 
-        <TextInputTheme 
-        label="Number"
-        onChangeText={setNumber}
-        value={number}
-        
+        <TextInputTheme
+          label="Number"
+          onChangeText={setNumber}
+          value={number}
         ></TextInputTheme>
-        <TextInputTheme 
-        label="Rent"
-        onChangeText={setRent}
-        value={rent}
-        
+        <TextInputTheme
+          label="Rent"
+          onChangeText={setRent}
+          value={rent}
         ></TextInputTheme>
-        <TextInputTheme 
-        label="Description"
-        onChangeText={setDescription}
-        value={description}
-        
+        <TextInputTheme
+          label="Description (Optional)"
+          onChangeText={setDescription}
+          value={description}
         ></TextInputTheme>
 
-        <ModalView Array={AC_option} Title="Ac_options" PickerValue={selectPickerValue}></ModalView>
-        <ModalView Array={Capacity} Title="Capacities" PickerValue={selectCapacityValue}></ModalView>
+        <ModalView
+          Array={AC_option}
+          Title="Ac_options"
+          PickerValue={selectPickerValue}
+        ></ModalView>
+        <ModalView
+          Array={Capacity}
+          Title="Capacities"
+          PickerValue={selectCapacityValue}
+        ></ModalView>
 
         <SpacingLarge />
 

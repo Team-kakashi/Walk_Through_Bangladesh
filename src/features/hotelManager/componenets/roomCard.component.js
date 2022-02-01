@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, Image } from "react-native";
 import { Card } from "react-native-paper";
 import styled from "styled-components/native";
@@ -17,20 +17,23 @@ import {
   ImagePreview,
   ImagePreviewContainer,
   Icon,
+  SpacingSmall,
 } from "../../../components/common.style";
-import {IpRoute} from "../../../components/environmentVeriables"
+import {IpRoute} from "../../../components/environmentVeriables";
+import {user_id} from "../../authentication/screens/logIn.screen"
 
 export const RoomCard = ({ roomCardInfo = {} }) => {
 
+  const[room,setRoom]=useState([]);
+  
   const submitData = () => {
-    fetch(IpRoute+"/login", {
+    fetch(IpRoute+"/getRoom", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: email,
-        password: password,
+        userId: user_id,
       }),
     })
       .then((res) => res.json())
@@ -39,16 +42,9 @@ export const RoomCard = ({ roomCardInfo = {} }) => {
         if (data == "wrong credential") {
           Alert.alert(data);
         } else {
-          console.log(data);
-          user_id= data.id;
-          // console.log(JSON.stringify(data.json()));
-          if (data.user_type == "HotelManager") {
-            navigation.navigate("HotelManagerLandingScreen");
-          }/* else if (data.user_type == "TourGuide") {
-            navigation.navigate("GuideInfo");
-          } else if (data.user_type == "VehicleOwner") {
-            navigation.navigate("VehicleInfo");
-          }*/
+          
+          setRoom(data.map(a => a))
+          
         }
       })
       .catch((err) => {
@@ -56,9 +52,12 @@ export const RoomCard = ({ roomCardInfo = {} }) => {
         //Alert.alert(err)
       });
   };
-
-  submitData();
-
+ 
+  useEffect(()=>{
+    submitData();
+    console.log(room);
+  },[])
+  
   const {
     roomNumber = "511",
     personNumber = "5 Persons",
@@ -71,21 +70,28 @@ export const RoomCard = ({ roomCardInfo = {} }) => {
   } = roomCardInfo;
 
   return (
+    <>
+    { room.map(i =>(
     <CardParent elevation={5}>
+      
       <Row>
         <CardDetails>
-          <Title>{roomNumber}</Title>
+        
+          <Title>{i.room_number}</Title>
+        
+          <SpacingSmall />
+
           <IconTextContainer>
             <Icon source={personIcon} />
-            <Subtitle>{personNumber}</Subtitle>
+            <Subtitle>{i.room_capacity}Persons</Subtitle>
           </IconTextContainer>
           <IconTextContainer>
             <Icon source={acIcon} />
-            <Subtitle>{AC}</Subtitle>
+            <Subtitle>{i.room_ac_option}</Subtitle>
           </IconTextContainer>
           <IconTextContainer>
             <Icon source={moneyIcon} />
-            <Subtitle>{rent}</Subtitle>
+            <Subtitle>{i.room_rent}BDT/Night</Subtitle>
           </IconTextContainer>
         </CardDetails>
         <ImagePreviewContainer>
@@ -93,7 +99,10 @@ export const RoomCard = ({ roomCardInfo = {} }) => {
           <ImagePreview source={{ uri: photos[1] }} />
         </ImagePreviewContainer>
       </Row>
+     
     </CardParent>
+     ))}
+     </>
   );
 };
 

@@ -58,6 +58,12 @@ export const Subtitle = styled(Text)`
   color: ${(props) => props.theme.colors.ui.secondary};
 `;
 
+export const PositiveSubtitle = styled(Text)`
+  font-family: ${(props) => props.theme.fonts.body};
+  font-size: ${(props) => props.theme.fontSizes.body};
+  color: ${(props) => props.theme.colors.brand.primary};
+`;
+
 export const Title = styled(Text)`
   margin-bottom: ${(props) => props.theme.space[2]};
   font-family: ${(props) => props.theme.fonts.body};
@@ -74,11 +80,23 @@ export const ImagePreview = styled(Image)`
   border-radius: ${(props) => props.theme.sizes[1]};
 `;
 
+export const CoverImagePreview = styled(Image)`
+  flex: 1;
+  background-color: ${(props) =>
+    props.theme.colors.bg.secondary};
+  padding: ${(props) => props.theme.space[1]};
+  border-radius: ${(props) => props.theme.sizes[1]};
+  height: 120px;
+`;
+
 export const ImagePreviewContainer = styled(View)`
   flex-direction: row;
   flex: 1;
 `;
-
+export const CoverImagePreviewContainer = styled(View)`
+  flex-direction: row;
+  flex: 1;
+`;
 export const SpacingLarge = styled(View)`
   margin-bottom: ${(props) => props.theme.space[5]};
 `;
@@ -211,5 +229,4 @@ export const Line = styled(View)`
   border-width: .2px;
   align-items: flex-start;
   margin-left:${(props) => props.theme.space[3]};
-
 `;
