@@ -585,6 +585,34 @@ const addRoom  = (req,res) => {
       
   //     });
 }
+const getRoom  = (req,res) => {
+  console.log("dhukse")
+  let {
+    userId,
+    
+  } = req.body;
+  console.log(
+    userId,
+)
+
+
+  postgres
+  .select("*")
+  .from("hotel")
+  .where("ownerid","=",userId)
+  .then((data)=>{
+    console.log(data)
+     res.status(200).json(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(400).json("Database error")
+  })
+
+
+
+
+}
 module.exports = {
-  postLogin,postRegister,RegisterTourGuide,RegisterVehicleOwner, RegisterHotelManager,addRoom 
+  postLogin,postRegister,RegisterTourGuide,RegisterVehicleOwner, RegisterHotelManager,addRoom ,getRoom
 };
