@@ -11,6 +11,7 @@ import {
   H1,
 } from "../../../components/common.style";
 import { ModalView, ItemChoise } from "../../../components/modalView.view";
+import {user_id} from "../../authentication/screens/logIn.screen"
 
 var ac_op;
 var cap;
@@ -24,7 +25,7 @@ export const AddRoomScreen = ({navigation}) => {
   const [description,setDescription] =React.useState("");
 
   const onPressAdd = () => {
-   // console.log(ItemChoise);
+   console.log(user_id);
 
      if (
        number == "" ||
@@ -59,6 +60,7 @@ export const AddRoomScreen = ({navigation}) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        userId: user_id,
         room_number: number,
         room_rent: rent,
         room_capacity: cap,

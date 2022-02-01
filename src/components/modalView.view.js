@@ -12,7 +12,7 @@ var selectingDropDown;
 var Title; 
 export var ItemChoise;
 export const ModalView = (props) => {
-  console.log(props);
+  
   Title = props.Title;
   selectingDropDown = props.Array;
   /*if(props.AC_option!=undefined){

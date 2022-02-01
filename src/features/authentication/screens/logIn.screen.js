@@ -25,7 +25,7 @@ import {
 } from "../../../components/common.style";
 
 
-
+export var user_id;
 
 export const LogInScreen = ({navigation}) =>{
 const [email, onChangeEmail] = React.useState(null);
@@ -58,6 +58,7 @@ const submitData = () => {
         Alert.alert(data);
       } else {
         console.log(data);
+        user_id= data.id;
         // console.log(JSON.stringify(data.json()));
         if (data.user_type == "HotelManager") {
           navigation.navigate("HotelManagerLandingScreen");

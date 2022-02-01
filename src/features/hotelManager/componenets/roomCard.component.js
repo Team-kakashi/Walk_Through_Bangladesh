@@ -18,8 +18,47 @@ import {
   ImagePreviewContainer,
   Icon,
 } from "../../../components/common.style";
+import {IpRoute} from "../../../components/environmentVeriables"
 
 export const RoomCard = ({ roomCardInfo = {} }) => {
+
+  const submitData = () => {
+    fetch(IpRoute+"/login", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log(res.status())
+        if (data == "wrong credential") {
+          Alert.alert(data);
+        } else {
+          console.log(data);
+          user_id= data.id;
+          // console.log(JSON.stringify(data.json()));
+          if (data.user_type == "HotelManager") {
+            navigation.navigate("HotelManagerLandingScreen");
+          }/* else if (data.user_type == "TourGuide") {
+            navigation.navigate("GuideInfo");
+          } else if (data.user_type == "VehicleOwner") {
+            navigation.navigate("VehicleInfo");
+          }*/
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        //Alert.alert(err)
+      });
+  };
+
+  submitData();
+
   const {
     roomNumber = "511",
     personNumber = "5 Persons",
