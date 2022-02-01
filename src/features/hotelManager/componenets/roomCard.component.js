@@ -22,6 +22,8 @@ import {
 import {IpRoute} from "../../../components/environmentVeriables";
 import {user_id} from "../../authentication/screens/logIn.screen"
 
+var keyid=0;
+var x=0;
 export const RoomCard = ({ roomCardInfo = {} }) => {
 
   const[room,setRoom]=useState([]);
@@ -42,8 +44,12 @@ export const RoomCard = ({ roomCardInfo = {} }) => {
         if (data == "wrong credential") {
           Alert.alert(data);
         } else {
-          
-          setRoom(data.map(a => a))
+          setRoom(data);
+          // setRoom(data.map(a => {
+          //   key={x}
+          //   x++
+          //   a
+          // }))
           
         }
       })
@@ -72,26 +78,27 @@ export const RoomCard = ({ roomCardInfo = {} }) => {
   return (
     <>
     { room.map(i =>(
+      
     <CardParent elevation={5}>
       
       <Row>
         <CardDetails>
         
-          <Title>{i.room_number}</Title>
+          <Title key={keyid++}>{i.room_number}</Title>
         
           <SpacingSmall />
 
           <IconTextContainer>
             <Icon source={personIcon} />
-            <Subtitle>{i.room_capacity}Persons</Subtitle>
+            <Subtitle >{i.room_capacity} Persons</Subtitle>
           </IconTextContainer>
           <IconTextContainer>
             <Icon source={acIcon} />
-            <Subtitle>{i.room_ac_option}</Subtitle>
+            <Subtitle >{i.room_ac_option}</Subtitle>
           </IconTextContainer>
           <IconTextContainer>
             <Icon source={moneyIcon} />
-            <Subtitle>{i.room_rent}BDT/Night</Subtitle>
+            <Subtitle >{i.room_rent} BDT/Night</Subtitle>
           </IconTextContainer>
         </CardDetails>
         <ImagePreviewContainer>
@@ -99,8 +106,9 @@ export const RoomCard = ({ roomCardInfo = {} }) => {
           <ImagePreview source={{ uri: photos[1] }} />
         </ImagePreviewContainer>
       </Row>
-     
+       
     </CardParent>
+    
      ))}
      </>
   );

@@ -64,11 +64,14 @@ export const LogInScreen = ({ navigation }) => {
             navigation.navigate(
               "HotelManagerLandingScreen"
             );
-          } /* else if (data.user_type == "TourGuide") {
-          navigation.navigate("GuideInfo");
-        } else if (data.user_type == "VehicleOwner") {
+          }  else if (data.user_type == "TourGuide") {
+          navigation.navigate("TourGuideLandingScreen");
+        }/* else if (data.user_type == "VehicleOwner") {
           navigation.navigate("VehicleInfo");
         }*/
+        else if(data.user_type == "Blogger"){
+          navigation.navigate("TravelBloggerLandingScreen")
+        } 
         }
       })
       .catch((err) => {

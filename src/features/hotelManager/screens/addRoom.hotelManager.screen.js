@@ -11,7 +11,7 @@ import {
   H1,
 } from "../../../components/common.style";
 import { ModalView, ItemChoise } from "../../../components/modalView.view";
-import {user_id} from "../../authentication/screens/logIn.screen"
+import {user_id} from "../../authentication/screens/logIn.screen";
 
 var ac_op;
 var cap;
