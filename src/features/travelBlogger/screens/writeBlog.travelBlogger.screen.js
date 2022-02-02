@@ -17,23 +17,24 @@ import {
 import { user_id } from "../../authentication/screens/logIn.screen";
 
 var tripRoute;
-var recomendation;
+var tripArea;
 export const WriteBlogScreen = ({navigation}) =>{
-  const route = ["Ratargul-bisanakandi", "Bisanakandi-jaflong","Jaflong-lalaKhal"];
-  const tripRecomendation = ["Best","Good","Bad","Worse"];
+  const route = ["Ratargul", "Bisanakandi","Jaflong"];
+  const area = ["Sylhet","Coxs-Bazar","Bandorban","Chittagong"];
   
   const [title, setTitle] = React.useState("");
   const [expense, setExpense] = React.useState("");
   const [description,setDescription] =React.useState("");
+  const [recommendation,setRecommendation] =React.useState("");
 
    const selectrouteValue=(item)=>{
     console.log("my slected item", item);
      tripRoute = item;
    }
 
-   const selectRecomendatoinValue =(item)=>{
+   const selectAreaValue =(item)=>{
     console.log("my slected item", item);
-    recomendation = item;
+    tripArea = item;
    }
 
   const onPressAdd = () => {
@@ -41,8 +42,8 @@ export const WriteBlogScreen = ({navigation}) =>{
     if (title == "" || expense == "") {
       Alert.alert("Fill all fields");
     } else {
-      //submitData();
-      Alert.alert(tripRoute);
+      submitData();
+     // Alert.alert(tripRoute);
       setTitle("");
       setDescription("");
     }
@@ -56,12 +57,14 @@ export const WriteBlogScreen = ({navigation}) =>{
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-      userId: user_id,
-      title: title,
-      route: tripRoute,
-      price : expense,
-      recomendation: recomendation,
-      description: description,
+        userId: user_id,
+        title: title,
+        area: tripArea,
+        route: tripRoute,
+        price : expense,
+        recommendation: recommendation,
+        description: description,
+  
 
       }),
     })
@@ -98,6 +101,11 @@ export const WriteBlogScreen = ({navigation}) =>{
       value={title}
       ></TextInputTheme>
       <ModalView
+      Array={area}
+      Title="Area"
+      PickerValue={selectAreaValue}
+      ></ModalView>
+      <ModalView
       Array={route}
       Title="Trips"
       PickerValue={selectrouteValue}
@@ -107,11 +115,11 @@ export const WriteBlogScreen = ({navigation}) =>{
       onChangeText={setExpense}
       value={expense}
       ></TextInputTheme>
-      <ModalView
-      Array={tripRecomendation}
-      Title="Recomendation"
-      PickerValue={selectRecomendatoinValue}
-      ></ModalView>
+      <TextInputTheme 
+      label="Recommendation"
+      onChangeText={setRecommendation}
+      value={recommendation}
+      ></TextInputTheme>
       <TextInputTheme 
       label="Description"
       onChangeText={setDescription}
