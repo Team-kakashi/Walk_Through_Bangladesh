@@ -26,7 +26,8 @@ var keyid=0;
 var x=0;
 export const RoomCard = ({ roomCardInfo = {} }) => {
 
-  const[room,setRoom]=useState([]);
+  const[room,setRoom]=useState([{}]);
+  const[loadPage,setloadPage]= useState(true);
   
   const submitData = () => {
     fetch(IpRoute+"/getRoom", {
@@ -45,11 +46,11 @@ export const RoomCard = ({ roomCardInfo = {} }) => {
           Alert.alert(data);
         } else {
           setRoom(data);
-          // setRoom(data.map(a => {
-          //   key={x}
-          //   x++
-          //   a
-          // }))
+          console.log(data);
+          console.log(data[0].room_number);
+          if(data[0].room_number==null){
+            setloadPage(false);
+          };
           
         }
       })
@@ -77,6 +78,8 @@ export const RoomCard = ({ roomCardInfo = {} }) => {
 
   return (
     <>
+    {loadPage 
+    ?<>
     { room.map(i =>(
       
     <CardParent elevation={5}>
@@ -110,6 +113,9 @@ export const RoomCard = ({ roomCardInfo = {} }) => {
     </CardParent>
     
      ))}
+    </>
+    :<></>
+}
      </>
   );
 };

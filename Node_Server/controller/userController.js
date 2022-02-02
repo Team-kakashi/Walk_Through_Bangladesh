@@ -429,7 +429,6 @@ const RegisterHotelManager = (req,res) => {
             ownerid:userid[0],
             name:hotelName,
             address:hotelAddress,
-            route:null,
                })
        .into("hotel")
        .then(()=>{
@@ -493,13 +492,13 @@ const addRoom  = (req,res) => {
     postgres
     .select("*")
     .from("hotel")
-    .where("route", "IS", null)
+    .where("room_number", "IS", null)
     .then((data) => {
       console.log(data)
       if(data[0]!=undefined){
       
-      postgres("tourguide")
-      .where("route", "IS", null)
+      postgres("hotel")
+      .where("room_number", "IS", null)
       .update({
           discount:0,
           room_number : room_number,
@@ -521,7 +520,7 @@ const addRoom  = (req,res) => {
         postgres
        .select("*")
        .from("hotel")
-       .where("userid", "=", userId)
+       .where("ownerid", "=", userId)
        .then((data) => {
 
         postgres

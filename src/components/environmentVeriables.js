@@ -1,1 +1,1 @@
-export const IpRoute = "http://192.168.0.181:3000" ;
+export const IpRoute = "http://192.168.0.193:3000" ;
