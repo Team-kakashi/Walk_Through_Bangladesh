@@ -25,7 +25,7 @@ var keyid=0;
 export const ServiceCard = ({ serviceCardInfo = {} }) => {
 
   const[service,setService]= React.useState([{}]);
-  const[loadPage,setloadPage]= useState(false);
+  const[loadPage,setloadPage]= useState(true);
   
   const submitData = () => {
     fetch(IpRoute+"/getService", {
@@ -47,8 +47,9 @@ export const ServiceCard = ({ serviceCardInfo = {} }) => {
 
           console.log(data);
           console.log(service.length)
-          if(data.length==0){
-            setloadPage(true);
+          console.log("price ",data[0].price);
+          if(data[0].price==null){
+            setloadPage(false);
           };
         }
       })
@@ -74,10 +75,10 @@ export const ServiceCard = ({ serviceCardInfo = {} }) => {
 
   return (
     <>
-    {loadPage ?<>
+    {loadPage
 
-    </>
-    :<> 
+    
+    ?<> 
     { service.map(i =>(
 
     <CardParent elevation={5}>
@@ -101,6 +102,7 @@ export const ServiceCard = ({ serviceCardInfo = {} }) => {
     </CardParent>
     ))}
     </>
+    :<></>
 }
     </>
   );

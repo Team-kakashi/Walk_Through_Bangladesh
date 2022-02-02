@@ -66,7 +66,7 @@ export const AddRoomScreen = ({ navigation }) => {
         //console.log(res.status())
         if (data == 200) {
           console.log(data);
-          navigation.navigate("HotelManagerLandingScreen");
+          navigation.push("HotelManagerLandingScreen");
           Alert.alert("Room successfully Added !");
         } else if (data == 500) {
           Alert.alert("Room already exists !");
