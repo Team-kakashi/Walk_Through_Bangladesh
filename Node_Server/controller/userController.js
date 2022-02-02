@@ -480,111 +480,79 @@ const addRoom  = (req,res) => {
     room_capacity,
     room_ac_option,
     room_description,)
-  //console.log(name,email,password,contactNo,userType)
-  //let hash = bcrypt.hashSync(password);
-  //  res.status(200).send("Success");
-  // console.log(nid, name, hash, verificationCode);
 
-  postgres
-  .select("*")
-  .from("hotel")
-  .where("ownerid","=",userId)
-  .then((data)=>{
+    // ownerid:userId ,
+    // name: data[0].name,
+    // address:data[0].address,
+    // discount:0,
+    // room_number : room_number,
+    // room_rent : room_rent,
+    // room_capacity : room_capacity,
+    // room_ac_option : room_ac_option,
+    // room_description : room_description,   
     postgres
-   .insert({
-    ownerid:userId ,
-    name: data[0].name,
-    address:data[0].address,
-    discount:0,
-    room_number : room_number,
-    room_rent : room_rent,
-    room_capacity : room_capacity,
-    room_ac_option : room_ac_option,
-    room_description : room_description,            
-         })
-  .into("hotel")
-  .then(()=>{
-    res.status(200).json("Successful")
-  })
-  .catch((err)=>{
-    console.log(err)
-    res.status(500).json("room already exist")
-  })
-  })
-  .catch((err)=>{
-    console.log(err)
-    res.status(400).json("Database error")
-  })
-
-
-
-  // postgres
-  //   .select("*")
-  //   .from("users")
-  //   .where("email", "=", email)
-  //   .then((data) => {
+    .select("*")
+    .from("hotel")
+    .where("route", "IS", null)
+    .then((data) => {
+      console.log(data)
+      if(data[0]!=undefined){
       
-  //     if (data[0] == undefined) {
-  //       postgres
-  //       .insert({
-  //            name: name,
-  //            email: email,
-  //            contact_info: contactNo,
-  //            area:area,
-  //            user_type:userType,
-            
-  //               })
-  //       .into("users")
-  //       .returning("id")
-  //       .then((userid)=>{
-  //        console.log(userid[0]);
-  //           postgres
-  //           .insert({
-  //             user_id:userid[0],
-  //             email:email,
-  //             password:hash,
-  //             verified:0,
-  //             verificationcode: verificationCode,
-  //                })
-  //        .into("login")
-  //        .then(()=>{
+      postgres("tourguide")
+      .where("route", "IS", null)
+      .update({
+          discount:0,
+          room_number : room_number,
+          room_rent : room_rent,
+          room_capacity : room_capacity,
+          room_ac_option : room_ac_option,
+         room_description : room_description,  
+      })
+      .then(()=>{
+        res.status(200).json("Successful");
+      })
+      .catch((err)=>{
+        res.status(400).json("Error");
+      })  
+    console.log(data)
+      }
+      else{
+        console.log("else")
+        postgres
+       .select("*")
+       .from("hotel")
+       .where("userid", "=", userId)
+       .then((data) => {
 
-  //         postgres
-  //         .insert({
-  //           ownerid:userid[0],
-  //           name:hotelName,
-  //           address:hotelAddress
-  //              })
-  //      .into("hotel")
-  //      .then(()=>{
-  //       res.status(200).json("Successful")
-  //      })
-  //      .catch(()=>{
-  //       console.log(err)
-  //       res.status(400).json("Unable to register")
-  //      })
+        postgres
+        .insert({
+           ownerid:userId ,
+           name: data[0].name,
+           address:data[0].address,
+           discount:0,
+           room_number : room_number,
+           room_rent : room_rent,
+           room_capacity : room_capacity,
+           room_ac_option : room_ac_option,
+           room_description : room_description,  
+             })
+     .into("hotel")
+     .then(()=>{
+      res.status(200).json("Successful")
+     })
+     .catch(()=>{
+      res.status(400).json("Error")
+     })
+    })
+      }
+    })
+    .catch((err)=>{
+     console.log(err)
+    res.status(400).json("Error")
+    })
 
-           
-  //        })
-  //        .catch((err)=>{
-  //          console.log(err)
-  //          res.status(400).json("Unable to register")
-  //        })
-  //       })
-  //       .catch((err)=>{
-  //         console.log(err)
-  //         res.status(400).json("Unable to register")
 
-  //       })
-  //     } else {
-  //       res.status(500).json("email already exist");
-  //     }
-  //   })
-  //   .catch((err) =>{
-  //     console.log(err)
-  //     res.status(400).json("database error")
-      
-  //     });
+
 }
 const getRoom  = (req,res) => {
   console.log("dhukse")
