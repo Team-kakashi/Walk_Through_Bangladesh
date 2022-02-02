@@ -91,7 +91,7 @@ export const AddServiceScreen = ({navigation}) =>{
         //console.log(res.status())
         if (data1 == 200) {
           console.log(data1);
-          navigation.navigate("TourGuideLandingScreen");
+          navigation.push("TourGuideLandingScreen");
           Alert.alert("Service successfully Added !");
         } else if (data1 == 500) {
           Alert.alert("Service route already exists !");
