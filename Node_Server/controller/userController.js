@@ -681,7 +681,51 @@ const getService  = (req,res) => {
 
 
 }
+const addBlog  = (req,res) => {
+  console.log("dhukse")
+  let {
+    userId,
+    title,
+    area,
+    route,
+    price ,
+    recommendation,
+    description
 
+    
+  } = req.body;
+  console.log(
+    userId,
+    title,
+    area,
+    route,
+    price ,
+    recommendation,
+    description
+)
+
+
+postgres
+ .insert({
+  userid:userId,
+  title:title,
+  area:area,
+  route:route,
+  description:description,
+  rating:0,
+  price:price ,
+  recommendation:recommendation,
+          })
+ .into("blog")
+ .then(()=>{
+  res.status(200).json("successful")
+ })
+ .catch((err)=>{
+   console.log(err)
+   res.status(400).json("database error")
+
+ })
+}
 module.exports = {
-  postLogin,postRegister,RegisterTourGuide,RegisterVehicleOwner, RegisterHotelManager,addRoom ,getRoom ,addService ,getService
+  postLogin,postRegister,RegisterTourGuide,RegisterVehicleOwner, RegisterHotelManager,addRoom ,getRoom ,addService ,getService, addBlog
 };

@@ -10,6 +10,7 @@ const {
   getRoom,
   addService,
   getService,
+  addBlog
   //   isVerified,
   //   postHelpRequest,
   //   getHelpRequestList,
@@ -40,5 +41,7 @@ router.post("/addRoom", addRoom);
 router.post("/getRoom", getRoom);
 router.post("/addService", addService);
 router.post("/getService", getService);
+
+router.post("/addBlog",addBlog);
 
 module.exports = router;
