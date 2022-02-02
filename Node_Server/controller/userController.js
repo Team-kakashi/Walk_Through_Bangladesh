@@ -428,7 +428,8 @@ const RegisterHotelManager = (req,res) => {
           .insert({
             ownerid:userid[0],
             name:hotelName,
-            address:hotelAddress
+            address:hotelAddress,
+            route:null,
                })
        .into("hotel")
        .then(()=>{
@@ -613,6 +614,107 @@ const getRoom  = (req,res) => {
 
 
 }
+const addService  = (req,res) => {
+  console.log("dhukse")
+  let {
+    userId ,
+    route,
+    price,
+    year_of_experience,
+
+} = req.body;
+  console.log(
+    userId ,
+    route,
+    price,
+    year_of_experience,
+)
+
+
+postgres
+    .select("*")
+    .from("tourguide")
+    .where("route", "IS", null)
+    .then((data) => {
+      console.log(data)
+      if(data[0]!=undefined){
+      
+      postgres("tourguide")
+      .where("route", "IS", null)
+      .update({
+        route:route,
+        price:price,
+        year_of_experience:year_of_experience
+      })
+      .then(()=>{
+        res.status(200).json("Successful");
+      })
+      .catch((err)=>{
+        res.status(400).json("Error");
+      })  
+    console.log(data)
+      }
+      else{
+        console.log("else")
+        postgres
+       .select("*")
+       .from("tourguide")
+       .where("userid", "=", userId)
+       .then((data) => {
+
+        postgres
+        .insert({
+          userid:userId,
+          area:data[0].area,
+          route:route,
+          price:price,
+          year_of_experience:year_of_experience
+             })
+     .into("tourguide")
+     .then(()=>{
+      res.status(200).json("Successful")
+     })
+     .catch(()=>{
+      res.status(400).json("Error")
+     })
+    })
+      }
+    })
+    .catch((err)=>{
+     console.log(err)
+    res.status(400).json("Error")
+    })
+
+
+}
+const getService  = (req,res) => {
+  console.log("dhukse")
+  let {
+    userId,
+    
+  } = req.body;
+  console.log(
+    userId,
+)
+
+
+  postgres
+  .select("*")
+  .from("tourguide")
+  .where("userid","=",userId)
+  .then((data)=>{
+    console.log(data)
+     res.status(200).json(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(400).json("Database error")
+  })
+
+
+
+}
+
 module.exports = {
-  postLogin,postRegister,RegisterTourGuide,RegisterVehicleOwner, RegisterHotelManager,addRoom ,getRoom
+  postLogin,postRegister,RegisterTourGuide,RegisterVehicleOwner, RegisterHotelManager,addRoom ,getRoom ,addService ,getService
 };
