@@ -36,7 +36,7 @@ export const AddServiceScreen = ({navigation}) =>{
     if (cost == "" || yearOfExperience == "") {
       Alert.alert("Fill all fields");
     } else {
-      //submitData();
+      submitData();
       Alert.alert(serviceRoute);
       setCost("");
       setYearOfExperience("");
