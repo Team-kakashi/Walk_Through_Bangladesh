@@ -73,7 +73,7 @@ export const WriteBlogScreen = ({navigation}) =>{
         //console.log(res.status())
         if (data1 == 200) {
           console.log(data1);
-          navigation.navigate("TravelBloggerLandingScreen");
+          navigation.push("TravelBloggerLandingScreen");
           Alert.alert("Blog successfully Added !");
         } else if (data1 == 500) {
           Alert.alert("Title already exists !");
