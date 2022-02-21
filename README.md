@@ -33,10 +33,13 @@ Core Features:
   
     c. Negative rated service providers will lose their account
   
-  d.Travellers will also be able to rate the suggested plan  
+    d.Travellers will also be able to rate the suggested plan  
 
 Language and technologies used for the app :
 
 1. React Native
-2. NodeJS
-3. PostgreSQL
+2. Html
+3. Css
+4. Javascript
+5. NodeJS
+6. PostgreSQL
