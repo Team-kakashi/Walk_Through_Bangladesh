@@ -10,6 +10,7 @@ import {
   RightGravity,
   SpacingSmall,
   Subtitle,
+  ParentMargin,
 } from "../../../components/common.style";
 
 const RoomCardContainer = styled(View)`

@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, Image } from "react-native";
 import { Card } from "react-native-paper";
 import styled from "styled-components/native";
@@ -17,9 +17,54 @@ import {
   ImagePreview,
   ImagePreviewContainer,
   Icon,
+  SpacingSmall,
 } from "../../../components/common.style";
+import {IpRoute} from "../../../components/environmentVeriables";
+import {user_id} from "../../authentication/screens/logIn.screen"
 
+var keyid=0;
+var x=0;
 export const RoomCard = ({ roomCardInfo = {} }) => {
+
+  const[room,setRoom]=useState([{}]);
+  const[loadPage,setloadPage]= useState(true);
+  
+  const submitData = () => {
+    fetch(IpRoute+"/getRoom", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: user_id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log(res.status())
+        if (data == "wrong credential") {
+          Alert.alert(data);
+        } else {
+          setRoom(data);
+          console.log(data);
+          console.log(data[0].room_number);
+          if(data[0].room_number==null){
+            setloadPage(false);
+          };
+          
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        //Alert.alert(err)
+      });
+  };
+ 
+  useEffect(()=>{
+    submitData();
+    console.log(room);
+  },[])
+  
   const {
     roomNumber = "511",
     personNumber = "5 Persons",
@@ -32,24 +77,31 @@ export const RoomCard = ({ roomCardInfo = {} }) => {
   } = roomCardInfo;
 
   return (
+    <>
+    {loadPage 
+    ?<>
+    { room.map(i =>(
+      
     <CardParent elevation={5}>
+      
       <Row>
         <CardDetails>
-          <Title>{roomNumber}</Title>
-
+        
+          <Title key={keyid++}>{i.room_number}</Title>
+        
           <SpacingSmall />
 
           <IconTextContainer>
             <Icon source={personIcon} />
-            <Subtitle>{personNumber}</Subtitle>
+            <Subtitle >{i.room_capacity} Persons</Subtitle>
           </IconTextContainer>
           <IconTextContainer>
             <Icon source={acIcon} />
-            <Subtitle>{AC}</Subtitle>
+            <Subtitle >{i.room_ac_option}</Subtitle>
           </IconTextContainer>
           <IconTextContainer>
             <Icon source={moneyIcon} />
-            <Subtitle>{rent}</Subtitle>
+            <Subtitle >{i.room_rent} BDT/Night</Subtitle>
           </IconTextContainer>
         </CardDetails>
         <ImagePreviewContainer>
@@ -57,7 +109,14 @@ export const RoomCard = ({ roomCardInfo = {} }) => {
           <ImagePreview source={{ uri: photos[1] }} />
         </ImagePreviewContainer>
       </Row>
+       
     </CardParent>
+    
+     ))}
+    </>
+    :<></>
+}
+     </>
   );
 };
 

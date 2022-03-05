@@ -18,7 +18,7 @@ const ServiceCardContainer = styled(View)`
   padding: ${(props) => props.theme.space[2]};
 `;
 
-export const TourGuideLandingScreen = () => {
+export const TourGuideLandingScreen = ({navigation}) => {
   return (
     <SafeAreaViewContainer>
       <ScrollView>
@@ -27,7 +27,7 @@ export const TourGuideLandingScreen = () => {
         <RightGravity>
           <TertiaryButton
             icon="folder-plus"
-            onPress={() => console.log("Pressed")}
+            onPress={() => navigation.navigate("AddServiceScreen")}
           >
             Add Service
           </TertiaryButton>

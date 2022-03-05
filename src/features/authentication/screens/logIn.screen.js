@@ -24,6 +24,9 @@ import {
   SafeAreaViewContainer,
 } from "../../../components/common.style";
 
+    
+export var user_id;
+
 export const LogInScreen = ({ navigation }) => {
   const [email, onChangeEmail] = React.useState(null);
   const [password, onChangePassword] = React.useState(null);
@@ -55,16 +58,20 @@ export const LogInScreen = ({ navigation }) => {
           Alert.alert(data);
         } else {
           console.log(data);
+          user_id=data.id;
           // console.log(JSON.stringify(data.json()));
           if (data.user_type == "HotelManager") {
             navigation.navigate(
               "HotelManagerLandingScreen"
             );
-          } /* else if (data.user_type == "TourGuide") {
-          navigation.navigate("GuideInfo");
-        } else if (data.user_type == "VehicleOwner") {
+          }  else if (data.user_type == "TourGuide") {
+          navigation.navigate("TourGuideLandingScreen");
+        }/* else if (data.user_type == "VehicleOwner") {
           navigation.navigate("VehicleInfo");
         }*/
+        else if(data.user_type == "Blogger"){
+          navigation.navigate("TravelBloggerLandingScreen")
+        } 
         }
       })
       .catch((err) => {

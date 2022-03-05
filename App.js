@@ -91,6 +91,22 @@ export default function App() {
             name="AddRoomScreen"
             component={AddRoomScreen}
           />
+          <Stack.Screen
+            name="TourGuideLandingScreen"
+            component={TourGuideLandingScreen}
+          />
+          <Stack.Screen
+            name="AddServiceScreen"
+            component={AddServiceScreen}
+          />
+          <Stack.Screen
+            name="TravelBloggerLandingScreen"
+            component={TravelBloggerLandingScreen}
+          />
+          <Stack.Screen
+            name="WriteBlogScreen"
+            component={WriteBlogScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>

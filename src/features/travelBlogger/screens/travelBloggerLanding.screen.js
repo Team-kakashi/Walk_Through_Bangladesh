@@ -12,13 +12,14 @@ import {
   ParentMargin,
   Subtitle,
 } from "../../../components/common.style";
+import { NavigationContainer } from "@react-navigation/native";
 
 const BlogCardContainer = styled(View)`
   flex: 1;
   padding: ${(props) => props.theme.space[2]};
 `;
 
-export const TravelBloggerLandingScreen = () => {
+export const TravelBloggerLandingScreen = ({navigation}) => {
   return (
     <SafeAreaViewContainer>
       <ScrollView>
@@ -26,7 +27,7 @@ export const TravelBloggerLandingScreen = () => {
         <RightGravity>
           <TertiaryButton
             icon="folder-plus"
-            onPress={() => console.log("Pressed")}
+            onPress={() => navigation.navigate("WriteBlogScreen")}
           >
             Write Blog
           </TertiaryButton>

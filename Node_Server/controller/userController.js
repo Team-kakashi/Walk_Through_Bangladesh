@@ -428,7 +428,7 @@ const RegisterHotelManager = (req,res) => {
           .insert({
             ownerid:userid[0],
             name:hotelName,
-            address:hotelAddress
+            address:hotelAddress,
                })
        .into("hotel")
        .then(()=>{
@@ -479,36 +479,98 @@ const addRoom  = (req,res) => {
     room_capacity,
     room_ac_option,
     room_description,)
-  //console.log(name,email,password,contactNo,userType)
-  //let hash = bcrypt.hashSync(password);
-  //  res.status(200).send("Success");
-  // console.log(nid, name, hash, verificationCode);
+
+    // ownerid:userId ,
+    // name: data[0].name,
+    // address:data[0].address,
+    // discount:0,
+    // room_number : room_number,
+    // room_rent : room_rent,
+    // room_capacity : room_capacity,
+    // room_ac_option : room_ac_option,
+    // room_description : room_description,   
+    postgres
+    .select("*")
+    .from("hotel")
+    .where("room_number", "IS", null)
+    .then((data) => {
+      console.log(data)
+      if(data[0]!=undefined){
+      
+      postgres("hotel")
+      .where("room_number", "IS", null)
+      .update({
+          discount:0,
+          room_number : room_number,
+          room_rent : room_rent,
+          room_capacity : room_capacity,
+          room_ac_option : room_ac_option,
+         room_description : room_description,  
+      })
+      .then(()=>{
+        res.status(200).json("Successful");
+      })
+      .catch((err)=>{
+        res.status(400).json("Error");
+      })  
+    console.log(data)
+      }
+      else{
+        console.log("else")
+        postgres
+       .select("*")
+       .from("hotel")
+       .where("ownerid", "=", userId)
+       .then((data) => {
+
+        postgres
+        .insert({
+           ownerid:userId ,
+           name: data[0].name,
+           address:data[0].address,
+           discount:0,
+           room_number : room_number,
+           room_rent : room_rent,
+           room_capacity : room_capacity,
+           room_ac_option : room_ac_option,
+           room_description : room_description,  
+             })
+     .into("hotel")
+     .then(()=>{
+      res.status(200).json("Successful")
+     })
+     .catch(()=>{
+      res.status(400).json("Error")
+     })
+    })
+      }
+    })
+    .catch((err)=>{
+     console.log(err)
+    res.status(400).json("Error")
+    })
+
+
+
+}
+const getRoom  = (req,res) => {
+  console.log("dhukse")
+  let {
+    userId,
+    
+  } = req.body;
+  console.log(
+    userId,
+)
+
 
   postgres
   .select("*")
   .from("hotel")
   .where("ownerid","=",userId)
   .then((data)=>{
-    postgres
-   .insert({
-    ownerid:userId ,
-    name: data[0].name,
-    address:data[0].address,
-    discount:0,
-    room_number : room_number,
-    room_rent : room_rent,
-    room_capacity : room_capacity,
-    room_ac_option : room_ac_option,
-    room_description : room_description,            
-         })
-  .into("hotel")
-  .then(()=>{
-    res.status(200).json("Successful")
-  })
-  .catch((err)=>{
-    console.log(err)
-    res.status(500).json("room already exist")
-  })
+    console.log(data)
+     res.status(200).json(data)
   })
   .catch((err)=>{
     console.log(err)
@@ -517,74 +579,182 @@ const addRoom  = (req,res) => {
 
 
 
-  // postgres
-  //   .select("*")
-  //   .from("users")
-  //   .where("email", "=", email)
-  //   .then((data) => {
+
+}
+const addService  = (req,res) => {
+  console.log("dhukse")
+  let {
+    userId ,
+    route,
+    price,
+    year_of_experience,
+
+} = req.body;
+  console.log(
+    userId ,
+    route,
+    price,
+    year_of_experience,
+)
+
+
+postgres
+    .select("*")
+    .from("tourguide")
+    .where("route", "IS", null)
+    .then((data) => {
+      console.log(data)
+      if(data[0]!=undefined){
       
-  //     if (data[0] == undefined) {
-  //       postgres
-  //       .insert({
-  //            name: name,
-  //            email: email,
-  //            contact_info: contactNo,
-  //            area:area,
-  //            user_type:userType,
-            
-  //               })
-  //       .into("users")
-  //       .returning("id")
-  //       .then((userid)=>{
-  //        console.log(userid[0]);
-  //           postgres
-  //           .insert({
-  //             user_id:userid[0],
-  //             email:email,
-  //             password:hash,
-  //             verified:0,
-  //             verificationcode: verificationCode,
-  //                })
-  //        .into("login")
-  //        .then(()=>{
+      postgres("tourguide")
+      .where("route", "IS", null)
+      .update({
+        route:route,
+        price:price,
+        year_of_experience:year_of_experience
+      })
+      .then(()=>{
+        res.status(200).json("Successful");
+      })
+      .catch((err)=>{
+        res.status(400).json("Error");
+      })  
+    console.log(data)
+      }
+      else{
+        console.log("else")
+        postgres
+       .select("*")
+       .from("tourguide")
+       .where("userid", "=", userId)
+       .then((data) => {
 
-  //         postgres
-  //         .insert({
-  //           ownerid:userid[0],
-  //           name:hotelName,
-  //           address:hotelAddress
-  //              })
-  //      .into("hotel")
-  //      .then(()=>{
-  //       res.status(200).json("Successful")
-  //      })
-  //      .catch(()=>{
-  //       console.log(err)
-  //       res.status(400).json("Unable to register")
-  //      })
+        postgres
+        .insert({
+          userid:userId,
+          area:data[0].area,
+          route:route,
+          price:price,
+          year_of_experience:year_of_experience
+             })
+     .into("tourguide")
+     .then(()=>{
+      res.status(200).json("Successful")
+     })
+     .catch(()=>{
+      res.status(400).json("Error")
+     })
+    })
+      }
+    })
+    .catch((err)=>{
+     console.log(err)
+    res.status(400).json("Error")
+    })
 
-           
-  //        })
-  //        .catch((err)=>{
-  //          console.log(err)
-  //          res.status(400).json("Unable to register")
-  //        })
-  //       })
-  //       .catch((err)=>{
-  //         console.log(err)
-  //         res.status(400).json("Unable to register")
 
-  //       })
-  //     } else {
-  //       res.status(500).json("email already exist");
-  //     }
-  //   })
-  //   .catch((err) =>{
-  //     console.log(err)
-  //     res.status(400).json("database error")
-      
-  //     });
+}
+const getService  = (req,res) => {
+  console.log("dhukse")
+  let {
+    userId,
+    
+  } = req.body;
+  console.log(
+    userId,
+)
+
+
+  postgres
+  .select("*")
+  .from("tourguide")
+  .where("userid","=",userId)
+  .then((data)=>{
+    console.log(data)
+     res.status(200).json(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(400).json("Database error")
+  })
+
+
+
+}
+const addBlog  = (req,res) => {
+  console.log("dhukse")
+  let {
+    userId,
+    title,
+    area,
+    route,
+    price ,
+    recommendation,
+    description
+
+    
+  } = req.body;
+  console.log(
+    userId,
+    title,
+    area,
+    route,
+    price ,
+    recommendation,
+    description
+)
+
+
+postgres
+ .insert({
+  userid:userId,
+  title:title,
+  area:area,
+  route:route,
+  description:description,
+  rating:0,
+  price:price ,
+  recommendation:recommendation,
+          })
+ .into("blog")
+ .then(()=>{
+  res.status(200).json("successful")
+ })
+ .catch((err)=>{
+   console.log(err)
+   res.status(400).json("database error")
+
+ })
+}
+const getBlog  = (req,res) => {
+  console.log("dhukse")
+  let {
+    userId,
+    
+  } = req.body;
+  console.log(
+    userId,
+)
+
+
+  postgres
+  .select("*")
+  .from("blog")
+  .where("userid","=",userId)
+  .then((data)=>{
+    console.log(data)
+     res.status(200).json(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(400).json("Database error")
+  })
+
+
+
 }
 module.exports = {
-  postLogin,postRegister,RegisterTourGuide,RegisterVehicleOwner, RegisterHotelManager,addRoom 
+  postLogin,postRegister,RegisterTourGuide,RegisterVehicleOwner,
+  RegisterHotelManager,addRoom ,getRoom ,addService ,getService,
+  addBlog ,getBlog
 };

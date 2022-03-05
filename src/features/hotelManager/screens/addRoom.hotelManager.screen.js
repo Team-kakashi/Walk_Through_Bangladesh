@@ -10,10 +10,8 @@ import {
   PrimaryButton,
   H1,
 } from "../../../components/common.style";
-import {
-  ModalView,
-  ItemChoise,
-} from "../../../components/modalView.view";
+import { ModalView, ItemChoise } from "../../../components/modalView.view";
+import {user_id} from "../../authentication/screens/logIn.screen";
 
 var ac_op;
 var cap;
@@ -27,7 +25,7 @@ export const AddRoomScreen = ({ navigation }) => {
 
   const onPressAdd = () => {
     // console.log(ItemChoise);
-
+    console.log(user_id);
     if (number == "" || rent == "") {
       Alert.alert("Fill all fields");
     } else {
@@ -55,6 +53,7 @@ export const AddRoomScreen = ({ navigation }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        userId: user_id,
         room_number: number,
         room_rent: rent,
         room_capacity: cap,
@@ -67,7 +66,7 @@ export const AddRoomScreen = ({ navigation }) => {
         //console.log(res.status())
         if (data == 200) {
           console.log(data);
-          navigation.navigate("HotelManagerLandingScreen");
+          navigation.push("HotelManagerLandingScreen");
           Alert.alert("Room successfully Added !");
         } else if (data == 500) {
           Alert.alert("Room already exists !");
