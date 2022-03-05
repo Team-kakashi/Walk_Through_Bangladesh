@@ -129,6 +129,10 @@ export const TertiaryButton = styled(Button).attrs({
   color: "#19B37A",
   mode: "contained",
 })``;
+export const QuaternaryButton = styled(Button).attrs({
+  color: "#19B37A",
+  mode: "outlined",
+})``;
 
 export const AccountTypeButton = styled(Button).attrs({
   color: "#19B37A",
