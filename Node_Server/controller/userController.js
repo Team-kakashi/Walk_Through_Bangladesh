@@ -493,12 +493,14 @@ const addRoom  = (req,res) => {
     .select("*")
     .from("hotel")
     .where("room_number", "IS", null)
+    .andWhere("ownerid","=",userId)
     .then((data) => {
       console.log(data)
       if(data[0]!=undefined){
       
       postgres("hotel")
       .where("room_number", "IS", null)
+      .andWhere("ownerid","=",userId)
       .update({
           discount:0,
           room_number : room_number,
@@ -753,6 +755,95 @@ const getBlog  = (req,res) => {
 
 
 }
+
+const addVehicle  = (req,res) => {
+  console.log("dhukse")
+  let {
+    v_name , 
+    ac_option ,
+    type ,
+    
+    
+  } = req.body;
+  console.log(
+    v_name , 
+    ac_option ,
+    type ,)
+
+    // ownerid:userId ,
+    // name: data[0].name,
+    // address:data[0].address,
+    // discount:0,
+    // room_number : room_number,
+    // room_rent : room_rent,
+    // room_capacity : room_capacity,
+    // room_ac_option : room_ac_option,
+    // room_description : room_description,   
+    postgres
+    .select("*")
+    .from("Vehicle")
+    .where("v_name", "IS", null)
+    .then((data) => {
+      console.log(data)
+      if(data[0]!=undefined){
+      
+      postgres("hotel")
+      .where("room_number", "IS", null)
+      .update({
+          discount:0,
+          room_number : room_number,
+          room_rent : room_rent,
+          room_capacity : room_capacity,
+          room_ac_option : room_ac_option,
+         room_description : room_description,  
+      })
+      .then(()=>{
+        res.status(200).json("Successful");
+      })
+      .catch((err)=>{
+        res.status(400).json("Error");
+      })  
+    console.log(data)
+      }
+      else{
+        console.log("else")
+        postgres
+       .select("*")
+       .from("hotel")
+       .where("ownerid", "=", userId)
+       .then((data) => {
+
+        postgres
+        .insert({
+           ownerid:userId ,
+           name: data[0].name,
+           address:data[0].address,
+           discount:0,
+           room_number : room_number,
+           room_rent : room_rent,
+           room_capacity : room_capacity,
+           room_ac_option : room_ac_option,
+           room_description : room_description,  
+             })
+     .into("hotel")
+     .then(()=>{
+      res.status(200).json("Successful")
+     })
+     .catch(()=>{
+      res.status(400).json("Error")
+     })
+    })
+      }
+    })
+    .catch((err)=>{
+     console.log(err)
+    res.status(400).json("Error")
+    })
+
+
+
+}
+
 module.exports = {
   postLogin,postRegister,RegisterTourGuide,RegisterVehicleOwner,
   RegisterHotelManager,addRoom ,getRoom ,addService ,getService,
