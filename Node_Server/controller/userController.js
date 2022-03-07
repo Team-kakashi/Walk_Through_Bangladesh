@@ -759,43 +759,34 @@ const getBlog  = (req,res) => {
 const addVehicle  = (req,res) => {
   console.log("dhukse")
   let {
+    ownerid,
     v_name , 
     ac_option ,
-    type ,
-    
-    
+    type ,  
   } = req.body;
   console.log(
     v_name , 
     ac_option ,
     type ,)
 
-    // ownerid:userId ,
-    // name: data[0].name,
-    // address:data[0].address,
-    // discount:0,
-    // room_number : room_number,
-    // room_rent : room_rent,
-    // room_capacity : room_capacity,
-    // room_ac_option : room_ac_option,
-    // room_description : room_description,   
+ 
     postgres
     .select("*")
     .from("Vehicle")
     .where("v_name", "IS", null)
+    .andWhere("ownerid","=",ownerid)
     .then((data) => {
       console.log(data)
       if(data[0]!=undefined){
       
-      postgres("hotel")
-      .where("room_number", "IS", null)
+      postgres("Vehicle")
+      .where("v_name", "IS", null)
+      .andWhere("ownerid","=",ownerid)
       .update({
-          discount:0,
-          room_number : room_number,
-          room_rent : room_rent,
-          room_capacity : room_capacity,
-          room_ac_option : room_ac_option,
-         room_description : room_description,  
+        v_name :v_name, 
+        ac_option:ac_option,
+        type:type,
+        discount :0,
       })
       .then(()=>{
         res.status(200).json("Successful");
@@ -809,23 +800,20 @@ const addVehicle  = (req,res) => {
         console.log("else")
         postgres
        .select("*")
-       .from("hotel")
-       .where("ownerid", "=", userId)
+       .from("Vehicle")
+       .where("ownerid", "=", ownerid)
        .then((data) => {
 
         postgres
         .insert({
-           ownerid:userId ,
-           name: data[0].name,
-           address:data[0].address,
-           discount:0,
-           room_number : room_number,
-           room_rent : room_rent,
-           room_capacity : room_capacity,
-           room_ac_option : room_ac_option,
-           room_description : room_description,  
-             })
-     .into("hotel")
+           ownerid:ownerid ,
+           area:data[0].area,
+           v_name :v_name, 
+           ac_option:ac_option,
+           type:type,
+           discount :0,
+              })
+     .into("Vehicle")
      .then(()=>{
       res.status(200).json("Successful")
      })
@@ -844,8 +832,116 @@ const addVehicle  = (req,res) => {
 
 }
 
+const addVehicleRoute  = (req,res) => {
+  console.log("dhukse")
+  let {
+    ownerid,
+    route,
+    rent,
+    v_id,
+    
+  } = req.body;
+  console.log(
+    ownerid,
+    v_id,
+    rent,)
+
+ 
+    postgres
+    .select("*")
+    .from("Vehicle")
+    .where("route", "IS", null)
+    .andWhere("ownerid","=",ownerid)
+    .andWhere("v_id","=",v_id)
+    .then((data) => {
+      console.log(data)
+      if(data[0]!=undefined){
+      
+      postgres("Vehicle")
+      .where("route", "IS", null)
+      .andWhere("ownerid","=",ownerid)
+      .andWhere("v_id","=",v_id)
+      .update({
+        route:route,
+        rent:rent,
+      })
+      .then(()=>{
+        res.status(200).json("Successful");
+      })
+      .catch((err)=>{
+        res.status(400).json("Error");
+      })  
+    console.log(data)
+      }
+      else{
+        console.log("else")
+        postgres
+       .select("*")
+       .from("Vehicle")
+       .where("ownerid", "=", ownerid)
+       .andWhere("v_id","=",v_id)
+       .then((data) => {
+
+        postgres
+        .insert({
+          ownerid: data[0].ownerid, 
+          area: data[0].area,
+          route:route,
+          rent :rent,
+          v_id:v_id,
+          v_name :data[0].v_name, 
+          ac_option: data[0].ac_option,
+          type: data[0].type,
+          discount:0,           
+              })
+     .into("Vehicle")
+     .then(()=>{
+      res.status(200).json("Successful")
+     })
+     .catch(()=>{
+      res.status(400).json("Error")
+     })
+    })
+      }
+    })
+    .catch((err)=>{
+     console.log(err)
+    res.status(400).json("Error")
+    })
+
+
+
+}
+const getVehicle  = (req,res) => {
+  console.log("dhukse")
+  let {
+    userId,
+    
+  } = req.body;
+  console.log(
+    userId,
+) 
+
+
+  postgres
+  .select("*")
+  .from("Vehicle")
+  .where("ownerid","=",userId)
+  .then((data)=>{
+    console.log(data)
+     res.status(200).json(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(400).json("Database error")
+  })
+
+
+
+}
+
 module.exports = {
   postLogin,postRegister,RegisterTourGuide,RegisterVehicleOwner,
   RegisterHotelManager,addRoom ,getRoom ,addService ,getService,
-  addBlog ,getBlog
+  addBlog ,getBlog,addVehicle, addVehicleRoute, getVehicle
 };
