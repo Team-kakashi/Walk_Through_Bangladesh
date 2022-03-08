@@ -22,7 +22,7 @@ import { IpRoute } from "../../../components/environmentVeriables";
 import { user_id } from "../../authentication/screens/logIn.screen";
 
 export const VecicleCard = () => {
-  const[service,setService]= React.useState([{}]);
+  const[vehicle,setVehicle]= React.useState([{}]);
   const[loadPage,setloadPage]= useState(true);
   
   const submitData = () => {
@@ -41,10 +41,12 @@ export const VecicleCard = () => {
         if (data == "wrong credential") {
           Alert.alert(data);
         } else {
-          setService(data);
+          setVehicle(data);
 
-          console.log(data);
-          console.log(service.length)
+          console.log("over");
+          console.log(vehicle);
+          console.log("under");
+          //console.log(vehicle.length);
           console.log("price ",data[0].rent);
           if(data[0].rent==null){
             setloadPage(false);
@@ -67,7 +69,7 @@ export const VecicleCard = () => {
 
     
     ?<> 
-    { service.map(i =>(
+    {vehicle.map(i =>(
     <CardParent elevation={5}>
       <Row>
         <CardDetails>

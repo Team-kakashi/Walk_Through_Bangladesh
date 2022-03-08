@@ -925,7 +925,7 @@ const getVehicle  = (req,res) => {
 
   postgres
   .select("*")
-  .from("Vehicle")
+  .from("vehicle")
   .where("ownerid","=",userId)
   .then((data)=>{
     console.log(data)
