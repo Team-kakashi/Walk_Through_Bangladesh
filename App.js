@@ -19,9 +19,15 @@ import { TourGuideLandingScreen } from "./src/features/tourGuide/screens/tourGui
 import { AddServiceScreen } from "./src/features/tourGuide/screens/addService.tourGuide.screen";
 import { TravelBloggerLandingScreen } from "./src/features/travelBlogger/screens/travelBloggerLanding.screen";
 import { WriteBlogScreen } from "./src/features/travelBlogger/screens/writeBlog.travelBlogger.screen";
+import { VehicleOwnerLandingScreen } from "./src/features/vehicleOwner/screens/vehicleOwnerLanding.screen";
+import { AddVehicleScreen } from "./src/features/vehicleOwner/components/addVehicle.vehicleOwner.screen";
+import { AddRouteScreen } from "./src/features/vehicleOwner/components/addRoute.vehicleOwner.screen";
+import {VecicleCard} from "./src/features/vehicleOwner/components/vehicleCard.component";
 
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme";
+
+import {ContentProvider} from "./src/features/vehicleOwner/components/vehicleContext";
 
 import {
   useFonts as useFontsInter,
@@ -51,13 +57,12 @@ export default function App() {
   }
 
   return (
+    <ContentProvider>
     <ThemeProvider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator>
-        <Stack.Screen
-            name="TourGuideLandingScreen"
-            component={TourGuideLandingScreen}
-          />
+          
+          
           <Stack.Screen
             name="LogInScreen"
             component={LogInScreen}
@@ -107,8 +112,25 @@ export default function App() {
             name="WriteBlogScreen"
             component={WriteBlogScreen}
           />
+          <Stack.Screen
+            name="AddVehicleScreen"
+            component={AddVehicleScreen}
+          />
+         <Stack.Screen
+            name="VehicleOwnerLandingScreen"
+            component={VehicleOwnerLandingScreen}
+          />
+          <Stack.Screen
+            name="AddRouteScreen"
+            component={AddRouteScreen}
+          />
+          <Stack.Screen
+            name="VecicleCard"
+            component={VecicleCard}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>
+    </ContentProvider>
   );
 }

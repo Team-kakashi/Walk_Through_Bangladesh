@@ -11,7 +11,10 @@ const {
   addService,
   getService,
   addBlog,
-  getBlog
+  getBlog,
+  addVehicle,
+  addVehicleRoute,
+  getVehicle
   //   isVerified,
   //   postHelpRequest,
   //   getHelpRequestList,
@@ -45,5 +48,8 @@ router.post("/getService", getService);
 
 router.post("/addBlog",addBlog);
 router.post("/getBlog", getBlog);
+router.post("/addVehicle", addVehicle);
+router.post("/addVehicleRoute", addVehicleRoute);
+router.post("/getVehicle", getVehicle);
 
 module.exports = router;

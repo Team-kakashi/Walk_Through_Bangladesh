@@ -493,12 +493,14 @@ const addRoom  = (req,res) => {
     .select("*")
     .from("hotel")
     .where("room_number", "IS", null)
+    .andWhere("ownerid","=",userId)
     .then((data) => {
       console.log(data)
       if(data[0]!=undefined){
       
       postgres("hotel")
       .where("room_number", "IS", null)
+      .andWhere("ownerid","=",userId)
       .update({
           discount:0,
           room_number : room_number,
@@ -753,8 +755,193 @@ const getBlog  = (req,res) => {
 
 
 }
+
+const addVehicle  = (req,res) => {
+  console.log("dhukse")
+  let {
+    ownerid,
+    v_name , 
+    ac_option ,
+    type ,  
+  } = req.body;
+  console.log(
+    v_name , 
+    ac_option ,
+    type ,)
+
+ 
+    postgres
+    .select("*")
+    .from("vehicle")
+    .where("v_name", "IS", null)
+    .andWhere("ownerid","=",ownerid)
+    .then((data) => {
+      console.log(data)
+      if(data[0]!=undefined){
+      
+      postgres("vehicle")
+      .where("v_name", "IS", null)
+      .andWhere("ownerid","=",ownerid)
+      .update({
+        v_name :v_name, 
+        ac_option:ac_option,
+        type:type,
+        discount :0,
+      })
+      .then(()=>{
+        res.status(200).json("Successful");
+      })
+      .catch((err)=>{
+        res.status(400).json("Error");
+      })  
+    console.log(data)
+      }
+      else{
+        console.log("else")
+        postgres
+       .select("*")
+       .from("vehicle")
+       .where("ownerid", "=", ownerid)
+       .then((data) => {
+
+        postgres
+        .insert({
+           ownerid:ownerid ,
+           area:data[0].area,
+           v_name :v_name, 
+           ac_option:ac_option,
+           type:type,
+           discount :0,
+              })
+     .into("vehicle")
+     .then(()=>{
+      res.status(200).json("Successful")
+     })
+     .catch(()=>{
+      res.status(400).json("Error")
+     })
+    })
+      }
+    })
+    .catch((err)=>{
+     console.log(err)
+    res.status(400).json("Error")
+    })
+
+
+
+}
+
+const addVehicleRoute  = (req,res) => {
+  console.log("dhukse")
+  let {
+    ownerid,
+    route,
+    rent,
+    v_id,
+    
+  } = req.body;
+  console.log(
+    ownerid,
+    v_id,
+    rent,)
+
+ 
+    postgres
+    .select("*")
+    .from("vehicle")
+    .where("route", "IS", null)
+    .andWhere("ownerid","=",ownerid)
+    .andWhere("v_id","=",v_id)
+    .then((data) => {
+      console.log(data)
+      if(data[0]!=undefined){
+      
+      postgres("vehicle")
+      .where("route", "IS", null)
+      .andWhere("ownerid","=",ownerid)
+      .andWhere("v_id","=",v_id)
+      .update({
+        route:route,
+        rent:rent,
+      })
+      .then(()=>{
+        res.status(200).json("Successful");
+      })
+      .catch((err)=>{
+        res.status(400).json("Error");
+      })  
+    console.log(data)
+      }
+      else{
+        console.log("else")
+        postgres
+       .select("*")
+       .from("vehicle")
+       .where("ownerid", "=", ownerid)
+       .andWhere("v_id","=",v_id)
+       .then((data) => {
+
+        postgres
+        .insert({
+          ownerid: data[0].ownerid, 
+          area: data[0].area,
+          route:route,
+          rent :rent,
+          v_id:v_id,
+          v_name :data[0].v_name, 
+          ac_option: data[0].ac_option,
+          type: data[0].type,
+          discount:0,           
+              })
+     .into("vehicle")
+     .then(()=>{
+      res.status(200).json("Successful")
+     })
+     .catch(()=>{
+      res.status(400).json("Error")
+     })
+    })
+      }
+    })
+    .catch((err)=>{
+     console.log(err)
+    res.status(400).json("Error")
+    })
+
+
+
+}
+const getVehicle  = (req,res) => {
+  console.log("dhukse")
+  let {
+    userId,
+    
+  } = req.body;
+  console.log(
+    userId,
+) 
+
+
+  postgres
+  .select("*")
+  .from("vehicle")
+  .where("ownerid","=",userId)
+  .then((data)=>{
+    console.log(data)
+     res.status(200).json(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(400).json("Database error")
+  })
+
+
+
+}
+
 module.exports = {
   postLogin,postRegister,RegisterTourGuide,RegisterVehicleOwner,
   RegisterHotelManager,addRoom ,getRoom ,addService ,getService,
-  addBlog ,getBlog
+  addBlog ,getBlog,addVehicle, addVehicleRoute, getVehicle
 };
