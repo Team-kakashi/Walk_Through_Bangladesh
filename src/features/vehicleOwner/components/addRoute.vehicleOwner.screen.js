@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { ScrollView, View, Alert } from "react-native";
 import { IpRoute } from "../../../components/environmentVeriables";
 import {
@@ -18,8 +18,12 @@ import {
 import { user_id } from "../../authentication/screens/logIn.screen";
 import { clickProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 
+import {ContentContext} from "./vehicleContext";
+
 var serviceRoute;
-export const AddRouteScreen = ({ navigation, vid }) => {
+export const AddRouteScreen = ({navigation}) => {
+  const [vid, setVid] =useContext(ContentContext);
+  console.log("v id in route",vid);
   const route = ["Ratargul", "Bisanakandi","Jaflong"];
   const [cost, setCost] = React.useState("");
 
@@ -29,7 +33,7 @@ export const AddRouteScreen = ({ navigation, vid }) => {
   }
 
   const onPressAdd = () => {
-    console.log(vid);
+    
     if (cost == "") {
       Alert.alert("Fill all fields");
     } else {
@@ -48,7 +52,7 @@ export const AddRouteScreen = ({ navigation, vid }) => {
       },
       body: JSON.stringify({
         ownerid : user_id,
-        route: route,
+        route: serviceRoute,
         rent: cost,
         v_id: X,
     

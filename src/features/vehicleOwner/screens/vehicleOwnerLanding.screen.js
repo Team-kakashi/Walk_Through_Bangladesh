@@ -39,7 +39,7 @@ export const VehicleOwnerLandingScreen = ({
           <ParentMargin>
             <Subtitle>My Vehicles</Subtitle>
           </ParentMargin>
-          <VecicleCard />
+          <VecicleCard navigation={navigation}/>
         </ServiceCardContainer>
       </ScrollView>
     </SafeAreaViewContainer>

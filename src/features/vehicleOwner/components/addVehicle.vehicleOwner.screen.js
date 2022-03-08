@@ -40,7 +40,7 @@ export const AddVehicleScreen = ({ navigation }) => {
       Alert.alert("Fill all fields");
     } else {
       submitData();
-      Alert.alert(serviceRoute);
+      //Alert.alert(serviceRoute);
       setVehicle_name("");
     }
   };
