@@ -23,7 +23,7 @@ const WIDTH = Dimensions.get("window").width;
 const HEIGHT = Dimensions.get("window").height;
 
 export const ModalPicker = (props) => {
-  //console.log(props.setData);
+  //console.log(props);
   console.log('hoise re',props.array)
   OPTIONS=props.array
   const onPressItem = (option) => {

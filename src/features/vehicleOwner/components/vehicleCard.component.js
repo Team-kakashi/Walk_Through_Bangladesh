@@ -43,9 +43,9 @@ export const VecicleCard = () => {
         } else {
           setVehicle(data);
 
-          console.log("over");
+          
           console.log(vehicle);
-          console.log("under");
+          
           //console.log(vehicle.length);
           console.log("price ",data[0].rent);
           if(data[0].rent==null){

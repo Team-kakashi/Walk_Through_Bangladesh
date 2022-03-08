@@ -21,7 +21,7 @@ var acValue;
 var typeValue;
 export const AddVehicleScreen = ({ navigation }) => {
   const Ac_option = ["AC", "Non-AC"];
-  const Type = ["Car", "Bus","Jeep","Motor-Bike","MicroBus"];
+  const VehicleType = ["Car", "Bus","Jeep","Motor-Bike","MicroBus"];
   
   const [v_name, setVehicle_name] = React.useState("");
 
@@ -97,7 +97,7 @@ export const AddVehicleScreen = ({ navigation }) => {
       ></ModalView>
 
       <ModalView
-      Array={Type}
+      Array={VehicleType}
       Title="Types"
       PickerValue={selectTypeValue}
       ></ModalView>
