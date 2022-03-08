@@ -57,14 +57,8 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen
-            name="AddRouteScreen"
-            component={AddRouteScreen}
-          />
-          <Stack.Screen
-            name="VehicleOwnerLandingScreen"
-            component={VehicleOwnerLandingScreen}
-          />
+          
+          
           <Stack.Screen
             name="LogInScreen"
             component={LogInScreen}
@@ -117,6 +111,18 @@ export default function App() {
           <Stack.Screen
             name="WriteBlogScreen"
             component={WriteBlogScreen}
+          />
+          <Stack.Screen
+            name="AddVehicleScreen"
+            component={AddVehicleScreen}
+          />
+         <Stack.Screen
+            name="VehicleOwnerLandingScreen"
+            component={VehicleOwnerLandingScreen}
+          />
+          <Stack.Screen
+            name="AddRouteScreen"
+            component={AddRouteScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

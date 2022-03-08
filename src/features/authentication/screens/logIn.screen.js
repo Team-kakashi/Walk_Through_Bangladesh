@@ -66,9 +66,9 @@ export const LogInScreen = ({ navigation }) => {
             );
           }  else if (data.user_type == "TourGuide") {
           navigation.navigate("TourGuideLandingScreen");
-        }/* else if (data.user_type == "VehicleOwner") {
-          navigation.navigate("VehicleInfo");
-        }*/
+        } else if (data.user_type == "VehicleOwner") {
+          navigation.navigate("VehicleOwnerLandingScreen");
+        }
         else if(data.user_type == "Blogger"){
           navigation.navigate("TravelBloggerLandingScreen")
         } 

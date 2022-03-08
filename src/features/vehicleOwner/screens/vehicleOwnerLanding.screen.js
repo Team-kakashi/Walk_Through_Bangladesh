@@ -27,7 +27,9 @@ export const VehicleOwnerLandingScreen = ({
         <SpacingSmall></SpacingSmall>
 
         <RightGravity>
-          <TertiaryButton icon="folder-plus">
+          <TertiaryButton icon="folder-plus"
+          onPress={() => navigation.navigate("AddVehicleScreen")}
+          >
             Add Vehicle
           </TertiaryButton>
         </RightGravity>
