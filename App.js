@@ -54,6 +54,10 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator>
+        <Stack.Screen
+            name="TourGuideLandingScreen"
+            component={TourGuideLandingScreen}
+          />
           <Stack.Screen
             name="LogInScreen"
             component={LogInScreen}
@@ -90,10 +94,6 @@ export default function App() {
           <Stack.Screen
             name="AddRoomScreen"
             component={AddRoomScreen}
-          />
-          <Stack.Screen
-            name="TourGuideLandingScreen"
-            component={TourGuideLandingScreen}
           />
           <Stack.Screen
             name="AddServiceScreen"
