@@ -912,6 +912,7 @@ const addVehicleRoute  = (req,res) => {
 
 
 }
+
 const getVehicle  = (req,res) => {
   console.log("dhukse")
   let {
@@ -935,13 +936,49 @@ const getVehicle  = (req,res) => {
     console.log(err)
     res.status(400).json("Database error")
   })
+}
+const getAreaRoute = (req,res) => {
+  console.log("dhukse")
 
 
+  postgres
+  .select("*")
+  .from("arearoute")
+  .then((data)=>{
+    console.log(data)
+     res.status(200).json(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(400).json("Database error")
+  })
+}
+const getHotelForTraveller = (req,res) => {
+  console.log("dhukse")
+  let {
+    address,
+    totalPerson,
+  } = req.body;
 
+  postgres
+  .select("*")
+  .from("hotel")
+  .where("room_capacity","<=",totalPerson)
+ 
+  .orderBy('rating')
+  .then((data)=>{
+    console.log(data)
+     res.status(200).json(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(400).json("Database error")
+  })
 }
 
 module.exports = {
   postLogin,postRegister,RegisterTourGuide,RegisterVehicleOwner,
   RegisterHotelManager,addRoom ,getRoom ,addService ,getService,
-  addBlog ,getBlog,addVehicle, addVehicleRoute, getVehicle
+  addBlog ,getBlog,addVehicle, addVehicleRoute, getVehicle,getAreaRoute,
+  getHotelForTraveller
 };
