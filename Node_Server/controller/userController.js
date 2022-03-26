@@ -1015,9 +1015,30 @@ const getGuideForTraveller = (req,res) => {
     res.status(400).json("Database error")
   })
 }
+const getRouteForTraveller = (req,res) => {
+  console.log("dhukse")
+  let {
+    address,
+    day,
+  } = req.body;
+
+  postgres
+  .select("*")
+  .from("tripplan")
+  .where("area","=",address)
+  .andWhere("daycount","=",day)
+  .then((data)=>{
+    console.log(data)
+     res.status(200).json(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(400).json("Database error")
+  })
+}
 module.exports = {
   postLogin,postRegister,RegisterTourGuide,RegisterVehicleOwner,
   RegisterHotelManager,addRoom ,getRoom ,addService ,getService,
   addBlog ,getBlog,addVehicle, addVehicleRoute, getVehicle,getAreaRoute,
-  getHotelForTraveller,getVehicleForTraveller,getGuideForTraveller
+  getHotelForTraveller,getVehicleForTraveller,getGuideForTraveller,getRouteForTraveller
 };
