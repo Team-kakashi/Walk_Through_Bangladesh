@@ -995,9 +995,29 @@ const getVehicleForTraveller = (req,res) => {
     res.status(400).json("Database error")
   })
 }
+const getGuideForTraveller = (req,res) => {
+  console.log("dhukse")
+  let {
+    address,
+  } = req.body;
+
+  postgres
+  .select("*")
+  .from("tourguide")
+  .where("area","=",address)
+  .orderBy('rating')
+  .then((data)=>{
+    console.log(data)
+     res.status(200).json(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(400).json("Database error")
+  })
+}
 module.exports = {
   postLogin,postRegister,RegisterTourGuide,RegisterVehicleOwner,
   RegisterHotelManager,addRoom ,getRoom ,addService ,getService,
   addBlog ,getBlog,addVehicle, addVehicleRoute, getVehicle,getAreaRoute,
-  getHotelForTraveller,getVehicleForTraveller
+  getHotelForTraveller,getVehicleForTraveller,getGuideForTraveller
 };
