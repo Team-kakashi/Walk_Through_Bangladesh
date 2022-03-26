@@ -772,14 +772,14 @@ const addVehicle  = (req,res) => {
  
     postgres
     .select("*")
-    .from("vehicle")
+    .from("Vehicle")
     .where("v_name", "IS", null)
     .andWhere("ownerid","=",ownerid)
     .then((data) => {
       console.log(data)
       if(data[0]!=undefined){
       
-      postgres("vehicle")
+      postgres("Vehicle")
       .where("v_name", "IS", null)
       .andWhere("ownerid","=",ownerid)
       .update({
@@ -800,7 +800,7 @@ const addVehicle  = (req,res) => {
         console.log("else")
         postgres
        .select("*")
-       .from("vehicle")
+       .from("Vehicle")
        .where("ownerid", "=", ownerid)
        .then((data) => {
 
@@ -813,7 +813,7 @@ const addVehicle  = (req,res) => {
            type:type,
            discount :0,
               })
-     .into("vehicle")
+     .into("Vehicle")
      .then(()=>{
       res.status(200).json("Successful")
      })
@@ -849,7 +849,7 @@ const addVehicleRoute  = (req,res) => {
  
     postgres
     .select("*")
-    .from("vehicle")
+    .from("Vehicle")
     .where("route", "IS", null)
     .andWhere("ownerid","=",ownerid)
     .andWhere("v_id","=",v_id)
@@ -857,7 +857,7 @@ const addVehicleRoute  = (req,res) => {
       console.log(data)
       if(data[0]!=undefined){
       
-      postgres("vehicle")
+      postgres("Vehicle")
       .where("route", "IS", null)
       .andWhere("ownerid","=",ownerid)
       .andWhere("v_id","=",v_id)
@@ -877,7 +877,7 @@ const addVehicleRoute  = (req,res) => {
         console.log("else")
         postgres
        .select("*")
-       .from("vehicle")
+       .from("Vehicle")
        .where("ownerid", "=", ownerid)
        .andWhere("v_id","=",v_id)
        .then((data) => {
@@ -894,7 +894,7 @@ const addVehicleRoute  = (req,res) => {
           type: data[0].type,
           discount:0,           
               })
-     .into("vehicle")
+     .into("Vehicle")
      .then(()=>{
       res.status(200).json("Successful")
      })
@@ -926,7 +926,7 @@ const getVehicle  = (req,res) => {
 
   postgres
   .select("*")
-  .from("vehicle")
+  .from("Vehicle")
   .where("ownerid","=",userId)
   .then((data)=>{
     console.log(data)
@@ -964,7 +964,7 @@ const getHotelForTraveller = (req,res) => {
   .select("*")
   .from("hotel")
   .where("room_capacity","<=",totalPerson)
- 
+  .andWhere("address","=",address)
   .orderBy('rating')
   .then((data)=>{
     console.log(data)
