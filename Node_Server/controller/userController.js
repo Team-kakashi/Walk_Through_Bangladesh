@@ -542,7 +542,7 @@ const addRoom  = (req,res) => {
       res.status(200).json("Successful")
      })
      .catch(()=>{
-      res.status(400).json("Error")
+      res.status(500).json("Error")
      })
     })
       }
@@ -940,10 +940,12 @@ const getVehicle  = (req,res) => {
 const getAreaRoute = (req,res) => {
   console.log("dhukse")
 
-
+  area =req.body.area
+  console.log(area)
   postgres
   .select("*")
   .from("arearoute")
+  .where("area","=",area)
   .then((data)=>{
     console.log(data)
      res.status(200).json(data)
