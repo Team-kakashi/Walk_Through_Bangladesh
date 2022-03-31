@@ -25,12 +25,18 @@ export const TravelBloggerLandingScreen = ({navigation}) => {
       <ScrollView>
         <SpacingSmall></SpacingSmall>
         <RightGravity>
+       
+          
           <TertiaryButton
             icon="folder-plus"
             onPress={() => navigation.navigate("WriteBlogScreen")}
           >
             Write Blog
           </TertiaryButton>
+          
+   
+      
+
         </RightGravity>
 
         <SpacingSmall></SpacingSmall>

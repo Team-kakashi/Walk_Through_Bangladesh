@@ -23,6 +23,7 @@ import { IpRoute } from "../../../components/environmentVeriables";
 import { user_id } from "../../authentication/screens/logIn.screen";
 import {ContentContext} from "./vehicleContext";
 
+var vehicleid;
 export const VecicleCard = ({
   navigation,
 }) => {
@@ -30,12 +31,13 @@ export const VecicleCard = ({
   const[loadPage,setloadPage]= useState(true);
   const [vid, setVid] =useContext(ContentContext);
 
-  const onPressAdd = (v) => {
+  function onPressAdd () {
    // console.log(navigation);
-   console.log(vid);
+   
+   console.log(vehicleid);
    //var vid = 1;
    
-   setVid(v);
+   setVid(vehicleid);
     navigation.navigate("AddRouteScreen",vid);
   }
   
@@ -95,9 +97,9 @@ export const VecicleCard = ({
           <Title>Vehicle Name : {i.v_name}</Title>
           <SpacingSmall />
           <Subtitle>Route: {i.route}</Subtitle>
-          <Subtitle>Price: {i.price}</Subtitle>
+          <Subtitle>Price: {i.rent}</Subtitle>
           <SpacingSmall />
-          <QuaternaryButton onPress={onPressAdd (i.v_id)}>Add Route</QuaternaryButton>
+          <QuaternaryButton onPress={onPressAdd} {...vehicleid=i.v_id}>Add Route</QuaternaryButton>
         </CardDetails>
         <ImagePreviewContainer>
           <ImagePreview />

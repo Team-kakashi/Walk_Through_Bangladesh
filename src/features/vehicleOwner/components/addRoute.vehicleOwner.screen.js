@@ -37,7 +37,7 @@ export const AddRouteScreen = ({navigation}) => {
     if (cost == "") {
       Alert.alert("Fill all fields");
     } else {
-     // submitData();
+      submitData();
       Alert.alert(serviceRoute);
       setCost("");
       
@@ -54,7 +54,7 @@ export const AddRouteScreen = ({navigation}) => {
         ownerid : user_id,
         route: serviceRoute,
         rent: cost,
-        v_id: X,
+        v_id: vid,
     
       }),
     })

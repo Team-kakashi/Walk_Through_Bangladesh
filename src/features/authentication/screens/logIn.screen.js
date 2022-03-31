@@ -96,6 +96,7 @@ export const LogInScreen = ({ navigation }) => {
         label="Password"
         onChangeText={onChangePassword}
         value={password}
+        secureTextEntry={true}
       ></TextInputTheme>
 
       <SpacingLarge></SpacingLarge>
