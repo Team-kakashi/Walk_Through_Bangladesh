@@ -772,14 +772,14 @@ const addVehicle  = (req,res) => {
  
     postgres
     .select("*")
-    .from("vehicle")
+    .from("Vehicle")
     .where("v_name", "IS", null)
     .andWhere("ownerid","=",ownerid)
     .then((data) => {
       console.log(data)
       if(data[0]!=undefined){
       
-      postgres("vehicle")
+      postgres("Vehicle")
       .where("v_name", "IS", null)
       .andWhere("ownerid","=",ownerid)
       .update({
@@ -800,7 +800,7 @@ const addVehicle  = (req,res) => {
         console.log("else")
         postgres
        .select("*")
-       .from("vehicle")
+       .from("Vehicle")
        .where("ownerid", "=", ownerid)
        .then((data) => {
 
@@ -813,7 +813,7 @@ const addVehicle  = (req,res) => {
            type:type,
            discount :0,
               })
-     .into("vehicle")
+     .into("Vehicle")
      .then(()=>{
       res.status(200).json("Successful")
      })
@@ -849,7 +849,7 @@ const addVehicleRoute  = (req,res) => {
  
     postgres
     .select("*")
-    .from("vehicle")
+    .from("Vehicle")
     .where("route", "IS", null)
     .andWhere("ownerid","=",ownerid)
     .andWhere("v_id","=",v_id)
@@ -857,7 +857,7 @@ const addVehicleRoute  = (req,res) => {
       console.log(data)
       if(data[0]!=undefined){
       
-      postgres("vehicle")
+      postgres("Vehicle")
       .where("route", "IS", null)
       .andWhere("ownerid","=",ownerid)
       .andWhere("v_id","=",v_id)
@@ -877,7 +877,7 @@ const addVehicleRoute  = (req,res) => {
         console.log("else")
         postgres
        .select("*")
-       .from("vehicle")
+       .from("Vehicle")
        .where("ownerid", "=", ownerid)
        .andWhere("v_id","=",v_id)
        .then((data) => {
@@ -894,7 +894,7 @@ const addVehicleRoute  = (req,res) => {
           type: data[0].type,
           discount:0,           
               })
-     .into("vehicle")
+     .into("Vehicle")
      .then(()=>{
       res.status(200).json("Successful")
      })
@@ -912,6 +912,7 @@ const addVehicleRoute  = (req,res) => {
 
 
 }
+
 const getVehicle  = (req,res) => {
   console.log("dhukse")
   let {
@@ -925,7 +926,7 @@ const getVehicle  = (req,res) => {
 
   postgres
   .select("*")
-  .from("vehicle")
+  .from("Vehicle")
   .where("ownerid","=",userId)
   .then((data)=>{
     console.log(data)
@@ -935,13 +936,109 @@ const getVehicle  = (req,res) => {
     console.log(err)
     res.status(400).json("Database error")
   })
-
-
-
 }
+const getAreaRoute = (req,res) => {
+  console.log("dhukse")
 
+
+  postgres
+  .select("*")
+  .from("arearoute")
+  .then((data)=>{
+    console.log(data)
+     res.status(200).json(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(400).json("Database error")
+  })
+}
+const getHotelForTraveller = (req,res) => {
+  console.log("dhukse")
+  let {
+    address,
+    totalPerson,
+  } = req.body;
+
+  postgres
+  .select("*")
+  .from("hotel")
+  .where("room_capacity","<=",totalPerson)
+  .andWhere("address","=",address)
+  .orderBy('rating')
+  .then((data)=>{
+    console.log(data)
+     res.status(200).json(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(400).json("Database error")
+  })
+}
+const getVehicleForTraveller = (req,res) => {
+  console.log("dhukse")
+  let {
+    address,
+  } = req.body;
+
+  postgres
+  .select("*")
+  .from("vehicle")
+  .where("area","=",address)
+  .orderBy('rating')
+  .then((data)=>{
+    console.log(data)
+     res.status(200).json(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(400).json("Database error")
+  })
+}
+const getGuideForTraveller = (req,res) => {
+  console.log("dhukse")
+  let {
+    address,
+  } = req.body;
+
+  postgres
+  .select("*")
+  .from("tourguide")
+  .where("area","=",address)
+  .orderBy('rating')
+  .then((data)=>{
+    console.log(data)
+     res.status(200).json(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(400).json("Database error")
+  })
+}
+const getRouteForTraveller = (req,res) => {
+  console.log("dhukse")
+  let {
+    address,
+    day,
+  } = req.body;
+
+  postgres
+  .select("*")
+  .from("tripplan")
+  .where("area","=",address)
+  .andWhere("daycount","=",day)
+  .then((data)=>{
+    console.log(data)
+     res.status(200).json(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+    res.status(400).json("Database error")
+  })
+}
 module.exports = {
   postLogin,postRegister,RegisterTourGuide,RegisterVehicleOwner,
   RegisterHotelManager,addRoom ,getRoom ,addService ,getService,
-  addBlog ,getBlog,addVehicle, addVehicleRoute, getVehicle
+  addBlog ,getBlog,addVehicle, addVehicleRoute, getVehicle,getAreaRoute,
+  getHotelForTraveller,getVehicleForTraveller,getGuideForTraveller,getRouteForTraveller
 };
