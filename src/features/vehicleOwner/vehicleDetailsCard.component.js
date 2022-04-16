@@ -107,5 +107,3 @@ export const ServiceCard = ({ serviceCardInfo = {} }) => {
     </>
   );
 };
-
-//npm install @expo-google-fonts/roboto-slab
