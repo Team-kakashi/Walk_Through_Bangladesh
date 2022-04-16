@@ -68,7 +68,10 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           
-         
+        <Stack.Screen
+            name="LogInScreen"
+            component={LogInScreen}
+          />
           
           <Stack.Screen
             name="TravellerHottelResultScreen"

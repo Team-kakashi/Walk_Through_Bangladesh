@@ -147,7 +147,7 @@ export const TravellerPlanScreen = ({navigation}) => {
     setPersons(personno);
     console.log (serviceArea+" "+serviceRoute+" "+budget+" "+dayno)
     console.log (area+" "+route+" "+days+" "+persons+" "+budget)
-    
+    navigation.navigate("TravellerHottelResultScreen");
     }
   }
 
