@@ -20,6 +20,7 @@ const {
   getVehicleForTraveller,
   getGuideForTraveller,
   getRouteForTraveller,
+  getAllAreaRoute,
   //   isVerified,
   //   postHelpRequest,
   //   getHelpRequestList,
@@ -61,7 +62,7 @@ router.post("/getHotelForTraveller", getHotelForTraveller);
 router.post("/getVehicleForTraveller", getVehicleForTraveller);
 router.post("/getGuideForTraveller", getGuideForTraveller);
 router.post("/getRouteForTraveller", getRouteForTraveller);
-
+router.post("/getAllAreaRoute", getAllAreaRoute);
 
 
 
