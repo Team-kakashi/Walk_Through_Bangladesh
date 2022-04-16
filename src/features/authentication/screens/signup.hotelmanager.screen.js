@@ -11,6 +11,8 @@ import {
   SafeAreaViewContainer,
 } from "../../../components/common.style";
 
+var serviceArea;
+var arealist = [];
 export const SignupHotelManagerScreen = ({navigation}) =>{ 
   const [name, setName] = React.useState("");
   const [contactno, setContactno] = React.useState("");
@@ -40,7 +42,45 @@ export const SignupHotelManagerScreen = ({navigation}) =>{
      }
    };
 
+   const selectrouteValue=(item)=>{
+    console.log("my slected item", item);
+    serviceArea = item;
+  }
 
+  const getArea = () => {
+    fetch(IpRoute+"/getService", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log(res.status())
+        if (data == "wrong credential") {
+          Alert.alert(data);
+        } else {
+          var j=0;
+          for (var i=0;i<data.length;i++){
+            arealist[j++]= data[i].area;
+          }
+          console.log(data);
+          
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        //Alert.alert(err)
+      });
+  };
+
+  useEffect(()=>{
+    getArea();
+  },[])
+  
    const submitData = () => {
     fetch(IpRoute+"/signupHotelManager", {
       method: "post",
@@ -54,7 +94,7 @@ export const SignupHotelManagerScreen = ({navigation}) =>{
         contactNo: contactno,
         userType: "HotelManager",
         hotelName: hotelName,
-        hotelAddress: hotelAddress,
+        hotelAddress: serviceArea,
 
       }),
     })
@@ -105,11 +145,11 @@ export const SignupHotelManagerScreen = ({navigation}) =>{
       onChangeText={setHotelName}
       value={hotelName}
       ></TextInputTheme>
-      <TextInputTheme 
-      label="Address"
-      onChangeText={setHotelAddress}
-      value={hotelAddress}
-      ></TextInputTheme>
+      <ModalView
+       Array={routeArry}
+      Title="HotelAddress"
+      PickerValue={selectrouteValue}
+      ></ModalView>
       
       
 

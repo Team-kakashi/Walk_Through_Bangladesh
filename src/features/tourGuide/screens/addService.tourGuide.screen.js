@@ -23,7 +23,7 @@ export const AddServiceScreen = ({navigation}) =>{
 
   const [route, setRoute] = React.useState([]);
 
-  
+  const [routeTitle, setRouteTitle] = React.useState("Routes");
   const [cost, setCost] = React.useState("");
   const [yearOfExperience, setYearOfExperience] = React.useState("");
 
@@ -41,6 +41,7 @@ export const AddServiceScreen = ({navigation}) =>{
       Alert.alert(serviceRoute);
       setCost("");
       setYearOfExperience("");
+      setRouteTitle("Routes");
     }
   };
 
@@ -120,7 +121,10 @@ export const AddServiceScreen = ({navigation}) =>{
 
   useEffect(()=>{
     getArea();
+    
   },[])
+
+  
 
   const submitData = () => {
     fetch(IpRoute + "/addService", {
@@ -164,7 +168,7 @@ return(
       <SpacingLarge />
       <ModalView
       Array={routeArry}
-      Title="Routes"
+      Title={routeTitle}
       PickerValue={selectrouteValue}
       ></ModalView>
 

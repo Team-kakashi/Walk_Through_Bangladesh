@@ -11,6 +11,8 @@ import {
   SafeAreaViewContainer,
 } from "../../../components/common.style";
 
+var serviceArea;
+var arealist = [];
 export const SignupTourGuideScreen = ({navigation}) =>{
 
   const [name, setName] = React.useState("");
@@ -38,6 +40,44 @@ export const SignupTourGuideScreen = ({navigation}) =>{
      }
    };
 
+   const selectrouteValue=(item)=>{
+    console.log("my slected item", item);
+    serviceArea = item;
+  }
+
+   const getArea = () => {
+    fetch(IpRoute+"/getService", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log(res.status())
+        if (data == "wrong credential") {
+          Alert.alert(data);
+        } else {
+          var j=0;
+          for (var i=0;i<data.length;i++){
+            arealist[j++]= data[i].area;
+          }
+          console.log(data);
+          
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        //Alert.alert(err)
+      });
+  };
+  useEffect(()=>{
+    getArea();
+  },[])
+
    const submitData = () => {
     fetch(IpRoute+"/signupTourGuide", {
       method: "post",
@@ -50,7 +90,7 @@ export const SignupTourGuideScreen = ({navigation}) =>{
         password: password,
         contactNo: contactno,
         userType: "TourGuide",
-        area: area,
+        area: serviceArea,
       }),
     })
       .then((res) => res.status)
@@ -95,10 +135,11 @@ return (
       onChangeText={setPassword}
       value={password}
       ></TextInputTheme>
-      <TextInputTheme 
-      label="Area"
-      onChangeText={setArea}
-      value={area}></TextInputTheme>
+      <ModalView
+      Array={routeArry}
+      Title="Area"
+      PickerValue={selectrouteValue}
+      ></ModalView>
 
       <SpacingLarge></SpacingLarge>
 
