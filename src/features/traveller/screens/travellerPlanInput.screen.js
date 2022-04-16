@@ -90,10 +90,18 @@ export const TravellerPlanScreen = ({navigation}) => {
       if (data == "wrong credential") {
         Alert.alert(data);
       } else {
-        var j=0;
-        for(var i=0;i<data.length;i++){
-          
-            routelist[j++]=data[i].route;
+        var cnt=0;
+    
+        for(var i=1;i<=data[data.length-1].planid;i++){
+          for(var j=0; j<data.length;j++){
+            if(i == data[j].planid && data[j]!= undefined && routelist[cnt]==undefined){
+               routelist[cnt]=(data[j].route+", ");
+            }
+            else if(i == data[j].planid && data[j]!= undefined){
+              routelist[cnt] += (data[j].route+", ");
+            }
+          }    
+            cnt++;
           
         }
         
