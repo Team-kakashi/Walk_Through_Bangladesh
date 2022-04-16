@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var IpRoute = \"http://192.168.0.181:3000\";","map":{"version":3,"sources":["E:/Development/Walk_Through_Bangladesh/src/components/environmentVeriables.js"],"names":["IpRoute"],"mappings":"AAAA,OAAO,IAAMA,OAAO,GAAG,2BAAhB","sourcesContent":["export const IpRoute = \"http://192.168.0.181:3000\" ;"]},"metadata":{},"sourceType":"module"}

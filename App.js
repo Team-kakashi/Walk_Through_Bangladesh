@@ -26,6 +26,7 @@ import {VecicleCard} from "./src/features/vehicleOwner/components/vehicleCard.co
 import { TravellerTabNavigation } from "./src/features/traveller/screens/travellerTabNavigation.screen";
 import { TravellerPlanScreen } from "./src/features/traveller/screens/travellerPlanInput.screen";
 import { TravellerPlansResultScreen } from "./src/features/traveller/screens/travellerPlans.screens";
+import { TravellerHottelResultScreen } from "./src/features/traveller/screens/travellerHotelResult.screen";
 
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme";
@@ -70,8 +71,8 @@ export default function App() {
          
           
           <Stack.Screen
-            name="LogInScreen"
-            component={LogInScreen}
+            name="TravellerHottelResultScreen"
+            component={TravellerHottelResultScreen}
           />
 
           <Stack.Screen

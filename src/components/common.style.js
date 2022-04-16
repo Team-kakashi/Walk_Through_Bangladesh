@@ -66,7 +66,7 @@ export const PositiveSubtitle = styled(Text)`
 
 export const Title = styled(Text)`
   margin-bottom: ${(props) => props.theme.space[2]};
-  font-family: ${(props) => props.theme.fonts.body};
+  font-family: ${(props) => props.theme.fonts.heading};
   font-size: ${(props) => props.theme.fontSizes.title};
   color: ${(props) => props.theme.colors.ui.primary};
 `;
