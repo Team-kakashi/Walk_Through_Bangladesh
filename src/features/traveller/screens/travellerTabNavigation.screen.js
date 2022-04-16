@@ -13,5 +13,5 @@ export const TravellerTabNavigation = () => {
         <Tab.Screen name="Homepage" component={Homepage} />
         <Tab.Screen name="Rating" component={Rating} />
       </Tab.Navigator>
-  );w
+  );
 }

@@ -3,6 +3,7 @@ const random = require("random");
 const { google } = require("googleapis");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt-nodejs");
+var {travellerBudget} = require("../model/userModel.model");
 // CLIENT_ID = process.env.CLIENT_ID;
 // CLIENT_SECRET = process.env.CLIENT_SECRET;
 // REDIRECT_URI = process.env.REDIRECT_URI;
@@ -960,6 +961,7 @@ const getHotelForTraveller = (req,res) => {
   let {
     address,
     totalPerson,
+    budget,
   } = req.body;
 
   postgres
@@ -967,6 +969,7 @@ const getHotelForTraveller = (req,res) => {
   .from("hotel")
   .where("room_capacity","<=",totalPerson)
   .andWhere("address","=",address)
+  .andWhere("room_rent","<=",budget)
   .orderBy('rating')
   .then((data)=>{
     console.log(data)
@@ -974,19 +977,21 @@ const getHotelForTraveller = (req,res) => {
   })
   .catch((err)=>{
     console.log(err)
-    res.status(400).json("Database error")
+    res.status(500).json("Database error")
   })
 }
 const getVehicleForTraveller = (req,res) => {
   console.log("dhukse")
   let {
     address,
+    budget,
   } = req.body;
 
   postgres
   .select("*")
   .from("vehicle")
   .where("area","=",address)
+  .andWhere("rent","<=",budget)
   .orderBy('rating')
   .then((data)=>{
     console.log(data)
@@ -1001,12 +1006,14 @@ const getGuideForTraveller = (req,res) => {
   console.log("dhukse")
   let {
     address,
+    budget,
   } = req.body;
 
   postgres
   .select("*")
   .from("tourguide")
   .where("area","=",address)
+  .andWhere("price","<=",budget)
   .orderBy('rating')
   .then((data)=>{
     console.log(data)

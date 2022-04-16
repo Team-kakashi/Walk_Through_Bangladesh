@@ -31,6 +31,7 @@ import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme";
 
 import {ContentProvider} from "./src/features/vehicleOwner/components/vehicleContext";
+import {PlanContentProvider} from  "./src/features/traveller/components/planContext";
 
 import {
   useFonts as useFontsInter,
@@ -60,16 +61,13 @@ export default function App() {
   }
 
   return (
+  <PlanContentProvider>
     <ContentProvider>
     <ThemeProvider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator>
           
-                    
-         <Stack.Screen
-            name="TravellerPlanScreen"
-            component={TravellerPlanScreen}
-          />
+         
           
           <Stack.Screen
             name="LogInScreen"
@@ -146,9 +144,20 @@ export default function App() {
             name="VecicleCard"
             component={VecicleCard}
           />
+         <Stack.Screen
+            name="TravellerTabNavigation"
+            component={TravellerTabNavigation}
+          />
+                     
+         <Stack.Screen
+            name="TravellerPlanScreen"
+            component={TravellerPlanScreen}
+          />
+
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>
     </ContentProvider>
+    </PlanContentProvider>
   );
 }

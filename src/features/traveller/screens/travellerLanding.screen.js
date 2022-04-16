@@ -15,12 +15,17 @@ import {
 } from "../../../components/common.style";
 
 
-export const Homepage = () => {
+export const Homepage = ({ navigation }) => {
+  const onPressbtn=()=>{
+    navigation.navigate(
+      "TravellerPlanScreen"
+    );
+  }
   return (
     <SafeAreaViewContainer>
       <ScrollView>
           <SpacingSmall/>
-          <PrimaryButton icon="plus">
+          <PrimaryButton icon="plus" onPress={onPressbtn}>
               Generate Plan
           </PrimaryButton>      
       </ScrollView>

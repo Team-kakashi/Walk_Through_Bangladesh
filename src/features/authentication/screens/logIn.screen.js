@@ -73,6 +73,10 @@ export const LogInScreen = ({ navigation }) => {
         else if(data.user_type == "Blogger"){
           navigation.navigate("TravelBloggerLandingScreen")
         } 
+        else if(data.user_type == "Traveller"){
+          navigation.navigate("TravellerTabNavigation")
+        } 
+
         }
       })
       .catch((err) => {
