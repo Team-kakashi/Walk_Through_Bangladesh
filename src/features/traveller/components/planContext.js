@@ -14,7 +14,8 @@ export function PlanContentProvider(props){
   const [route,setRoute] =React.useState();
 
     return(
-        <PlanContentContext.Provider value={{days, setDays, persons, setPersons,budget,setBudget,area,setArea,route,setRoute}}>
+        <PlanContentContext.Provider value={{days, setDays, persons, setPersons,budget,setBudget,area,setArea,route,setRoute,
+                                             setAreasobj, areasobj, routesobj, setRoutesobj}}>
             {props.children}
         </PlanContentContext.Provider>
     );

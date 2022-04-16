@@ -68,18 +68,20 @@ export const TravellerPlanScreen = ({navigation}) => {
   const selectAreaValue=(item)=>{
     console.log("my slected item", item);
     serviceArea = item;
-    getRoute(serviceArea);
+    
   }
 
 
-  const getRoute = (area) => {
-    fetch(IpRoute + "/getAreaRoute", {
+  const getRoute = (area,day) => {
+    console.log(area+", "+day);
+    fetch(IpRoute + "/getRouteForTraveller", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        area: area,
+        address: area,
+        day: day
       }),
     })
     .then((res) => res.json())
@@ -116,6 +118,8 @@ export const TravellerPlanScreen = ({navigation}) => {
   const selectDayValue=(item)=>{
     console.log("my slected item", item);
     dayno = item;
+    console.log("in select day"+serviceArea);
+    getRoute(serviceArea,dayno);
   }
 
   const selectPersonValue=(item)=>{
@@ -152,6 +156,12 @@ export const TravellerPlanScreen = ({navigation}) => {
           Title="Area"
           Array={arealist}
           PickerValue={selectAreaValue}
+        ></ModalView>
+
+        <ModalView
+          Title="Days"
+          Array={day}
+          PickerValue={selectDayValue}
         ></ModalView>
 
         <ModalView
