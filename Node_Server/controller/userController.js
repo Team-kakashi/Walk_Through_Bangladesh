@@ -1043,7 +1043,7 @@ const getAllAreaRoute = (req,res) => {
   console.log("dhukse")
 
 
-  console.log(area)
+  
   postgres
   .select("*")
   .distinctOn("area")

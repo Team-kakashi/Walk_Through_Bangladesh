@@ -11,6 +11,11 @@ import {
   SafeAreaViewContainer,
 } from "../../../components/common.style";
 
+import {
+  ModalView,
+  ItemChoise,
+} from "../../../components/modalView.view";
+
 var serviceArea;
 var arealist = [];
 export const SignupTourGuideScreen = ({navigation}) =>{
@@ -46,7 +51,7 @@ export const SignupTourGuideScreen = ({navigation}) =>{
   }
 
    const getArea = () => {
-    fetch(IpRoute+"/getService", {
+    fetch(IpRoute+"/getAllAreaRoute", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +79,7 @@ export const SignupTourGuideScreen = ({navigation}) =>{
         //Alert.alert(err)
       });
   };
-  useEffect(()=>{
+  React.useEffect(()=>{
     getArea();
   },[])
 
@@ -136,7 +141,7 @@ return (
       value={password}
       ></TextInputTheme>
       <ModalView
-      Array={routeArry}
+      Array={arealist}
       Title="Area"
       PickerValue={selectrouteValue}
       ></ModalView>

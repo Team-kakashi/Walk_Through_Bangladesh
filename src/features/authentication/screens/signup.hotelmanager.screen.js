@@ -10,6 +10,10 @@ import {
   H1,
   SafeAreaViewContainer,
 } from "../../../components/common.style";
+import {
+  ModalView,
+  ItemChoise,
+} from "../../../components/modalView.view";
 
 var serviceArea;
 var arealist = [];
@@ -48,7 +52,7 @@ export const SignupHotelManagerScreen = ({navigation}) =>{
   }
 
   const getArea = () => {
-    fetch(IpRoute+"/getService", {
+    fetch(IpRoute+"/getAllAreaRoute", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +81,7 @@ export const SignupHotelManagerScreen = ({navigation}) =>{
       });
   };
 
-  useEffect(()=>{
+  React.useEffect(()=>{
     getArea();
   },[])
   
@@ -146,7 +150,7 @@ export const SignupHotelManagerScreen = ({navigation}) =>{
       value={hotelName}
       ></TextInputTheme>
       <ModalView
-       Array={routeArry}
+       Array={arealist}
       Title="HotelAddress"
       PickerValue={selectrouteValue}
       ></ModalView>
