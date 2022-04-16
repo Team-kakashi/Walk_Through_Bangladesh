@@ -22,8 +22,10 @@ import {
 import { IpRoute } from "../../../components/environmentVeriables";
 import { user_id } from "../../authentication/screens/logIn.screen";
 import {ContentContext} from "./vehicleContext";
+import {Vehicle} from "./vehicle";
 
-var vehicleid;
+//var vehicleid;
+var temp = 0 ;
 export const VecicleCard = ({
   navigation,
 }) => {
@@ -31,21 +33,28 @@ export const VecicleCard = ({
   const[loadPage,setloadPage]= useState(true);
   const [vid, setVid] =useContext(ContentContext);
 
-  const photos = 
-      "https://thumbs.dreamstime.com/b/russian-jeep-four-wheel-drive-car-very-good-passability-mountain-tour-extreme-vacation-summer-172031152.jpg";
-    
-   
-
-
-  const onPressAdd = () => {
-   // console.log(navigation);
-   console.log(vehicleid);
-   //var vid = 1;
-   
-   setVid(vehicleid);
-    navigation.navigate("AddRouteScreen",vid);
-  }
   
+  temp = 0;
+    const list = vehicle.map((i)=>(
+      
+        <Vehicle 
+        id = {temp++} 
+        v_name = {i.v_name}
+        route={i.route} 
+        rent={i.rent}
+        update = {update}
+        />
+
+    ));
+
+    function update(id){
+      console.log("card id ",id);
+
+      setVid(vehicle[id].v_id);
+    navigation.navigate("AddRouteScreen",vid);
+
+    }
+
   const submitData = () => {
     console.log('as',loadPage)
    // setloadPage(true);
@@ -64,9 +73,9 @@ export const VecicleCard = ({
         if (data == "wrong credential") {
           Alert.alert(data);
         } else {
-          //console.log(data);
+          console.log("vehivle data",data);
           setVehicle(data);
-
+          temp = 0;
           
           console.log("abc",vehicle);
           
@@ -91,30 +100,36 @@ export const VecicleCard = ({
   },[])
   return (
     <>
-    {loadPage 
+    {list}
+    </>
+//     <>
+//     {loadPage 
 
     
-   ?<> 
-    {vehicle.map(i =>(
-    <CardParent elevation={5}>
-      <Row>
-        <CardDetails>
-          <Title>Vehicle Name : {i.v_name}</Title>
-          <SpacingSmall />
-          <Subtitle>Route: {i.route}</Subtitle>
-          <Subtitle>Price: {i.rent}</Subtitle>
-          <SpacingSmall />
-          <QuaternaryButton onPress={onPressAdd}{...vehicleid=i.v_id}>Add Route</QuaternaryButton>
-        </CardDetails>
-        <ImagePreviewContainer>
-          <ImagePreview source={{ uri: photos }}/>
-        </ImagePreviewContainer>
-      </Row>
-    </CardParent>
-    ))}
-    </>
-    :<></>
-}
-    </>
+//    ?<> 
+   
+//     {vehicle.map(i =>(
+//     <CardParent elevation={5}>
+//       <Row>
+//         <CardDetails>
+//           <Title>Vehicle Name : {i.v_name}</Title>
+//           <SpacingSmall />
+//           <Subtitle>Route: {i.route}</Subtitle>
+//           <Subtitle>Price: {i.rent}</Subtitle>
+//           <SpacingSmall />
+         
+          
+//           <QuaternaryButton onPress={onPressAdd} {...vehicleid=i.v_id}>Add Route</QuaternaryButton>
+//         </CardDetails>
+//         <ImagePreviewContainer>
+//           <ImagePreview />
+//         </ImagePreviewContainer>
+//       </Row>
+//     </CardParent>
+//     ))}
+//     </>
+//     :<></>
+// }
+//     </>
   );
 };

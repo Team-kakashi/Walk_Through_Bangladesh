@@ -18,9 +18,10 @@ import {
 import {user_id} from "../../authentication/screens/logIn.screen";
 
 var serviceRoute;
+var routeArry=[];
 export const AddServiceScreen = ({navigation}) =>{
 
-  const route = ["Ratargul", "Bisanakandi","Jaflong"];
+  const [route, setRoute] = React.useState([]);
 
   
   const [cost, setCost] = React.useState("");
@@ -43,9 +44,8 @@ export const AddServiceScreen = ({navigation}) =>{
     }
   };
 
-
   const getArea = () => {
-    fetch(IpRoute + "/getRoute", {
+    fetch(IpRoute+"/getService", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -54,12 +54,62 @@ export const AddServiceScreen = ({navigation}) =>{
         userId: user_id,
       }),
     })
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log(res.status())
+        if (data == "wrong credential") {
+          Alert.alert(data);
+        } else {
+          
+          getRoute(data[0].area);
+          console.log(data);
+          
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        //Alert.alert(err)
+      });
+  };
+
+
+  const getRoute = (area) => {
+    fetch(IpRoute + "/getAreaRoute", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        area: area,
+      }),
+    })
     .then((res) => res.json())
     .then((data) => {
       //console.log(res.status())
       if (data == "wrong credential") {
         Alert.alert(data);
       } else {
+        var j=0;
+        for(var i=0;i<data.length;i++){
+          if(data[i].guide==true){
+            routeArry[j++]=data[i].route;
+          }
+          if(i==data.length-1){
+            console.log(routeArry);
+          }
+        }
+        
+        //console.log("routearry ",routeArry);
+       /* setProducts(previouProduct => [...previouProduct, 
+          {   id : idcount,
+              title : title,
+              description: description ,
+              hour : 0,
+              min : 0,
+              sec : 0,
+              flag:true,
+              myInterval:0
+          }]);*/
       console.log(data);
       }
     })
@@ -69,7 +119,7 @@ export const AddServiceScreen = ({navigation}) =>{
   };
 
   useEffect(()=>{
-    //getArea();
+    getArea();
   },[])
 
   const submitData = () => {
@@ -113,7 +163,7 @@ return(
 
       <SpacingLarge />
       <ModalView
-      Array={route}
+      Array={routeArry}
       Title="Routes"
       PickerValue={selectrouteValue}
       ></ModalView>

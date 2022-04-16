@@ -46,6 +46,7 @@ export const ModalView = (props) => {
     <SafeAreaViewContainer>
       <TouchableOpacityPicker
         onPress={() =>{ changeModalVisibility(true);
+                        //setChooseData()
         }}
       >
         <Subtitle>{chooseData}</Subtitle>

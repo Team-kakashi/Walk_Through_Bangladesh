@@ -21,10 +21,11 @@ import { clickProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 import {ContentContext} from "./vehicleContext";
 
 var serviceRoute;
+var routeArry=[];
 export const AddRouteScreen = ({navigation}) => {
   const [vid, setVid] =useContext(ContentContext);
   console.log("v id in route",vid);
-  const route = ["Ratargul", "Bisanakandi","Jaflong"];
+  //const route = ["Ratargul", "Bisanakandi","Jaflong"];
   const [cost, setCost] = React.useState("");
 
   const selectrouteValue=(item)=>{
@@ -43,6 +44,74 @@ export const AddRouteScreen = ({navigation}) => {
       
     }
   };
+
+  const getArea = () => {
+    fetch(IpRoute+"/getVehicle", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: user_id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log(res.status())
+        if (data == "wrong credential") {
+          Alert.alert(data);
+        } else {
+          
+          getRoute(data[0].area);
+          console.log(data);
+          
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        //Alert.alert(err)
+      });
+  };
+
+
+  const getRoute = (area) => {
+    fetch(IpRoute + "/getAreaRoute", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        area: area,
+      }),
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      //console.log(res.status())
+      if (data == "wrong credential") {
+        Alert.alert(data);
+      } else {
+        var j=0;
+        for(var i=0;i<data.length;i++){
+          if(data[i].vehicle==true){
+            routeArry[j++]=data[i].route;
+          }
+          if(i==data.length-1){
+            console.log(routeArry);
+          }
+        }
+        
+        
+      console.log(data);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  };
+
+  useEffect(()=>{
+    getArea();
+  },[])
 
   const submitData = () => {
     fetch(IpRoute + "/addVehicleRoute", {
@@ -85,7 +154,7 @@ export const AddRouteScreen = ({navigation}) => {
 
         <SpacingLarge />
         <ModalView
-        Array={route}
+        Array={routeArry}
         Title="Routes"
         PickerValue={selectrouteValue}></ModalView>
         <TextInputTheme
