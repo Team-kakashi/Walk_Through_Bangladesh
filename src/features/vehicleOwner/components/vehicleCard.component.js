@@ -33,7 +33,6 @@ export const VecicleCard = ({
   const[loadPage,setloadPage]= useState(true);
   const [vid, setVid] =useContext(ContentContext);
 
-
   
   temp = 0;
     const list = vehicle.map((i)=>(

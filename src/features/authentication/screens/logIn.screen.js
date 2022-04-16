@@ -1,4 +1,5 @@
 /** @format */
+import { ScrollView } from "react-native";
 
 import React from "react";
 import { IpRoute } from "../../../components/environmentVeriables";
@@ -81,7 +82,9 @@ export const LogInScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaViewContainer>
+    <SafeAreaViewContainer>      
+      <ScrollView>
+
       <H1>Walk Through Bangladesh</H1>
 
       <SpacingLarge></SpacingLarge>
@@ -116,6 +119,10 @@ export const LogInScreen = ({ navigation }) => {
       <PrimaryButton icon="login" onPress={onPressLogin}>
         Login
       </PrimaryButton>
+      <SpacingLarge></SpacingLarge>
+
+      </ScrollView>
+
     </SafeAreaViewContainer>
   );
 };

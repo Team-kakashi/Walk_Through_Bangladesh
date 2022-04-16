@@ -92,6 +92,7 @@ export const AddRoomScreen = ({ navigation }) => {
           onChangeText={setNumber}
           value={number}
         ></TextInputTheme>
+
         <TextInputTheme
           label="Rent"
           onChangeText={setRent}
@@ -108,6 +109,7 @@ export const AddRoomScreen = ({ navigation }) => {
           Title="Ac_options"
           PickerValue={selectPickerValue}
         ></ModalView>
+        
         <ModalView
           Array={Capacity}
           Title="Capacities"
