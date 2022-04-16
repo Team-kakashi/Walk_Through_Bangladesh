@@ -23,6 +23,9 @@ import { VehicleOwnerLandingScreen } from "./src/features/vehicleOwner/screens/v
 import { AddVehicleScreen } from "./src/features/vehicleOwner/components/addVehicle.vehicleOwner.screen";
 import { AddRouteScreen } from "./src/features/vehicleOwner/components/addRoute.vehicleOwner.screen";
 import {VecicleCard} from "./src/features/vehicleOwner/components/vehicleCard.component";
+import { TravellerTabNavigation } from "./src/features/traveller/screens/travellerTabNavigation.screen";
+import { TravellerPlanScreen } from "./src/features/traveller/screens/travellerPlanInput.screen";
+import { TravellerPlansResultScreen } from "./src/features/traveller/screens/travellerPlans.screens";
 
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme";
@@ -62,31 +65,42 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           
+                    
+         <Stack.Screen
+            name="TravellerPlanScreen"
+            component={TravellerPlanScreen}
+          />
           
           <Stack.Screen
             name="LogInScreen"
             component={LogInScreen}
           />
+
           <Stack.Screen
             name="AccountSelectScreen"
             component={AccountSelectScreen}
           />
+
           <Stack.Screen
             name="SignupTravellerScreen"
             component={SignupTravellerScreen}
           />
+
           <Stack.Screen
             name="SignupHotelManagerScreen"
             component={SignupHotelManagerScreen}
           />
+
           <Stack.Screen
             name="SignupBloggerScreen"
             component={SignupBloggerScreen}
           />
+
           <Stack.Screen
             name="SignupTourGuideScreen"
             component={SignupTourGuideScreen}
           />
+
           <Stack.Screen
             name="SignupVehicleOwnerScreen"
             component={SignupVehicleOwnerScreen}
@@ -99,6 +113,10 @@ export default function App() {
           <Stack.Screen
             name="AddRoomScreen"
             component={AddRoomScreen}
+          />
+          <Stack.Screen
+            name="TourGuideLandingScreen"
+            component={TourGuideLandingScreen}
           />
           <Stack.Screen
             name="AddServiceScreen"
