@@ -42,11 +42,12 @@ export const PlanCard = ({ navigation }) => {
 
   async function update(id) {
     await setRoute(travellerRoute[id]);
+    await setPlanid(id);
     console.log(" in parent id ", id);
     console.log("hotel info id", travellerRoute[id]);
     //console.log("in update card info ",hotelObject)
     //console.log(navigation);
-    //navigation.navigate("TravellerPlansResultScreen");
+    navigation.navigate("TravellerSelectedPlanScreen");
   }
 
   const getRoute = (area, day) => {

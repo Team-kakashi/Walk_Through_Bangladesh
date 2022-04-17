@@ -27,7 +27,7 @@ import { TravellerTabNavigation } from "./src/features/traveller/screens/travell
 import { TravellerPlanScreen } from "./src/features/traveller/screens/travellerPlanInput.screen";
 import { TravellerPlansResultScreen } from "./src/features/traveller/screens/travellerPlans.screens";
 import { TravellerHottelResultScreen } from "./src/features/traveller/screens/travellerHotelResult.screen";
-import { TravellerSelectedPlanScreen } from "./src/features/traveller/screens/travellerSelectedPlan.screen";
+
 import { GuideSelectScreen } from "./src/features/traveller/screens/travellerGuideSelect.screen";
 import { VehicleSelectScreen } from "./src/features/traveller/screens/travellerVehicleSelect.screen";
 import { RoomCardResult } from "./src/features/traveller/components/hotelRoomCard.component";
@@ -39,6 +39,7 @@ import { theme } from "./src/infrastructure/theme";
 
 import { ContentProvider } from "./src/features/vehicleOwner/components/vehicleContext";
 import { PlanContentProvider } from "./src/features/traveller/components/planContext";
+import {TravellerSelectedPlanScreen} from "./src/features/traveller/screens/travellerSelectedPlan.screen";
 
 import {
   useFonts as useFontsInter,
@@ -78,10 +79,7 @@ export default function App() {
                 component={LogInScreen}
               />
 
-              <Stack.Screen
-                name="TravellerSelectedPlanScreen"
-                component={TravellerSelectedPlanScreen}
-              />
+             
 
               <Stack.Screen
                 name="SignupTravellerScreen"
@@ -190,6 +188,11 @@ export default function App() {
                 name="PlanCardDetails"
                 component={PlanCardDetails}
               />
+              <Stack.Screen
+                name="TravellerSelectedPlanScreen"
+                component={TravellerSelectedPlanScreen}
+              />
+
             </Stack.Navigator>
           </NavigationContainer>
         </ThemeProvider>

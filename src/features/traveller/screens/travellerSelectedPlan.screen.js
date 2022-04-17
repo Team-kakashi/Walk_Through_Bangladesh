@@ -14,6 +14,8 @@ import {
   PrimaryButton
 } from "../../../components/common.style";
 import { SelectedRouteCard } from "../components/selectedRouteCard.component";
+import { PlanContentContext } from "../components/planContext";
+import { IpRoute } from "../../../components/environmentVeriables";
 
 const RoomCardContainer = styled(View)`
   flex: 1;
@@ -22,6 +24,8 @@ const RoomCardContainer = styled(View)`
 
 
 export const TravellerSelectedPlanScreen = () => {
+
+
   return (
     <SafeAreaViewContainer>
       <ScrollView>

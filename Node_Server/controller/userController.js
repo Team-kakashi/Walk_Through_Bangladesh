@@ -990,7 +990,7 @@ const getVehicleForTraveller = (req,res) => {
   postgres
   .select("*")
   .from("vehicle")
-  .where("area","=",address)
+  .where("route","=",address)
   .andWhere("rent","<=",budget)
   .orderBy('rating')
   .then((data)=>{
@@ -1012,7 +1012,7 @@ const getGuideForTraveller = (req,res) => {
   postgres
   .select("*")
   .from("tourguide")
-  .where("area","=",address)
+  .where("route","=",address)
   .andWhere("price","<=",budget)
   .orderBy('rating')
   .then((data)=>{

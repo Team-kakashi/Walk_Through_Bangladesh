@@ -8,6 +8,8 @@ import personIcon from "../../../../assets/icons/person.png";
 import moneyIcon from "../../../../assets/icons/money.png";
 import acIcon from "../../../../assets/icons/ac.png";
 import { CardDetails } from "../../../components/roomCard.style";
+import { PlanContentContext } from "../components/planContext";
+import { IpRoute } from "../../../components/environmentVeriables";
 import {
   IconTextContainer,
   CardParent,
@@ -27,7 +29,23 @@ import {
 
 export const SelectedRouteCard = () => {
 
+  const {days, setDays, persons, setPersons, budget, setBudget, area, setArea, route, setRoute, planid, setPlanid, routesobj, setRoutesobj} = React.useContext(PlanContentContext);
 
+  console.log("asto obj = ",routesobj)
+  console.log("planid = ",planid)
+   
+   var selectedRoute=[];
+   var cnt=0;
+   console.log(routesobj.length)
+   for(var i=0;i<routesobj.length;i++){
+     if(routesobj[i].planid==planid+1){
+       selectedRoute[cnt++]=routesobj[i];
+     }
+     if(i==routesobj.length-1){
+       console.log("array is",selectedRoute)
+     }
+   }
+  
   return (
 
 
