@@ -20,7 +20,15 @@ const RoomCardContainer = styled(View)`
 
 import { PlanCard } from "../components/planCard.component";
 
-export const TravellerPlansResultScreen = () => {
+
+
+export const TravellerPlansResultScreen = ({navigation}) => {
+
+  
+  
+ 
+  
+  
   return (
     <SafeAreaViewContainer>
       <ScrollView>
@@ -30,7 +38,7 @@ export const TravellerPlansResultScreen = () => {
           <ParentMargin>
             <Subtitle>Generated Plans</Subtitle>
           </ParentMargin>
-          <PlanCard />
+          <PlanCard navigation={navigation}/>
         </RoomCardContainer>
       </ScrollView>
     </SafeAreaViewContainer>

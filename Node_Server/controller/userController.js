@@ -3,7 +3,7 @@ const random = require("random");
 const { google } = require("googleapis");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt-nodejs");
-var {travellerBudget} = require("../model/userModel.model");
+var travellerBudget=0;
 // CLIENT_ID = process.env.CLIENT_ID;
 // CLIENT_SECRET = process.env.CLIENT_SECRET;
 // REDIRECT_URI = process.env.REDIRECT_URI;
@@ -967,7 +967,7 @@ const getHotelForTraveller = (req,res) => {
   postgres
   .select("*")
   .from("hotel")
-  .where("room_capacity","<=",totalPerson)
+  .where("room_capacity",">=",totalPerson)
   .andWhere("address","=",address)
   .andWhere("room_rent","<=",budget)
   .orderBy('rating')
