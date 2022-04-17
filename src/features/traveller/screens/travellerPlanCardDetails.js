@@ -42,7 +42,7 @@ export const PlanCardDetails = (props) => {
     return (
     
       <CardParent elevation={5}>
-      {/* <TouchableOpacity onPress={onPressAdd()}> */}
+       <TouchableOpacity onPress={onPressAdd}>
       <Row>
         <CardDetails>
             
@@ -59,7 +59,7 @@ export const PlanCardDetails = (props) => {
           <ImagePreview source={{ uri: photos[1] }} />
         </ImagePreviewContainer>
       </Row>
-      {/* </TouchableOpacity> */}
+      </TouchableOpacity>
     </CardParent>
     
       
