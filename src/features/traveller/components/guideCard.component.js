@@ -1,6 +1,6 @@
 /** @format */
 
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import moneyIcon from "../../../../assets/icons/money.png";
 import timerIcon from "../../../../assets/icons/timer.png";
 
@@ -17,11 +17,7 @@ import {
   Icon,
 } from "../../../components/common.style";
 
-
 export const GuideCard = ({ serviceCardInfo = {} }) => {
-
-
-  
   const {
     tripTitle = "Sylhet - Ratargul",
     experience = "5 years",
@@ -32,8 +28,6 @@ export const GuideCard = ({ serviceCardInfo = {} }) => {
   } = serviceCardInfo;
 
   return (
-
-
     <CardParent elevation={5}>
       <Row>
         <CardDetails>
@@ -49,11 +43,9 @@ export const GuideCard = ({ serviceCardInfo = {} }) => {
           </IconTextContainer>
         </CardDetails>
         <ImagePreviewContainer>
-          <ImagePreview/>
+          <ImagePreview />
         </ImagePreviewContainer>
       </Row>
     </CardParent>
-
   );
 };
-

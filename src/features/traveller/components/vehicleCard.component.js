@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+/** @format */
+
+import React, {
+  useState,
+  useEffect,
+  useContext,
+} from "react";
 import moneyIcon from "../../../../assets/icons/money.png";
 import timerIcon from "../../../../assets/icons/timer.png";
 
@@ -17,29 +23,23 @@ import {
   Button,
 } from "../../../components/common.style";
 
-
 export const VehicleCard = (props) => {
+  console.log("props in vehicle ", props);
 
-    console.log("props in vehicle ",props);
-    
-    function onPressAdd () {
-     props.update(props.id);
-    }
-    
-    
-    return (
-     
-      <CardParent elevation={5}>
-        <Row>
-          <CardDetails>
-            <Title>Vehicle Name : {props.v_name}</Title>
-            <SpacingSmall />
-            <Subtitle>Price: {props.rent}</Subtitle>
-            <SpacingSmall />
-          </CardDetails>
-        </Row>
-      </CardParent>
-     
-    );
-  };
-  
+  function onPressAdd() {
+    props.update(props.id);
+  }
+
+  return (
+    <CardParent elevation={5}>
+      <Row>
+        <CardDetails>
+          <Title>Vehicle Name : {props.v_name}</Title>
+          <SpacingSmall />
+          <Subtitle>Price: {props.rent}</Subtitle>
+          <SpacingSmall />
+        </CardDetails>
+      </Row>
+    </CardParent>
+  );
+};

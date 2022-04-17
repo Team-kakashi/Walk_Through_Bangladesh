@@ -11,9 +11,9 @@ import {
   Subtitle,
   H1,
   ParentMargin,
+  PrimaryButton
 } from "../../../components/common.style";
 import { SelectedRouteCard } from "../components/selectedRouteCard.component";
-
 
 const RoomCardContainer = styled(View)`
   flex: 1;
@@ -28,9 +28,17 @@ export const TravellerSelectedPlanScreen = () => {
         <H1>Select</H1>
         <SpacingSmall></SpacingSmall>
         <RoomCardContainer>
-
+          <ParentMargin>
+            <Subtitle>Plan</Subtitle>
+          </ParentMargin>
           <SelectedRouteCard />
+          <SpacingSmall></SpacingSmall>
+
+          <PrimaryButton>
+            Generate Final Plan
+          </PrimaryButton>
         </RoomCardContainer>
+
       </ScrollView>
     </SafeAreaViewContainer>
   );

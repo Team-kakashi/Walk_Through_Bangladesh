@@ -31,6 +31,7 @@ export const CardParent = styled(Card)`
 
 export const Row = styled(View)`
   flex-direction: row;
+  margin-bottom: ${(props) => props.theme.space[3]};
 `;
 
 export const ParentMargin = styled(View)`
@@ -47,14 +48,30 @@ export const RightGravity = styled(View)`
 `;
 
 export const IconTextContainer = styled(View)`
+  display: flex;
+
   align-items: center;
   flex-direction: row;
-  margin-bottom: ${(props) => props.theme.space[2]};
+
+  padding-bottom: ${(props) => props.theme.space[2]};
+`;
+
+export const VericalDivider = styled(View)`
+  display: flex;
+  width: ${(props) => props.theme.sizes[0]};
+  background-color: ${(props) =>
+    props.theme.colors.ui.quaternary};
+  margin-left: ${(props) => props.theme.space[2]};
+  margin-right: ${(props) => props.theme.space[3]};
+  border-radius: ${(props) => props.theme.sizes[2]};
 `;
 
 export const Subtitle = styled(Text)`
   font-family: ${(props) => props.theme.fonts.body};
   font-size: ${(props) => props.theme.fontSizes.body};
+  margin-bottom: ${(props) => props.theme.space[1]};
+  margin-top: ${(props) => props.theme.space[1]};
+
   color: ${(props) => props.theme.colors.ui.secondary};
 `;
 
@@ -198,6 +215,12 @@ export const TouchableOpacityPicker = styled(
   padding: ${(props) => props.theme.sizes[3]};
   padding-top: ${(props) => props.theme.sizes[5]};
   padding-bottom: ${(props) => props.theme.sizes[5]};
+`;
+
+export const WhiteBackground = styled(View)`
+  flex: 1;
+  background-color: ${(props) =>
+    props.theme.colors.bg.secondary};
 `;
 
 export const ModalContainer = styled(TouchableOpacity)`

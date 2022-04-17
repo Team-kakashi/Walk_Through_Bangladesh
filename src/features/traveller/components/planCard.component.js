@@ -20,45 +20,31 @@ import {
   SpacingSmall,
 } from "../../../components/common.style";
 
-var keyid=0;
-var x=0;
+var keyid = 0;
+var x = 0;
 export const PlanCard = ({ planCardInfo = {} }) => {
-  
-  const  {
-    routes = [
-      "Nilgiri",
-      "Debotakhum"
-    ],
+  const {
+    routes = ["Nilgiri", "Debotakhum"],
     photos = [
-        "https://images.unsplash.com/photo-1615874959474-d609969a20ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8YmVkcm9vbXxlbnwwfHwwfHw%3D&w=1000&q=80",
-        "https://images.unsplash.com/photo-1540518614846-7eded433c457?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8YmVkcm9vbXxlbnwwfHwwfHw%3D&w=1000&q=80",
-      ],
+      "https://images.unsplash.com/photo-1615874959474-d609969a20ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8YmVkcm9vbXxlbnwwfHwwfHw%3D&w=1000&q=80",
+      "https://images.unsplash.com/photo-1540518614846-7eded433c457?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8YmVkcm9vbXxlbnwwfHwwfHw%3D&w=1000&q=80",
+    ],
   } = planCardInfo;
 
-
   return (
-
-      
     <CardParent elevation={5}>
-      
       <Row>
         <CardDetails>
-            
-            <Subtitle >{routes[0]}</Subtitle>
-            <SpacingSmall/>
-            <Subtitle >{routes[1]}</Subtitle>
-
-
+          <Subtitle>{routes[0]}</Subtitle>
+          <SpacingSmall />
+          <Subtitle>{routes[1]}</Subtitle>
         </CardDetails>
-
 
         <ImagePreviewContainer>
           <ImagePreview source={{ uri: photos[0] }} />
           <ImagePreview source={{ uri: photos[1] }} />
         </ImagePreviewContainer>
       </Row>
-       
     </CardParent>
-
   );
 };

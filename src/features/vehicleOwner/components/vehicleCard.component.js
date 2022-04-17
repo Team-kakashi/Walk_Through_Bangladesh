@@ -30,7 +30,7 @@ export const VecicleCard = ({
   navigation,
 }) => {
   const[vehicle,setVehicle]= React.useState([{}]);
-  const[loadPage,setloadPage]= useState(true);
+     const[loadPage,setloadPage]= useState(true);
   const [vid, setVid] =useContext(ContentContext);
 
   
