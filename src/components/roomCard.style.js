@@ -6,12 +6,14 @@ import { Card } from "react-native-paper";
 import styled from "styled-components/native";
 
 export const RoomCardParent = styled(Card)`
-  shadow-color: ${(props) => props.theme.colors.ui.quaternary};
+  shadow-color: ${(props) =>
+    props.theme.colors.ui.quaternary};
   box-shadow: 0px 3px;
   shadow-opacity: 0.1;
   shadow-radius: 8px;
 
-  background-color: ${(props) => props.theme.colors.bg.secondary};
+  background-color: ${(props) =>
+    props.theme.colors.bg.secondary};
   border-radius: ${(props) => props.theme.sizes[2]};
   padding: ${(props) => props.theme.space[2]};
   margin: ${(props) => props.theme.space[2]};
@@ -19,7 +21,8 @@ export const RoomCardParent = styled(Card)`
 
 export const CardDetails = styled(View)`
   flex: 1;
-  background-color: ${(props) => props.theme.colors.bg.secondary};
+  background-color: ${(props) =>
+    props.theme.colors.bg.secondary};
   padding: ${(props) => props.theme.space[2]};
 `;
 
@@ -49,7 +52,8 @@ export const CardHeader = styled(Text)`
 export const CardImage = styled(Image)`
   flex: 1;
   margin: ${(props) => props.theme.space[1]};
-  background-color: ${(props) => props.theme.colors.bg.secondary};
+  background-color: ${(props) =>
+    props.theme.colors.bg.secondary};
   padding: ${(props) => props.theme.space[2]};
   border-radius: ${(props) => props.theme.sizes[1]};
 `;

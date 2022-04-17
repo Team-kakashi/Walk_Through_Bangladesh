@@ -9,17 +9,17 @@ import {
   RightGravity,
   SpacingSmall,
   ParentMargin,
-  Subtitle,H1,
+  Subtitle,
+  H1,
 } from "../../../components/common.style";
 import { VehicleCard } from "../components/vehicleCard.component";
-
 
 const ServiceCardContainer = styled(View)`
   flex: 1;
   padding: ${(props) => props.theme.space[2]};
 `;
 
-export const VehicleSelectScreen = ({navigation}) => {
+export const VehicleSelectScreen = ({ navigation }) => {
   return (
     <SafeAreaViewContainer>
       <ScrollView>
