@@ -141,7 +141,7 @@ export const TravellerPlanScreen = ({navigation}) => {
     }
     else{
     setArea(serviceArea);
-    setRoute(serviceRoute);
+   // setRoute(serviceRoute);
     setBudget(budget);
     setDays(dayno);
     setPersons(personno);
@@ -172,11 +172,11 @@ export const TravellerPlanScreen = ({navigation}) => {
           PickerValue={selectDayValue}
         ></ModalView>
 
-        <ModalView
+        {/* <ModalView
           Title="Route"
           Array={routelist}
           PickerValue={selectRouteValue}
-        ></ModalView>
+        ></ModalView> */}
 
       <TextInputTheme 
       label="Budget"
@@ -184,11 +184,7 @@ export const TravellerPlanScreen = ({navigation}) => {
       value={budget}
       ></TextInputTheme>
 
-        <ModalView
-          Title="Days"
-          Array={day}
-          PickerValue={selectDayValue}
-        ></ModalView>
+       
 
         <ModalView
           Title="Persons"

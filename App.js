@@ -30,6 +30,10 @@ import { TravellerHottelResultScreen } from "./src/features/traveller/screens/tr
 import { TravellerSelectedPlanScreen } from "./src/features/traveller/screens/travellerSelectedPlan.screen";
 import { GuideSelectScreen } from "./src/features/traveller/screens/travellerGuideSelect.screen";
 import { VehicleSelectScreen } from "./src/features/traveller/screens/travellerVehicleSelect.screen";
+import { RoomCardResult } from "./src/features/traveller/components/hotelRoomCard.component";
+import {PlanCard} from "./src/features/traveller/components/planCard.component";
+import {PlanCardDetails} from "./src/features/traveller/screens/travellerPlanCardDetails";
+
 
 
 import { ThemeProvider } from "styled-components/native";
@@ -160,6 +164,27 @@ export default function App() {
          <Stack.Screen
             name="TravellerPlanScreen"
             component={TravellerPlanScreen}
+          />
+
+          <Stack.Screen
+            name="TravellerHottelResultScreen"
+            component={TravellerHottelResultScreen}
+          />
+          <Stack.Screen
+            name="RoomCardResult"
+            component={RoomCardResult}
+          />
+          <Stack.Screen
+            name="TravellerPlansResultScreen"
+            component={TravellerPlansResultScreen}
+          />
+          <Stack.Screen
+            name="PlanCard"
+            component={PlanCard}
+          />
+           <Stack.Screen
+            name="PlanCardDetails"
+            component={PlanCardDetails}
           />
 
         </Stack.Navigator>

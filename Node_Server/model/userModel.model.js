@@ -1,2 +1,2 @@
-export var travellerBudget=0;
+export const travellerBudget=0;
  

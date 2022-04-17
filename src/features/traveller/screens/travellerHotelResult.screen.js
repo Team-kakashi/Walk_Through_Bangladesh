@@ -22,7 +22,7 @@ const RoomCardContainer = styled(View)`
 `;
 
 
-export const TravellerHottelResultScreen = () => {
+export const TravellerHottelResultScreen = ({navigation}) => {
   return (
     <SafeAreaViewContainer>
       <ScrollView>
@@ -32,7 +32,7 @@ export const TravellerHottelResultScreen = () => {
           <ParentMargin>
             <Subtitle>Rooms</Subtitle>
           </ParentMargin>
-          <RoomCardResult />
+          <RoomCardResult navigation={navigation}/>
         </RoomCardContainer>
       </ScrollView>
     </SafeAreaViewContainer>

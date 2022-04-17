@@ -12,10 +12,11 @@ export function PlanContentProvider(props){
   const [budget,setBudget] = React.useState(0);
   const [area,setArea] = React.useState();
   const [route,setRoute] =React.useState();
+  const [hotelObject,setHotelObject] = React.useState({});
 
     return(
         <PlanContentContext.Provider value={{days, setDays, persons, setPersons,budget,setBudget,area,setArea,route,setRoute,
-                                             setAreasobj, areasobj, routesobj, setRoutesobj}}>
+                                             setAreasobj, areasobj, routesobj, setRoutesobj, hotelObject, setHotelObject}}>
             {props.children}
         </PlanContentContext.Provider>
     );
