@@ -32,22 +32,12 @@ var routelist = [];
 var tourGuideAvilability = [];
 var vehicleAvilability = [];
 export const PlanCard = ({ navigation }) => {
-  const [travellerRoute, setTravellerRoute] =
-    React.useState([]);
+  const [travellerRoute, setTravellerRoute] = React.useState([]);
+  const [istourguideavilable,setTourGuideAvilable] = React.useState([]);
+  const [isVehicleAvailable,setVehicleAvailable] = React.useState([]);
 
-  const {
-    days,
-    setDays,
-    persons,
-    setPersons,
-    budget,
-    setBudget,
-    area,
-    setArea,
-    route,
-    setRoute,
-  } = React.useContext(PlanContentContext);
-
+  const {days, setDays, persons, setPersons, budget, setBudget, area, setArea, route, setRoute, planid, setPlanid, routesobj, setRoutesobj} = React.useContext(PlanContentContext);
+  
   temp = 0;
 
   async function update(id) {
@@ -78,16 +68,11 @@ export const PlanCard = ({ navigation }) => {
           Alert.alert(data);
         } else {
           var cnt = 0;
-          console.log(
-            "plaid",
-            data[data.length - 1].planid
-          );
+          console.log("plaid",data[data.length - 1].planid);
           console.log("arrlen", data.length - 1);
-          for (
-            var i = 1;
-            i <= data[data.length - 1].planid;
-            i++
-          ) {
+          setTravellerRoute([]);
+          routelist = [];
+          for (var i = 1;i <= data[data.length - 1].planid;i++) {
             for (var j = 0; j < data.length; j++) {
               if (
                 i == data[j].planid &&
@@ -115,7 +100,11 @@ export const PlanCard = ({ navigation }) => {
           }
           temp = 0;
 
-          console.log("data", data);
+          
+      console.log("routelist 2",routelist); 
+      console.log("data",data);
+      setRoutesobj(data);
+      
         }
       })
       .catch((err) => {

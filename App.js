@@ -22,7 +22,7 @@ import { WriteBlogScreen } from "./src/features/travelBlogger/screens/writeBlog.
 import { VehicleOwnerLandingScreen } from "./src/features/vehicleOwner/screens/vehicleOwnerLanding.screen";
 import { AddVehicleScreen } from "./src/features/vehicleOwner/components/addVehicle.vehicleOwner.screen";
 import { AddRouteScreen } from "./src/features/vehicleOwner/components/addRoute.vehicleOwner.screen";
-import {VecicleCard} from "./src/features/vehicleOwner/components/vehicleCard.component";
+import { VecicleCard } from "./src/features/vehicleOwner/components/vehicleCard.component";
 import { TravellerTabNavigation } from "./src/features/traveller/screens/travellerTabNavigation.screen";
 import { TravellerPlanScreen } from "./src/features/traveller/screens/travellerPlanInput.screen";
 import { TravellerPlansResultScreen } from "./src/features/traveller/screens/travellerPlans.screens";
@@ -31,16 +31,14 @@ import { TravellerSelectedPlanScreen } from "./src/features/traveller/screens/tr
 import { GuideSelectScreen } from "./src/features/traveller/screens/travellerGuideSelect.screen";
 import { VehicleSelectScreen } from "./src/features/traveller/screens/travellerVehicleSelect.screen";
 import { RoomCardResult } from "./src/features/traveller/components/hotelRoomCard.component";
-import {PlanCard} from "./src/features/traveller/components/planCard.component";
-import {PlanCardDetails} from "./src/features/traveller/screens/travellerPlanCardDetails";
-
-
+import { PlanCard } from "./src/features/traveller/components/planCard.component";
+import { PlanCardDetails } from "./src/features/traveller/screens/travellerPlanCardDetails";
 
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./src/infrastructure/theme";
 
-import {ContentProvider} from "./src/features/vehicleOwner/components/vehicleContext";
-import {PlanContentProvider} from  "./src/features/traveller/components/planContext";
+import { ContentProvider } from "./src/features/vehicleOwner/components/vehicleContext";
+import { PlanContentProvider } from "./src/features/traveller/components/planContext";
 
 import {
   useFonts as useFontsInter,
@@ -70,127 +68,132 @@ export default function App() {
   }
 
   return (
-  <PlanContentProvider>
-    <ContentProvider>
-    <ThemeProvider theme={theme}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          
-        <Stack.Screen
-            name="LogInScreen"
-            component={LogInScreen}
-          />
-          
-          <Stack.Screen
-            name="TravellerSelectedPlanScreen"
-            component={TravellerSelectedPlanScreen}
-          />
+    <PlanContentProvider>
+      <ContentProvider>
+        <ThemeProvider theme={theme}>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="LogInScreen"
+                component={LogInScreen}
+              />
 
-          <Stack.Screen
-            name="AccountSelectScreen"
-            component={AccountSelectScreen}
-          />
+              <Stack.Screen
+                name="TravellerSelectedPlanScreen"
+                component={TravellerSelectedPlanScreen}
+              />
 
-          <Stack.Screen
-            name="SignupTravellerScreen"
-            component={SignupTravellerScreen}
-          />
+              <Stack.Screen
+                name="SignupTravellerScreen"
+                component={SignupTravellerScreen}
+              />
 
-          <Stack.Screen
-            name="SignupHotelManagerScreen"
-            component={SignupHotelManagerScreen}
-          />
+              <Stack.Screen
+                name="SignupHotelManagerScreen"
+                component={SignupHotelManagerScreen}
+              />
 
-          <Stack.Screen
-            name="SignupBloggerScreen"
-            component={SignupBloggerScreen}
-          />
+              <Stack.Screen
+                name="SignupBloggerScreen"
+                component={SignupBloggerScreen}
+              />
 
-          <Stack.Screen
-            name="SignupTourGuideScreen"
-            component={SignupTourGuideScreen}
-          />
+              <Stack.Screen
+                name="SignupTourGuideScreen"
+                component={SignupTourGuideScreen}
+              />
 
-          <Stack.Screen
-            name="SignupVehicleOwnerScreen"
-            component={SignupVehicleOwnerScreen}
-          />
+              <Stack.Screen
+                name="SignupVehicleOwnerScreen"
+                component={SignupVehicleOwnerScreen}
+              />
 
-          <Stack.Screen
-            name="HotelManagerLandingScreen"
-            component={HotelManagerLandingScreen}
-          />
-          <Stack.Screen
-            name="AddRoomScreen"
-            component={AddRoomScreen}
-          />
-          <Stack.Screen
-            name="TourGuideLandingScreen"
-            component={TourGuideLandingScreen}
-          />
-          <Stack.Screen
-            name="AddServiceScreen"
-            component={AddServiceScreen}
-          />
-          <Stack.Screen
-            name="TravelBloggerLandingScreen"
-            component={TravelBloggerLandingScreen}
-          />
-          <Stack.Screen
-            name="WriteBlogScreen"
-            component={WriteBlogScreen}
-          />
-          <Stack.Screen
-            name="AddVehicleScreen"
-            component={AddVehicleScreen}
-          />
-         <Stack.Screen
-            name="VehicleOwnerLandingScreen"
-            component={VehicleOwnerLandingScreen}
-          />
-          <Stack.Screen
-            name="AddRouteScreen"
-            component={AddRouteScreen}
-          />
-          <Stack.Screen
-            name="VecicleCard"
-            component={VecicleCard}
-          />
-         <Stack.Screen
-            name="TravellerTabNavigation"
-            component={TravellerTabNavigation}
-          />
-                     
-         <Stack.Screen
-            name="TravellerPlanScreen"
-            component={TravellerPlanScreen}
-          />
+              <Stack.Screen
+                name="AccountSelectScreen"
+                component={AccountSelectScreen}
+              />
+              <Stack.Screen
+                name="AddRoomScreen"
+                component={AddRoomScreen}
+              />
+              <Stack.Screen
+                name="TourGuideLandingScreen"
+                component={TourGuideLandingScreen}
+              />
+              <Stack.Screen
+                name="AddServiceScreen"
+                component={AddServiceScreen}
+              />
+              <Stack.Screen
+                name="TravelBloggerLandingScreen"
+                component={TravelBloggerLandingScreen}
+              />
+              <Stack.Screen
+                name="WriteBlogScreen"
+                component={WriteBlogScreen}
+              />
+              <Stack.Screen
+                name="AddVehicleScreen"
+                component={AddVehicleScreen}
+              />
+              <Stack.Screen
+                name="VehicleOwnerLandingScreen"
+                component={VehicleOwnerLandingScreen}
+              />
+              <Stack.Screen
+                name="AddRouteScreen"
+                component={AddRouteScreen}
+              />
+              <Stack.Screen
+                name="VecicleCard"
+                component={VecicleCard}
+              />
+              <Stack.Screen
+                name="TravellerTabNavigation"
+                component={TravellerTabNavigation}
+              />
 
-          <Stack.Screen
-            name="TravellerHottelResultScreen"
-            component={TravellerHottelResultScreen}
-          />
-          <Stack.Screen
-            name="RoomCardResult"
-            component={RoomCardResult}
-          />
-          <Stack.Screen
-            name="TravellerPlansResultScreen"
-            component={TravellerPlansResultScreen}
-          />
-          <Stack.Screen
-            name="PlanCard"
-            component={PlanCard}
-          />
-           <Stack.Screen
-            name="PlanCardDetails"
-            component={PlanCardDetails}
-          />
+              <Stack.Screen
+                name="HotelManagerLandingScreen"
+                component={HotelManagerLandingScreen}
+              />
+              
+              
+              
+           
+              
+            
 
-        </Stack.Navigator>
-      </NavigationContainer>
-    </ThemeProvider>
-    </ContentProvider>
+             
+              <Stack.Screen
+                name="TravellerPlanScreen"
+                component={TravellerPlanScreen}
+              />
+
+              <Stack.Screen
+                name="TravellerHottelResultScreen"
+                component={TravellerHottelResultScreen}
+              />
+              <Stack.Screen
+                name="RoomCardResult"
+                component={RoomCardResult}
+              />
+              <Stack.Screen
+                name="TravellerPlansResultScreen"
+                component={TravellerPlansResultScreen}
+              />
+              <Stack.Screen
+                name="PlanCard"
+                component={PlanCard}
+              />
+              <Stack.Screen
+                name="PlanCardDetails"
+                component={PlanCardDetails}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </ThemeProvider>
+      </ContentProvider>
     </PlanContentProvider>
   );
 }
