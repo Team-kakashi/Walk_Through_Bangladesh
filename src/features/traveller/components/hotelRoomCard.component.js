@@ -30,7 +30,7 @@ export const RoomCardResult = ({navigation,}) => {
   const[hotelInfo ,setHotelInfo]= React.useState([{}]);
   
 
-  const {persons, budget, area, hotelObject, setHotelObject} = React.useContext(PlanContentContext);
+  const {persons, budget,setBudget, area, hotelObject, setHotelObject} = React.useContext(PlanContentContext);
 
   
 
@@ -56,6 +56,7 @@ async function update (id) {
   await setHotelObject(hotelInfo[id]);
   console.log (" in parent id ",id)
   console.log ("hotel info id",hotelInfo[id])
+  setBudget(budget-hotelInfo[id].room_rent);
   //console.log("in update card info ",hotelObject)
    //console.log(navigation);
    navigation.navigate("TravellerPlansResultScreen");

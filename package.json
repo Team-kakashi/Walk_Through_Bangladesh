@@ -16,6 +16,7 @@
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.2.5",
+    "events": "^3.3.0",
     "expo": "~44.0.0",
     "expo-camera": "^12.1.0",
     "expo-font": "^10.0.4",
